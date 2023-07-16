@@ -3,7 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
-title: Home
+title: How to Use
 level: 0
-order: 0
+order: 100
 ---
