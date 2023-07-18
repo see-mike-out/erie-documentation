@@ -72,7 +72,7 @@
     }
 
     function removeCodeCopyButtons() {
-      document.querySelectorAll(".code-copy-button").remove();
+      document.querySelectorAll(".code-copy-button").forEach((a) => a.remove());
     }
 
     function makeCodeTabs() {
@@ -128,13 +128,22 @@
       });
     }
     document.getElementById("use-interactive-tabs")?.addEventListener("change", (e) => {
+      removeCodeCopyButtons();
       if (e.target.checked) {
+        localStorage.setItem("erie-doc-interactive-tabs", 'true');
         makeCodeTabs();
       } else {
+        localStorage.setItem("erie-doc-interactive-tabs", 'false');
         releaseCodeTabs();
       }
       makeCodeCopyButtons()
     });
+
+    if (localStorage.getItem("erie-doc-interactive-tabs") === 'true') {
+      document.getElementById("use-interactive-tabs").setAttribute('checked', true);
+      makeCodeTabs();
+    }
+
     makeCodeCopyButtons();
   </script>
 </body>

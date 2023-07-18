@@ -27,8 +27,8 @@ The default unit for time-related channels is "second" unless specified otherwis
 
 ## Absolute timing with fixed duration: `time`
 
-The baseline pattern for absolute timing with fixed duration is using `field` attribute.
-With the `scale` attribute, it is possible to set the total `length` of the sonification stream, as a shortcut to the `range` attribute.
+The baseline pattern for absolute timing with fixed duration is using `field` property.
+With the `scale` property, it is possible to set the total `length` of the sonification stream, as a shortcut to the `range` property.
 
 <code-groups>
 <code-group>
@@ -124,8 +124,8 @@ stream.enc.time2.field("Miles_per_Gallon_stdevp_upper");
 ## Relative timing with fixed duration: `time`
 
 For relative timing, such as when sonifying the mean value of a quantitative field over a nominal/ordinal field,
-use the `timing` attribute of the `scale` with the value of `relative`, as shown below.
-One can specify the length of each tone (if not specified by `duration` field) using the `band` attribute.
+use the `timing` property of the `scale` with the value of `relative`, as shown below.
+One can specify the length of each tone (if not specified by `duration` field) using the `band` property.
 
 <code-groups>
 <code-group>
