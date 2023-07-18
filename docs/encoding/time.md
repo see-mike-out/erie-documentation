@@ -40,7 +40,7 @@ With the `scale` property, it is possible to set the total `length` of the sonif
     "time": {
       "field": "Miles_per_Gallon",
       "type": "quantitative",
-      "sclae": {
+      "scale": {
         "length": 5, // unit: seconds
         "domain": [0, 5] // equivalent with the above line
       }
@@ -91,7 +91,7 @@ If the `time` channel includes `bin` then `time2` is not available because bin s
     "time": {
       "field": "Miles_per_Gallon_stdevp_lower",
       "type": "quantitative",
-      "sclae": {
+      "scale": {
         "length": 5, // unit: seconds
       }
     },
@@ -113,7 +113,7 @@ stream.transform.add("aggregate", "mean", "Miles_per_Gallon", "Miles_per_Gallon_
 stream.transform.add("calculate",  "datum.Miles_per_Gallon_mean - datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_lower");
 stream.transform.add("calculate",  "datum.Miles_per_Gallon_mean + datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_upper");
 ...
-stream.enc.time.field("Miles_per_Gallon_stdevp_lower", "quantitative);
+stream.enc.time.field("Miles_per_Gallon_stdevp_lower", "quantitative");
 stream.enc.time.scale("length", 5); 
 stream.enc.time2.field("Miles_per_Gallon_stdevp_upper");
 ...
@@ -137,7 +137,7 @@ One can specify the length of each tone (if not specified by `duration` field) u
     "time": {
       "field": "Origin",
       "type": "nominal",
-      "sclae": {
+      "scale": {
         "timing": "relative",
         "band": 0.5 // unit: seconds
       }

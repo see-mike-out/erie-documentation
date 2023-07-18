@@ -24,6 +24,7 @@ This documentation describes overall structure of each encoding channel and thei
 | `aggregate` | `string` | (Optional) The data aggregation method for the channel. For count-based aggregate methods, `field` is ignored. See `aggregate` documentation for details. |
 | `bin` | `boolean` or `object` | (Optional) For an autoamted binning, set as `true`. For more detailed bin settings, see below. |
 | `scale` | `object` | (Optional, but highly suggested) The detail of scaling. See below for details. |
+| `speech` | `boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
 
 ### Aggregate
 
@@ -63,7 +64,7 @@ To provide more details, one can use a `bin` object with details.
 | --- | ----------- | ----------- |
 | `nice` | `boolean` | (Optional) Whether to use 'nicely' separated bins (default: `true`). |
 | `maxbins` | `integer` | (Optional) The maximum number of bins (default: `10`). |
-| `steps` | `number` | (Optional) The exact size acrass all bins. |
+| `step` | `number` | (Optional) The exact size acrass all bins. |
 | `exact` | `number[]` | (Optional) The eaxct bin sizes for each bin. For example, if it is `[0, 10, 15, 20]`, then the resulting bins are `[0, 10)`, `[10, 15)`, and `[15, 20)`. |
 
 ### Scale
@@ -80,7 +81,81 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | `maxDistinct` | `boolean` | (Optional, default: `true`) When `range` is not specified and `maxDistinct` is true, then the `range` becomes the entire range of that channel (e.g., from the lowest pitch to the highest pitch, from the pan of `-1`—leftmost to pan of `1`–rightmost). |
 | `times` | `number` | (Optional) A direct scale factor. When provided, for a value `v`, the auditory value is `v * times`. If the `max(value) * times` or `min(value) * times` goes beyond the possible auditory value for each channel, then the specified `times` is adjusted. |
 | `zero` | `boolean` | (Optional, default: `false`) Whether to include the zero value in the scale for a quantitative encoding. The default value is `zero` unlike visualization to maximalize the discriminability of auditory values because some audio values have limited possible range. |
-| `description` | `boolean` | (Optional, default: `true`) Whether to play a description about the scale before playing the sonification stream. |
+| `description` | `'nonskip'|'skip'` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. Future plan is to provide more description options. |
 | `length` | `number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
 | `band` | `number` (unit: second) | (Optional, only for the `time` channel) The length of each tone. |
 | `timing` | `'relative'|'absolute'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
+
+## API usage
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "encoding" : {
+    "channel": {
+      "field": "FieldName",
+      "type": "DataType",
+      "aggregate": "AggregateMethod", // only for a `quantitative` channel
+      "bin": {
+        "nice": true // or false,
+        "maxbins": 10,
+        "step": 5, // Number
+        "exact": false // or true
+      }, // or true or false
+      "scale": {
+        "domain": [ ... ],
+        "range": [ ... ],
+        "polarity": "positive" // or "negative",
+        "maxDistinct": true // or false,
+        "times": ..., // Number,
+        "zero": false // or true,
+        "description": "nonskip" // or "skip",
+        // only for `time` channel
+        "length": ..., // Seconds, 
+        "band": ..., // Seconds
+        "timing": "absolute" // or "relative"
+      },
+      "speech": true // or false
+    }
+  }
+  ...
+}
+{% endhighlight %}
+</code-group>
+
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let stream = new Erie.Stream();
+
+// method 1 (more reusable)
+let channel = new Erie.Channel();
+channel.field("Origin", "nominal");
+// or let channel = new Erie.Channel("Origin", "nominal");
+let maxbins = 10, nice = true, step;
+channel.bin(maxbins, step, nice);
+// channel.bin(true);
+// channel.bin(false);
+// let exact = [0, 10, 15, 20];
+// channel.bin(exact);
+channel.aggregate("mean");
+channel.scale("timing", "relative"); // key & value
+channel.scale("domain", [0, 10]); 
+channel.scale("timing", "relative"); 
+
+stream.enc.ChannelName = channel;
+
+// method 2 (more direct)
+stream.enc.ChannelName.field("Origin", "nominal");
+stream.enc.ChannelName.scale("timing", "relative");
+
+// method 1 + 2
+stream.enc.ChannelName = new Erie.Channel("Origin", "nominal");
+stream.enc.ChannelName.scale("timing", "relative");
+
+{% endhighlight %}
+</code-group>
+</code-groups>
