@@ -1,3 +1,5 @@
+@import "native.css";
+
 body,
 html {
   height: 100%;
@@ -94,6 +96,13 @@ html {
   text-decoration: underline;
 }
 
+.config {
+  font-size: 0.9rem;
+}
+.config input {
+  vertical-align: -0.12rem;
+}
+
 .copy {
   font-size: 0.8rem;
   color: #666666;
@@ -104,7 +113,131 @@ html {
 
 #content-section h1 {
   font-size: 1.5rem;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.25rem 0;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #ddd;
+}
+
+#content-section h1 small {
+  display: block;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.15rem;
+}
+
+#pointers a {
+  font-size: 0.8rem;
+  padding-bottom: 0.25rem;
+}
+
+#content-section p {
+  max-width: 600px;
+  font-size: 0.9rem;
+}
+
+#content-section h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+#content-section h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+#content-section h4 {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+
+#content-section pre {
+  border-radius: 0.5rem;
+  background: #f6f6f6;
+  padding: 1rem;
+}
+
+#content-section table {
+  margin: 0.5rem 0;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+#content-section table td,
+#content-section table th {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+figure.highlight {
+  position: relative;
+}
+.code-copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: transparent;
+  appearance: none;
+  border: 0;
+  vertical-align: top;
+  line-height: 100%;
+}
+
+.code-copy-button:hover {
+  background: #ffffff;
+}
+
+.code-copy-button.ready {
+  color: #454545;
+}
+.code-copy-button.ready .bi-clipboard-x,
+.code-copy-button.ready .bi-clipboard-check-fill {
+  display: none;
+}
+.code-copy-button.succeed {
+  color: green;
+}
+.code-copy-button.succeed .bi-clipboard-x,
+.code-copy-button.succeed .bi-clipboard {
+  display: none;
+}
+.code-copy-button.fail {
+  color: orangered;
+}
+.code-copy-button.fail .bi-clipboard,
+.code-copy-button.fail .bi-clipboard-check-fill {
+  display: none;
+}
+
+.code-tab {
+  display: flex;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0.5rem 0;
+  padding: 0;
+}
+
+.code-tab h4 {
+  margin: 0 !important;
+  min-width: 120px;
+  padding: calc(0.5rem + 3px) 0.5rem 0.5rem 0.5rem;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  font-weight: normal;
+  cursor: pointer;
+}
+.code-tab h4.selected {
+  font-weight: bold;
+  border-top: 4px solid green;
+  padding-top: 0.5rem;
 }
