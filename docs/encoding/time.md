@@ -65,6 +65,8 @@ stream.enc.time.scale("domain", [0, 5]);// equivalent with the above line
 </code-group>
 </code-groups>
 
+<!-- todo: example -->
+
 ## Absolute timing with varied duration along the same scale: `time` and `time2`
 
 When the duration of a tone is determined by another field that uses the same scale of the `time` channel's field,
@@ -121,6 +123,8 @@ stream.enc.time2.field("Miles_per_Gallon_stdevp_upper");
 </code-group>
 </code-groups>
 
+<!-- todo: example -->
+
 ## Relative timing with fixed duration: `time`
 
 For relative timing, such as when sonifying the mean value of a quantitative field over a nominal/ordinal field,
@@ -160,3 +164,6 @@ stream.enc.time.scale("band", 0.5); // unit: seconds
 {% endhighlight %}
 </code-group>
 </code-groups>
+
+
+<!-- todo: example -->

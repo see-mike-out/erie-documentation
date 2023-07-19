@@ -49,3 +49,5 @@ stream.enc.time.scale("range", [0, 1]); // unit: seconds
 {% endhighlight %}
 </code-group>
 </code-groups>
+
+<!-- todo: example -->

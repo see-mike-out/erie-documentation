@@ -83,7 +83,7 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | `zero` | `boolean` | (Optional, default: `false`) Whether to include the zero value in the scale for a quantitative encoding. The default value is `zero` unlike visualization to maximalize the discriminability of auditory values because some audio values have limited possible range. |
 | `description` | `'nonskip'|'skip'` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. Future plan is to provide more description options. |
 | `length` | `number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
-| `band` | `number` (unit: second) | (Optional, only for the `time` channel) The length of each tone. |
+| `band` | `number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
 | `timing` | `'relative'|'absolute'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
 
 ## API usage
@@ -115,8 +115,9 @@ Each encoding channel may have different `scale` properties, so refer to relevan
         "description": "nonskip" // or "skip",
         // only for `time` channel
         "length": ..., // Seconds, 
+        "timing": "absolute", // or "relative"
+        // only for `time`, `tapSpeed`, and `tapCount` channels
         "band": ..., // Seconds
-        "timing": "absolute" // or "relative"
       },
       "speech": true // or false
     }
