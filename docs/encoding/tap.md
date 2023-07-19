@@ -1,7 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 title: Tap Channels (Speed and Count)
 parent: Encoding
@@ -24,7 +21,7 @@ Note: a tapping sound consists of a sound and pause. The ration of sound to paus
 
 ### `tapSpeed` usage pattern
 
-The `tapSpeed` channel maps a data value to the number of tappings per second, given the same fixed time of duration (defined using `band`).
+The `tapSpeed` channel maps a data value to the number of tappings per second, given the same fixed duration of time (defined using `band`).
 When the `polarity` of the scale is `positive`, a higher value is mapped to more tap counts, and a lower value to fewer tap counts, 
 where tappings are distributed evenly for the same time duration.
 For instance, when the `scale`'s `domain` is `[0, 1]` and `range` is `[0, 10]` for the `band` of `2` seconds,

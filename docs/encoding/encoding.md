@@ -1,7 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 title: Encoding
 level: 0
@@ -11,9 +8,36 @@ order: 700
 The `encoding` property of a `steam` defines how to map data variables to auditory variables.
 While Erie uses many Vega-Lite conventions, each encoding channel may have different properties and usage patterns.
 This is because data sonification is defined on a sound space.
-For example, a `time` channel plays two roles: an encoding channel and a sonification canvas at the same time. 
+For example, a `time` channel plays two roles: an encoding channel and a sonification canvas at the same time.
 
 This documentation describes overall structure of each encoding channel and their common properties.
+
+## Supported encoding channels
+
+| Channel | Description |
+| ------- | ----------- |
+| `time` | (Mandatory) The time when a tone is played. |
+| `time2` | The time when a tone is finished, with a data field sharing the same scale with the corresponding `time` channel. |
+| `duration` | The length of a tone being played, with a data field *not* sharing the same scale with the corresponding `time` channel. |
+| `tapSpeed` | The number of tapping sounds uniformly distributed over the specified duration of time. |
+| `tapCount` | The number of tapping sounds of the same specified length. |
+| `pitch` | The pitch frequency of a tone. |
+| `loudness` | The volume or loudness of a tone. |
+| `pan` | The stereo panning (left and right spatial positioing) of a tone. |
+| `postReverb` | The length of the reverb sound played after a tone. |
+| `speechBefore` | The speech text played before playing a tone. |
+| `speechAfter` | The speech text played after playing a tone. |
+| `repeat` | Repeating streams of the same structure (i.e., encoding and tone design) over one or more `nominal`/`ordinal` variables. |
+
+### Encoding channels planned for updates
+
+| Channel | Description |
+| ------- | ----------- |
+| `modulation` | The degree of modulation of a FM synth tone. |
+| `panX` | For 3D panning, the left-right position of a tone. While it is same as `pan` but it works in a 3D panning setting. Requires a high-end audio device and advanced computing device, otherwise using 3D panning will cause high latency or low quality. |
+| `panY` | For 3D panning, the front-back position of a tone. |
+| `panZ` | For 3D panning, the top-down position of a tone. |
+
 
 ## Common encoding channel properties
 
@@ -57,7 +81,7 @@ See the `transform` documentation for further details.
 
 ### Bin
 
-The simplest way to use in-channel binning is setting the `bin` property as `true`. 
+The simplest way to use in-channel binning is setting the `bin` property as `true`.
 To provide more details, one can use a `bin` object with details.
 
 | Property | Type | Description |
@@ -114,7 +138,7 @@ Each encoding channel may have different `scale` properties, so refer to relevan
         "zero": false // or true,
         "description": "nonskip" // or "skip",
         // only for `time` channel
-        "length": ..., // Seconds, 
+        "length": ..., // Seconds,
         "timing": "absolute", // or "relative"
         // only for `time`, `tapSpeed`, and `tapCount` channels
         "band": ..., // Seconds
@@ -144,8 +168,8 @@ channel.bin(maxbins, step, nice);
 // channel.bin(exact);
 channel.aggregate("mean");
 channel.scale("timing", "relative"); // key & value
-channel.scale("domain", [0, 10]); 
-channel.scale("timing", "relative"); 
+channel.scale("domain", [0, 10]);
+channel.scale("timing", "relative");
 
 stream.enc.ChannelName = channel;
 
