@@ -40,11 +40,54 @@ It is possible to specify the order to be played using either `order` or `sort` 
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.speechAfter.field("region", "nominal");
-stream.enc.speechAfter.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
-stream.enc.speechAfter.scale("order", ["Asia", "Europe", "North America"]); // optional
-stream.enc.speechAfter.scale("sort", "ascending"); // optional (not together with `order`)
-stream.enc.speechAfter.scale("description", "skip");
+stream.enc.repeat.field("region", "nominal");
+stream.enc.repeat.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
+stream.enc.repeat.scale("order", ["Asia", "Europe", "North America"]); // optional
+stream.enc.repeat.scale("sort", "ascending"); // optional (not together with `order`)
+stream.enc.repeat.scale("description", "skip");
+...
+{% endhighlight %}
+</code-group>
+</code-groups>
+
+<!-- example -->
+
+
+### Multi-field `repeat` channel
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "encoding" : {
+    "repeat": {
+      "field": ["region", "category"],
+      "type": "nominal",
+      "speech": true,
+      "scale": {
+        "order": [
+          ["Asia", "Europe", "North America"], 
+          ["Customer", "Business", "Non-profit"]
+        ], // Asia-Customer > Asia-Business > Asia-Non-profit > ... > North America-Non-profit
+        "description": "skip" 
+      }
+    }
+  }
+  ...
+}
+{% endhighlight %}
+</code-group>
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let stream = new Erie.Stream();
+...
+stream.enc.repeat.field(["region", "category"], "nominal");
+stream.enc.repeat.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
+stream.enc.repeat.scale("order", [["Asia", "Europe", "North America"], ["Customer", "Business", "Non-profit"]]); // Asia-Customer > Asia-Business > Asia-Non-profit > ... > North America-Non-profit
+stream.enc.repeat.scale("description", "skip");
 ...
 {% endhighlight %}
 </code-group>
