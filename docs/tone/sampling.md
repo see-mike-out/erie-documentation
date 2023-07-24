@@ -3,7 +3,7 @@ layout: default
 title: Sampling
 parent: Tone
 level: 1
-order: 301
+order: 501
 ---
 
 It is possible to sample sounds by providing sampling sounds.

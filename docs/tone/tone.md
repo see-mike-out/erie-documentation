@@ -2,7 +2,7 @@
 layout: default
 title: Tone
 level: 0
-order: 300
+order: 500
 ---
 
 A `tone` is analogous to a mark in a visualization.
