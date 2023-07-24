@@ -113,7 +113,7 @@ stream.transform.add("calculate",  "datum.Miles_per_Gallon_mean - datum.Miles_pe
 stream.transform.add("calculate",  "datum.Miles_per_Gallon_mean + datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_upper");
 ...
 stream.enc.time.field("Miles_per_Gallon_stdevp_lower", "quantitative");
-stream.enc.time.scale("length", 5); 
+stream.enc.time.scale("length", 5);
 stream.enc.time2.field("Miles_per_Gallon_stdevp_upper");
 ...
 {% endhighlight %}
@@ -162,5 +162,110 @@ stream.enc.time.scale("band", 0.5); // unit: seconds
 </code-group>
 </code-groups>
 
+<!-- todo: example -->
+
+## Simiultaneous timing
+
+The `simultaneous` timing makes all the tones played at the same time (each tone's start time is 0).
+It is recommended to use a separate `duration` channel or `time2` channel with a nominal channel.
+In this case, speech channels (`speechBefore`, `speechAfter`) are not supported (ignored).
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "encoding" : {
+    "time": {
+      "field": "Origin",
+      "type": "nominal",
+      "scale": {
+        "timing": "simultaneous"
+      }
+    }
+  }
+  ...
+}
+{% endhighlight %}
+</code-group>
+
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let stream = new Erie.Stream();
+...
+stream.enc.time.field("Origin", "nominal");
+stream.enc.time.scale("timing", "simultaneous");
+...
+{% endhighlight %}
+</code-group>
+</code-groups>
 
 <!-- todo: example -->
+
+## Use of a `tick`
+
+As an audio axis, it's possible to use a `tick`.
+
+It is defined using the following properties
+
+| Channel | type | Description |
+| ------- | ---- | ----------- |
+| `name` | `string` | (Optional) The name of the tick. |
+| `interval` | `number` (unit: seconds) | (Default: `0.5`) the interval between tick sounds. |
+| `playAtTime0` | `boolean` | (Default: `true`) whether to play a tick sound at the beginnig of a stream. |
+| `oscType` | `'sine'|'square'|'sawtooth'|'triangle'` | (Default: `'sine'`) the type of an oscillator. See [here](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type) for details. |
+| `pitch` | `number` | (Default: `150`) the pitch frequency of the tick sound. |
+| `loudness` | `number[0-1]` | (Default: `0.4`) the relative loudness of the tick sound. |
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "encoding" : {
+    "time": {
+      "field": "Origin",
+      "type": "nominal",
+      "tick": {
+        "name": "default_tick", // optional
+        "interval": 0.5, // unit: seconds
+        "playAtplayAtTime0": true, // default
+        "oscType": "sine", // default
+        "pitch": 150, // default
+        "loudness": 0.4 // default
+      }
+    }
+  }
+  ...
+}
+{% endhighlight %}
+</code-group>
+
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let stream = new Erie.Stream();
+...
+stream.enc.time.tick(true); // set tick
+stream.enc.time.tick("name", "default_tick"); // optional
+stream.enc.time.tick("interval", 0.5) // unit: seconds
+stream.enc.time.tick("playAtplayAtTime0", true) // default
+stream.enc.time.tick("oscType", "sine") // default
+stream.enc.time.tick("pitch", 150) // default
+stream.enc.time.tick("loudness", 0.4) // default
+
+// alternatively
+let tick = new Erie.Tick("default_tick") // name, optional argument
+tick.interval = 0.5; // unit: seconds
+tick.playAtplayAtTime0 = true; // default
+tick.oscType = "sine"; // default
+tick.pitch = 150; // default
+tick.loudness = 0.4; // default
+stream.enc.time.tick(tick);
+
+{% endhighlight %}
+</code-group>
+</code-groups>

@@ -16,7 +16,7 @@ This documentation describes overall structure of each encoding channel and thei
 
 | Channel | Description |
 | ------- | ----------- |
-| `time` | (Mandatory) The time when a tone is played. |
+| `time` | (Required) The time when a tone is played. |
 | `time2` | The time when a tone is finished, with a data field sharing the same scale with the corresponding `time` channel. |
 | `duration` | The length of a tone being played, with a data field *not* sharing the same scale with the corresponding `time` channel. |
 | `tapSpeed` | The number of tapping sounds uniformly distributed over the specified duration of time. |
@@ -38,7 +38,6 @@ This documentation describes overall structure of each encoding channel and thei
 | `panY` | For 3D panning, the front-back position of a tone. |
 | `panZ` | For 3D panning, the top-down position of a tone. |
 
-
 ## Common encoding channel properties
 
 | Property | Type | Description |
@@ -47,8 +46,11 @@ This documentation describes overall structure of each encoding channel and thei
 | `type` | `string` | (Required, but auto-detected) The data type of a field. Allowed values: `nominal`, `ordinal`, `quantitative`, and `temporal`. |
 | `aggregate` | `string` | (Optional) The data aggregation method for the channel. For count-based aggregate methods, `field` is ignored. See `aggregate` documentation for details. |
 | `bin` | `boolean` or `object` | (Optional) For an autoamted binning, set as `true`. For more detailed bin settings, see below. |
+| `condition` | `object` | Conditional value assignment. |
+| `value` | `any` | (Optional) A static sound for a channel. |
 | `scale` | `object` | (Optional, but highly suggested) The detail of scaling. See below for details. |
 | `speech` | `boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
+| `tick` | `object` | (Optional, default: `null`; only for `time` channel) An audio axis. |
 
 ### Aggregate
 
@@ -105,10 +107,10 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | `maxDistinct` | `boolean` | (Optional, default: `true`) When `range` is not specified and `maxDistinct` is true, then the `range` becomes the entire range of that channel (e.g., from the lowest pitch to the highest pitch, from the pan of `-1`—leftmost to pan of `1`–rightmost). |
 | `times` | `number` | (Optional) A direct scale factor. When provided, for a value `v`, the auditory value is `v * times`. If the `max(value) * times` or `min(value) * times` goes beyond the possible auditory value for each channel, then the specified `times` is adjusted. |
 | `zero` | `boolean` | (Optional, default: `false`) Whether to include the zero value in the scale for a quantitative encoding. The default value is `zero` unlike visualization to maximalize the discriminability of auditory values because some audio values have limited possible range. |
-| `description` | `'nonskip'|'skip'` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. Future plan is to provide more description options. |
+| `description` | `'nonskip'|'skip'`,`null`, or`string` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. If it is `'skip'` or `null`, then description is not played. If provided as a string that is not `'skip'` or `'nonskip'`, then the provided string is played instead. |
 | `length` | `number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
 | `band` | `number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
-| `timing` | `'relative'|'absolute'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
+| `timing` | `'relative'|'absolute'|'simultaneous'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
 
 ## API usage
 
@@ -119,7 +121,7 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 {
   ...
   "encoding" : {
-    "channel": {
+    "[channel]": {
       "field": "FieldName",
       "type": "DataType",
       "aggregate": "AggregateMethod", // only for a `quantitative` channel
@@ -141,8 +143,14 @@ Each encoding channel may have different `scale` properties, so refer to relevan
         "length": ..., // Seconds,
         "timing": "absolute", // or "relative"
         // only for `time`, `tapSpeed`, and `tapCount` channels
-        "band": ..., // Seconds
+        "band": ..., // Seconds,
       },
+      "value": ...,
+      "condition": [
+        {"test": [ value1, value2, ... ], "value": ... }, // as array
+        {"test": {"not": [ value1, value2, ... ]}, "value": ... }, // "not"
+        {"test": "d.field > 0", "value": ... } // conditional
+      ],
       "speech": true // or false
     }
   }
@@ -157,7 +165,8 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 let stream = new Erie.Stream();
 
 // method 1 (more reusable)
-let channel = new Erie.Channel();
+let channel = new Erie.{ChannelName}();
+// or let channel = new Erie.({channelName});
 channel.field("Origin", "nominal");
 // or let channel = new Erie.Channel("Origin", "nominal");
 let maxbins = 10, nice = true, step;
@@ -171,15 +180,21 @@ channel.scale("timing", "relative"); // key & value
 channel.scale("domain", [0, 10]);
 channel.scale("timing", "relative");
 
-stream.enc.ChannelName = channel;
+// static
+channel.value(...);
+channel.condition.add([ value1, value2, ... ], ...);
+channel.condition.add({"not": [ value1, value2, ... ]}, ...);
+channel.condition.add("d.field > 0", ...);
+
+stream.enc.{channelName}.set(channel); // provided for reusability;
 
 // method 2 (more direct)
-stream.enc.ChannelName.field("Origin", "nominal");
-stream.enc.ChannelName.scale("timing", "relative");
+stream.enc.{channelName}.field("Origin", "nominal");
+stream.enc.{channelName}.scale("timing", "relative");
 
 // method 1 + 2
-stream.enc.ChannelName = new Erie.Channel("Origin", "nominal");
-stream.enc.ChannelName.scale("timing", "relative");
+stream.enc.{channelName} = new Erie.Channel("Origin", "nominal");
+stream.enc.{channelName}.scale("timing", "relative");
 
 {% endhighlight %}
 </code-group>
