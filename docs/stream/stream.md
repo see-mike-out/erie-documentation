@@ -35,9 +35,10 @@ A `stream` can have the following porperties.
 <h4>JSON</h4>
 {% highlight json %}
 {
+  "title": "...",
+  "description": "...",
   "data": { ... },
   "transform": [...],
-  "tone": { ... },
   "tick": [ ... ],
   "encoding" : { ... },
   "config": { ... }
@@ -48,12 +49,13 @@ A `stream` can have the following porperties.
 <h4>JavaScript</h4>
 {% highlight js %}
 let stream = new Erie.Stream();
-stream.data(...);
+stream.title.set("...");
+stream.description.set("...");
+stream.data.set(...);
 stream.transform.add(...);
-stream.transform.remove(index) // see the transform documentation
+stream.transform.remove(index); // see the transform documentation
 stream.tone = new Erie.Tone();
 // alt) stream.tone({key}, {value});
-stream.tick.add(new Erie.Tick());
 let channel = new Erie.{ChannelName}Channel();
 stream.enc.{channelName} = channel;
 // ex) let channel = new Erie.PitchChannel(); // provided for reusability.

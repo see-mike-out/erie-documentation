@@ -47,3 +47,7 @@ stream.transform.add({ ... });
 {% endhighlight %}
 </code-group>
 </code-groups>
+
+
+For JavaScript API,
+you can also use `stream.transform.remove(index)` to remove a transform item by index.
