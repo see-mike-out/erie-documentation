@@ -15,8 +15,8 @@ A `tone` object has the following properties.
 
 ## Tone properties
 
-| Channel | type | Description |
-| ------- | ---- | ----------- |
+| Property | type | Description |
+| -------- | ---- | ----------- |
 | `type` | `string` or `object` | (Default: `'default'`, a sine wave oscillator) The instrument type of a tone. |
 | `continued` | `boolean` | (Default: `false`) Whether a tone is continued (no break between sound points) or discrete (breaks between sound points). This property can be ignored for sampled instruments (see below). |
 | `sample` | `object` | A sampling object. |

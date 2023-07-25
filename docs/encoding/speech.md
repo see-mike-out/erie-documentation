@@ -11,7 +11,7 @@ These channels works for discrete (only) and relatively timed (ideal) tones.
 No `scale` option is available. 
 The speech rate is controled by the `config` object.
 
-### `pan` usage pattern
+### `speechBefore` usage pattern
 
 <code-groups>
 <code-group>
@@ -20,7 +20,7 @@ The speech rate is controled by the `config` object.
 {
   ...
   "encoding" : {
-    "speechAfter": {
+    "speechBefore": {
       "field": "name",
       "type": "nominal",
       "language": "en-US"
@@ -38,8 +38,8 @@ The speech rate is controled by the `config` object.
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.speechAfter.field("name", "nominal");
-stream.enc.speechAfter.language("en-US");
+stream.enc.speechBefore.field("name", "nominal");
+stream.enc.speechBefore.language("en-US");
 ...
 stream.config("speechRate", 1.75);
 {% endhighlight %}

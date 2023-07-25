@@ -54,30 +54,9 @@ This documentation describes overall structure of each encoding channel and thei
 
 ### Aggregate
 
-Possible `aggregate` values are:
+Possible `aggregate` values 
 
-- Single-value summaries
-  - `mean` or `average`
-  - `mode`
-  - `median`
-  - `sum`
-  - `product`
-  - `max`
-  - `min`
-
-- Dispersion-related
-  - `stdev`
-  - `stdevp`
-  - `variance`
-  - `variancep`
-
-- Count-based:
-  - `count`
-  - `valid`
-  - `invalid`
-  - `distinct`
-
-Note: `corr`, `covariance`, `covariancep`, and `quartile` is not available for the encoding `aggregate`.
+Note: `corr`, `covariance`, and `covariancep` is not available for the encoding `aggregate`.
 
 See the `transform` documentation for further details.
 

@@ -18,8 +18,10 @@ A `stream` can have the following porperties.
 
 ## Stream properties
 
-| Channel | type | Description |
-| ------- | ---- | ----------- |
+| Property | type | Description |
+| -------- | ---- | ----------- |
+| `title` | `string` | (Required) The title of a sonification (if specified, it is played) |
+| `description` | `string` | (Required) The description of a sonification (if specified, it is played). |
 | `data` | `object` | (Required) Data to sonify. |
 | `transform` | `array` | Data to sonify. |
 | `tone` | `object` | Tone definition. |

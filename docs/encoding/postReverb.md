@@ -11,7 +11,7 @@ For example, if the domain is `[10, 20]` and the range is `[0, 2]` (unit: second
 then after the main tone, a 1-second less loud sound is played for a data value of 15.
 Note: the ratio of loudness of a post-reverb sound to its main tone will be adjustable soon.
 
-### `pan` usage pattern
+### `postReverb` usage pattern
 
 <code-groups>
 <code-group>

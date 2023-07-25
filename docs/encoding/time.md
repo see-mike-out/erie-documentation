@@ -77,9 +77,10 @@ If the `time` channel includes `bin` then `time2` is not available because bin s
 {% highlight json %}
 {
   "transform" : [{
-    "aggregate": "stdevp", "field": "Miles_per_Gallon", "as": "Miles_per_Gallon_stdevp"
-  }, {
-    "aggregate": "mean", "field": "Miles_per_Gallon", "as": "Miles_per_Gallon_mean"
+    "aggregate": [
+      { "op": "stdevp", "field": "Miles_per_Gallon", "as": "Miles_per_Gallon_stdevp" },
+      { "op": "mean", "field": "Miles_per_Gallon", "as": "Miles_per_Gallon_mean" }
+    ]
   }, {
     "calculate": "datum.Miles_per_Gallon_mean - datum.Miles_per_Gallon_stdevp", "as": "Miles_per_Gallon_stdevp_lower"
   }, {
@@ -107,10 +108,14 @@ If the `time` channel includes `bin` then `time2` is not available because bin s
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.transform.add("aggregate", "stdevp", "Miles_per_Gallon", "Miles_per_Gallon_stdevp");
-stream.transform.add("aggregate", "mean", "Miles_per_Gallon", "Miles_per_Gallon_mean");
-stream.transform.add("calculate",  "datum.Miles_per_Gallon_mean - datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_lower");
-stream.transform.add("calculate",  "datum.Miles_per_Gallon_mean + datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_upper");
+let agg = new Erie.Aggregate()
+agg.add("stdevp", "Miles_per_Gallon", "Miles_per_Gallon_stdevp");
+agg.add("mean", "Miles_per_Gallon", "Miles_per_Gallon_mean")
+stream.transform.add(agg);
+let calc1 = new Erie.Calculate("datum.Miles_per_Gallon_mean - datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_lower");
+let calc2 = new Erie.Calculate("datum.Miles_per_Gallon_mean + datum.Miles_per_Gallon_stdevp", "Miles_per_Gallon_stdevp_upper")
+stream.transform.add(calc1);
+stream.transform.add(calc2);
 ...
 stream.enc.time.field("Miles_per_Gallon_stdevp_lower", "quantitative");
 stream.enc.time.scale("length", 5);
@@ -210,8 +215,8 @@ As an audio axis, it's possible to use a `tick`.
 
 It is defined using the following properties
 
-| Channel | type | Description |
-| ------- | ---- | ----------- |
+| Property | type | Description |
+| -------- | ---- | ----------- |
 | `name` | `string` | (Optional) The name of the tick. |
 | `interval` | `number` (unit: seconds) | (Default: `0.5`) the interval between tick sounds. |
 | `playAtTime0` | `boolean` | (Default: `true`) whether to play a tick sound at the beginnig of a stream. |
