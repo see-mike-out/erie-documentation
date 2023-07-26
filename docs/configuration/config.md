@@ -15,3 +15,4 @@ A `config` object specifies global controls over a `stream`, using the follwing 
 | `skipScaleSpeech` | `boolean` | (Default: `false`) Wheter to skip playing the scale descriptions. |
 | `skipDescription` | `boolean` | (Default: `false`) Wheter to skip playing the description. |
 | `skipTitle` | `boolean` | (Default: `false`) Wheter to skip playing the title. |
+| `overlayScaleConsistency` | `boolean` | (Default: `true`) Whether to use common scales for `overlay` compositions. |
