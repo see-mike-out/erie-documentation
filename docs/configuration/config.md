@@ -16,3 +16,10 @@ A `config` object specifies global controls over a `stream`, using the follwing 
 | `skipDescription` | `boolean` | (Default: `false`) Wheter to skip playing the description. |
 | `skipTitle` | `boolean` | (Default: `false`) Wheter to skip playing the title. |
 | `overlayScaleConsistency` | `boolean` | (Default: `true`) Whether to use common scales for `overlay` compositions. |
+| `sequenceScaleConsistency` | `boolean` | (Default: `true`) Whether to use common scales for `sequence` compositions. |
+
+For nested specifications (e.g., a `sequence` of `overlay` and single streams), 
+the closest `config` object has the priority. 
+
+For the behavior of `overlayScaleConsistency` and `sequenceScaleConsistency`,
+refer to the `encoding` documentation.

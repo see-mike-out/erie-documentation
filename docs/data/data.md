@@ -11,8 +11,7 @@ Erie supports two methods for providing the data: `values` and `url`.
 | -------- | ---- | ----------- |
 | `values` | `object[]` | A tidy data. |
 | `url` | `urlString` | A URL to a dataset. It is retrieved using Fetch API. |
-
-Specifying named datasets is under plan.
+| `name` | `string` | The name of a dataset, which is defined in the `datasets` object. |
 
 ### Specifying data using `values`
 
@@ -77,7 +76,7 @@ let data = [
 ];
 let stream = new Erie.Stream();
 ...
-stream.data.set(data);
+stream.data.set("values", data);
 ...
 {% endhighlight %}
 </code-group>
@@ -103,7 +102,7 @@ stream.data.set(data);
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.data.set("data/penguins.json");
+stream.data.set("url", "data/penguins.json");
 ...
 {% endhighlight %}
 </code-group>

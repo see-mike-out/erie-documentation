@@ -91,7 +91,7 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | `band` | `number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
 | `timing` | `'relative'|'absolute'|'simultaneous'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
 
-## API usage
+#### API usage
 
 <code-groups>
 <code-group>
@@ -178,3 +178,39 @@ stream.enc.{channelName}.scale("timing", "relative");
 {% endhighlight %}
 </code-group>
 </code-groups>
+
+#### Scale consistency for multi-stream sonifications
+
+It is possible (and default) to use a consistent scales unless otherwise specified.
+
+For example, suppose a `sequence` consisting of one single `stream` and one three-stream `overlay`, so there are four streams defined.
+Let's name them 'Stream-A', 'Overlay-1', 'Overlay-2', and 'Overlay-3', respectively.
+'Overlay-1', 'Overlay-2', and 'Overlay-3' comprise 'Stream-B'
+The specification will look like: 
+`{"sequence": [ {... Stream-A ...}, { "overlay": [Overlay-1, Overaly-2, Overlay-3]}]}`.
+
+Then, assume these streams use a pitch channel.
+
+##### Case 1: Global
+'Stream-A' defines a pitch channel, while the others do not. 
+Then, 'Overlay-1', 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Stream-A' 
+as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
+If the overlaid streams use a different dataset or of a different encoding type, 
+then the scale will be different. 
+
+
+##### Case 2: Nested
+'Stream-A' and 'Overlay-1' definee a pitch channel, while the others do not. 
+Then, 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Overlay-1' 
+as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
+If 'Overlay-2', and 'Overlay-3' use a different dataset or of a different encoding type, 
+then the scale will be different. 
+
+##### Case 3: I just need individually defined scales
+If it is necessary to use individually defined scales, 
+then set `overlayScaleConsistency` (for `overlay`) or `sequenceScaleConsistency` (for `sequence`) to be `true`,
+in the closest `config` object.
+To make inconsistent scales between 'Stream-A' and 'Stream-B', 
+then set `sequenceScaleConsistency` as `true` in the top-level `sequence`.
+To make inconsistent scales among 'Overlay-1', 'Overlay-2', and 'Overlay-3',
+then set `overlayScaleConsistency` as `true` in the `overlay` object.
