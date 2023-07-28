@@ -214,3 +214,5 @@ To make inconsistent scales between 'Stream-A' and 'Stream-B',
 then set `sequenceScaleConsistency` as `true` in the top-level `sequence`.
 To make inconsistent scales among 'Overlay-1', 'Overlay-2', and 'Overlay-3',
 then set `overlayScaleConsistency` as `true` in the `overlay` object.
+
+When two scale definitions conflicts, a property defined earliest is applied. 
