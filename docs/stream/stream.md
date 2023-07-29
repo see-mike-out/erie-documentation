@@ -23,10 +23,17 @@ A `stream` can have the following porperties.
 | `title` | `string` | (Required) The title of a sonification (if specified, it is played) |
 | `description` | `string` | (Required) The description of a sonification (if specified, it is played). |
 | `data` | `object` | (Required) Data to sonify. |
+| `datasets` | `array` | Registering datasets to be used (mainly for multi-stream sonifications). |
+| `sampling` | `array` | Registering sampling audios to be used. |
+| `synth` | `array` | Registering synths sounds to be used. |
+| `tick` | `array` | Registering ticks to be used (mainly for multi-stream sonifications). |
 | `transform` | `array` | Data to sonify. |
 | `tone` | `object` | Tone definition. |
 | `encoding` | `object` | (Required) Encoding channels. |
 | `config` | `object` | Configuration object. |
+
+Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level stream will be ignored.
+
 
 ## API Usage
 

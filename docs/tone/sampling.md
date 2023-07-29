@@ -28,8 +28,9 @@ If your `pitch` channel's range is lower than the C7 note scale, then provide on
 {% highlight json %}
 {
   ...
-  "tone": {
-    "type": {
+  "sampling": [
+    {
+      "name": "sample_audio",
       "sample": {
         "C0": ..., // url string
         "C1": ..., // url string
@@ -40,8 +41,8 @@ If your `pitch` channel's range is lower than the C7 note scale, then provide on
         "C6": ..., // url string
         "C7": ... // url string
       }
-    },
-   },
+    }
+  ],
   ...
 }
 {% endhighlight %}
@@ -51,7 +52,7 @@ If your `pitch` channel's range is lower than the C7 note scale, then provide on
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-let tone = new Erie.SampledTone({
+let tone = new Erie.SampledTone("sample_audio", {
   "C0": ..., // url string
   "C1": ..., // url string
   "C2": ..., // url string
@@ -61,6 +62,7 @@ let tone = new Erie.SampledTone({
   "C6": ..., // url string
   "C7": ... // url string
 });
+stream.sampling.add(tone); // optional
 stream.tone.set(tone);
 ...
 {% endhighlight %}
@@ -77,11 +79,12 @@ For single pitch sounds like drum, provide the url only.
 {% highlight json %}
 {
   ...
-  "tone": {
-    "type": {
-      "sample": ... // url string
+  "sampling": [
+    {
+      "name": "sample_audio",
+      "sample":  // url string
     },
-   },
+  ],
   ...
 }
 {% endhighlight %}
@@ -91,7 +94,7 @@ For single pitch sounds like drum, provide the url only.
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-let tone = new Erie.SampledTone( ... ); // url string
+let tone = new Erie.SampledTone("sample_audio", ... ); // url string
 stream.tone.set(tone);
 ...
 {% endhighlight %}

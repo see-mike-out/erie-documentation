@@ -21,19 +21,21 @@ This documentation describes overall structure of each encoding channel and thei
 | `duration` | The length of a tone being played, with a data field *not* sharing the same scale with the corresponding `time` channel. |
 | `tapSpeed` | The number of tapping sounds uniformly distributed over the specified duration of time. |
 | `tapCount` | The number of tapping sounds of the same specified length. |
-| `pitch` | The pitch frequency of a tone. |
-| `loudness` | The volume or loudness of a tone. |
+| `pitch` | The pitch frequency of a tone. For a synth instrument, this changes the carrier's frequency. |
+| `loudness` | The volume or loudness of a tone. For a synth instrument, this changes the carrier's frequency. |
 | `pan` | The stereo panning (left and right spatial positioing) of a tone. |
 | `postReverb` | The length of the reverb sound played after a tone. |
 | `speechBefore` | The speech text played before playing a tone. |
 | `speechAfter` | The speech text played after playing a tone. |
 | `repeat` | Repeating streams of the same structure (i.e., encoding and tone design) over one or more `nominal`/`ordinal` variables. |
+| `modulation` | Modultaiotn index for a synth tone. |
+
+For more details about the `modulation`, please refer to [frequency modulation](https://en.wikipedia.org/wiki/Frequency_modulation#Modulation_index) and [amplitude modulation (or harmonicity)](https://en.wikipedia.org/wiki/Amplitude_modulation#Modulation_index).
 
 ### Encoding channels planned for updates
 
 | Channel | Description |
 | ------- | ----------- |
-| `modulation` | The degree of modulation of a FM synth tone. |
 | `panX` | For 3D panning, the left-right position of a tone. While it is same as `pan` but it works in a 3D panning setting. Requires a high-end audio device and advanced computing device, otherwise using 3D panning will cause high latency or low quality. |
 | `panY` | For 3D panning, the front-back position of a tone. |
 | `panZ` | For 3D panning, the top-down position of a tone. |
@@ -54,7 +56,7 @@ This documentation describes overall structure of each encoding channel and thei
 
 ### Aggregate
 
-Possible `aggregate` values 
+Possible `aggregate` values
 
 Note: `corr`, `covariance`, and `covariancep` is not available for the encoding `aggregate`.
 
@@ -186,33 +188,35 @@ It is possible (and default) to use a consistent scales unless otherwise specifi
 For example, suppose a `sequence` consisting of one single `stream` and one three-stream `overlay`, so there are four streams defined.
 Let's name them 'Stream-A', 'Overlay-1', 'Overlay-2', and 'Overlay-3', respectively.
 'Overlay-1', 'Overlay-2', and 'Overlay-3' comprise 'Stream-B'
-The specification will look like: 
+The specification will look like:
 `{"sequence": [ {... Stream-A ...}, { "overlay": [Overlay-1, Overaly-2, Overlay-3]}]}`.
 
 Then, assume these streams use a pitch channel.
 
 ##### Case 1: Global
-'Stream-A' defines a pitch channel, while the others do not. 
-Then, 'Overlay-1', 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Stream-A' 
-as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
-If the overlaid streams use a different dataset or of a different encoding type, 
-then the scale will be different. 
 
+'Stream-A' defines a pitch channel, while the others do not.
+Then, 'Overlay-1', 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Stream-A'
+as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
+If the overlaid streams use a different dataset or of a different encoding type,
+then the scale will be different.
 
 ##### Case 2: Nested
-'Stream-A' and 'Overlay-1' definee a pitch channel, while the others do not. 
-Then, 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Overlay-1' 
+
+'Stream-A' and 'Overlay-1' definee a pitch channel, while the others do not.
+Then, 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Overlay-1'
 as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
-If 'Overlay-2', and 'Overlay-3' use a different dataset or of a different encoding type, 
-then the scale will be different. 
+If 'Overlay-2', and 'Overlay-3' use a different dataset or of a different encoding type,
+then the scale will be different.
 
 ##### Case 3: I just need individually defined scales
-If it is necessary to use individually defined scales, 
+
+If it is necessary to use individually defined scales,
 then set `overlayScaleConsistency` (for `overlay`) or `sequenceScaleConsistency` (for `sequence`) to be `true`,
 in the closest `config` object.
-To make inconsistent scales between 'Stream-A' and 'Stream-B', 
+To make inconsistent scales between 'Stream-A' and 'Stream-B',
 then set `sequenceScaleConsistency` as `true` in the top-level `sequence`.
 To make inconsistent scales among 'Overlay-1', 'Overlay-2', and 'Overlay-3',
 then set `overlayScaleConsistency` as `true` in the `overlay` object.
 
-When two scale definitions conflicts, a property defined earliest is applied. 
+When two scale definitions conflicts, a property defined earliest is applied.

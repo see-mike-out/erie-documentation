@@ -119,10 +119,12 @@ stream.tone.set(tone);
 </code-groups>
 
 
-#### Sampling a sound
+#### Sampling a sound or using a synth
 
-See the sampling documentation.
-
+Set the `type` as the name of the sampled sound or synth instrument as defined in the `sampling` or `synth` object.
+Make sure to not use the overlapping names.
+Erie searches the instrument by looking at the named instrument list, the `synth` object, and the `sampling` object, in this order.
+ 
 ### About supporting `continued` tone types
 
 Erie offers those instruments by sampling audio files for notes.
