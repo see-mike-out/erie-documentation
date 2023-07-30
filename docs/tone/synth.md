@@ -19,7 +19,7 @@ To use an FM/AM synth tone, it MUST be registered in the `synth` abject (`array`
 | `carrierDetune` | `number` (Hz) | (Default: `0`) The amount of detuning the carrier. |
 | `modulatorType` | `'sine'|'square'|'sawtooth'|'triangle'` (Hz) | (Default: `'sine'`) The wave form type of the modulator. |
 | `modulatorPitch` | `number` (Hz) | (Default: `220` Hz) The pitch frequency of the modulator. |
-| `modulatorVolume` | `number<0-1>` | (Default: `440` Hz) The pitch frequency of the modulator. |
+| `modulatorVolume` | `number<0-1>` | (Default: 0.2) The gain of the modulator. |
 | `modulation` | `number` | (Only for `FM` synth, default: `1`) It is multiplied to the `carrierPitch` to get `modulatorPitch`. |
 | `harmonicity` | `number` | (Only for `AM` synth, default: `1`) it is harmonic of the modulator node. |
 | `attackTime` | `number` (seconds) | (Default: `0` sec.) The length of attack (when the highest peek comes). |
@@ -52,7 +52,7 @@ If both provided, `modulation` is ignored.
 let stream = new Erie.Stream();
 ...
 let tone = new Erie.SynthTone("my_synth");
-tone.attackTime.set(0.2);
+tone.attackTime(0.2);
 ...
 stream.tone.set(tone);
 ...

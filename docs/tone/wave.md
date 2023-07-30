@@ -51,7 +51,10 @@ let periodicWave = {
   "real": [ ... ], // sine terms
   "imag": [ ... ] // cosine terms
 };
-let wave = new Erie.Wave("wave1", periodicWave)
+let wave = new Erie.Wave("wave1", periodicWave);
+// alt1) let wave = new Erie.Wave("wave1"); wave.wave(periodicWave);
+// alt2) let wave = new Erie.Wave("wave1"); wave.real(periodicWave.real); wave.imag(periodicWave.imag);
+
 stream.wave.add(wave);
 let tone = new Erie.Tone("wave1");
 stream.tone.set(tone);
