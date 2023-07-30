@@ -49,7 +49,8 @@ A `density` transformation converts a variable into an estimated kernel density 
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-let density = new Erie.Density("Body Mass (g)"); // no shortcut constructor
+let density = new Erie.Density("Body Mass (g)"); // shortcut constructor
+// alt) let density = new Erie.Density(); density.field("Body Mass (g)");
 density.extent(2500, 6500);
 // alt) density.extent([2500, 6500]);
 stream.transform.add(density);

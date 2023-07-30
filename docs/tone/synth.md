@@ -3,7 +3,7 @@ layout: default
 title: Synth
 parent: Tone
 level: 1
-order: 502
+order: 503
 ---
 
 To use an FM/AM synth tone, it MUST be registered in the `synth` abject (`array` type) before using it.

@@ -26,6 +26,7 @@ A `stream` can have the following porperties.
 | `datasets` | `array` | Registering datasets to be used (mainly for multi-stream sonifications). |
 | `sampling` | `array` | Registering sampling audios to be used. |
 | `synth` | `array` | Registering synths sounds to be used. |
+| `wave` | `array` | Registering periodic waves to be used. |
 | `tick` | `array` | Registering ticks to be used (mainly for multi-stream sonifications). |
 | `transform` | `array` | Data to sonify. |
 | `tone` | `object` | Tone definition. |
@@ -33,7 +34,6 @@ A `stream` can have the following porperties.
 | `config` | `object` | Configuration object. |
 
 Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level stream will be ignored.
-
 
 ## API Usage
 

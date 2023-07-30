@@ -19,7 +19,6 @@ A `tone` object has the following properties.
 | -------- | ---- | ----------- |
 | `type` | `string` or `object` | (Default: `'default'`, a sine wave oscillator) The instrument type of a tone. |
 | `continued` | `boolean` | (Default: `false`) Whether a tone is continued (no break between sound points) or discrete (breaks between sound points). This property can be ignored for sampled instruments (see below). |
-| `sample` | `object` | A sampling object. |
 
 ### Supported instrument types
 
@@ -80,51 +79,12 @@ stream.tone.set(tone);
 </code-group>
 </code-groups>
 
-#### Providing a Periodic Wave form
+#### Sampling a sound, using a synth, or providing a Periodic Wave form
 
-It is possible to provide a periodic wave form (see [this MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/PeriodicWave))
-by providing a periodic wave object.
-These instrument types suppport `continued` tones.
-
-<code-groups>
-<code-group>
-<h4>JSON</h4>
-{% highlight json %}
-{
-  ...
-  "tone": {
-    "type": {
-      "real": [ ... ], // sine terms
-      "imag": [ ... ] // cosine terms
-    }, 
-   },
-  ...
-}
-{% endhighlight %}
-</code-group>
-<code-group>
-<h4>JavaScript</h4>
-{% highlight js %}
-let stream = new Erie.Stream();
-...
-let periodicWave = {
-  "real": [ ... ], // sine terms
-  "imag": [ ... ] // cosine terms
-};
-let tone = new Erie.Tone(periodicWave);
-stream.tone.set(tone);
-...
-{% endhighlight %}
-</code-group>
-</code-groups>
-
-
-#### Sampling a sound or using a synth
-
-Set the `type` as the name of the sampled sound or synth instrument as defined in the `sampling` or `synth` object.
+Set the `type` as the name of the sampled sound or synth instrument as defined in the top-level `sampling`, `synth`, or `wave` object.
 Make sure to not use the overlapping names.
-Erie searches the instrument by looking at the named instrument list, the `synth` object, and the `sampling` object, in this order.
- 
+Erie searches the instrument by looking at the named instrument list, the `wave` object, the `synth` object, and the `sampling` object, in this order.
+
 ### About supporting `continued` tone types
 
 Erie offers those instruments by sampling audio files for notes.
