@@ -3,7 +3,7 @@ layout: default
 title: Sequence
 parent: Composition
 level: 1
-order: 801
+order: 701
 ---
 
 A `sequence` composition plays its child streams one by one.

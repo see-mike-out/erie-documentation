@@ -3,7 +3,7 @@ layout: default
 title: Duration Channel
 parent: Encoding
 level: 1
-order: 702
+order: 602
 ---
 
 The `duration` channel sets the length of each tone (only works for discrete tones)

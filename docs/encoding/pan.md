@@ -3,7 +3,7 @@ layout: default
 title: Pan Channel
 parent: Encoding
 level: 1
-order: 706
+order: 606
 ---
 
 In Erie, the `pan` channel means streo panning (left and right spatial positioning).

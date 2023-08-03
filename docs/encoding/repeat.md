@@ -3,7 +3,7 @@ layout: default
 title: Repeat Channel
 parent: Encoding
 level: 1
-order: 709
+order: 610
 ---
 
 The `repeat` channel is a way to make sequanced streams

@@ -3,7 +3,7 @@ layout: default
 title: Tap Channels (Speed and Count)
 parent: Encoding
 level: 1
-order: 703
+order: 603
 ---
 
 A tap channel sets the number of repeated tones (only works for `discrete` tones, and recommended using with `relative` `timing`).

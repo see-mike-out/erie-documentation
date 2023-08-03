@@ -2,7 +2,7 @@
 layout: default
 title: Encoding
 level: 0
-order: 700
+order: 600
 ---
 
 The `encoding` property of a `steam` defines how to map data variables to auditory variables.
@@ -22,6 +22,7 @@ This documentation describes overall structure of each encoding channel and thei
 | `tapSpeed` | The number of tapping sounds uniformly distributed over the specified duration of time. |
 | `tapCount` | The number of tapping sounds of the same specified length. |
 | `pitch` | The pitch frequency of a tone. For a synth instrument, this changes the carrier's frequency. |
+| `detune` | (Only for noise tones) The amount of detuning a tone. |
 | `loudness` | The volume or loudness of a tone. For a synth instrument, this changes the carrier's frequency. |
 | `pan` | The stereo panning (left and right spatial positioing) of a tone. |
 | `postReverb` | The length of the reverb sound played after a tone. |
@@ -29,6 +30,7 @@ This documentation describes overall structure of each encoding channel and thei
 | `speechAfter` | The speech text played after playing a tone. |
 | `repeat` | Repeating streams of the same structure (i.e., encoding and tone design) over one or more `nominal`/`ordinal` variables. |
 | `modulation` | Modultaiotn index for a synth tone. |
+| `harmonicity` | Harmony between AM carrier and modulator. |
 
 For more details about the `modulation`, please refer to [frequency modulation](https://en.wikipedia.org/wiki/Frequency_modulation#Modulation_index) and [amplitude modulation (or harmonicity)](https://en.wikipedia.org/wiki/Amplitude_modulation#Modulation_index).
 
@@ -52,7 +54,7 @@ For more details about the `modulation`, please refer to [frequency modulation](
 | `value` | `any` | (Optional) A static sound for a channel. |
 | `scale` | `object` | (Optional, but highly suggested) The detail of scaling. See below for details. |
 | `speech` | `boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
-| `tick` | `object` | (Optional, default: `null`; only for `time` channel) An audio axis. |
+| `tick` | `object|string` | (Optional, default: `null`; only for `time` channel) An audio axis. If it is `string`, then it should be a registered tick's name. |
 
 ### Aggregate
 
@@ -147,7 +149,6 @@ let stream = new Erie.Stream();
 
 // method 1 (more reusable)
 let channel = new Erie.{ChannelName}();
-// or let channel = new Erie.({channelName});
 channel.field("Origin", "nominal");
 // or let channel = new Erie.Channel("Origin", "nominal");
 let maxbins = 10, nice = true, step;

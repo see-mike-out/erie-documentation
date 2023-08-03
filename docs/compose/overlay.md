@@ -3,7 +3,7 @@ layout: default
 title: Overlay
 parent: Composition
 level: 1
-order: 802
+order: 702
 ---
 
 A `overlay` composition plays its child streams together, simultaneously, parallelly

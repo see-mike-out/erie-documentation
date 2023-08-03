@@ -2,7 +2,7 @@
 layout: default
 title: Composition
 level: 0
-order: 800
+order: 700
 ---
 
 Erie offers two primary options to compose a multi-stream sonification: `sequence` and `overlay`.

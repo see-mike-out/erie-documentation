@@ -19,6 +19,7 @@ A `tone` object has the following properties.
 | -------- | ---- | ----------- |
 | `type` | `string` or `object` | (Default: `'default'`, a sine wave oscillator) The instrument type of a tone. |
 | `continued` | `boolean` | (Default: `false`) Whether a tone is continued (no break between sound points) or discrete (breaks between sound points). This property can be ignored for sampled instruments (see below). |
+| `filter` | `string[]` | A list of audio filter names. |
 
 ### Supported instrument types
 
@@ -28,30 +29,38 @@ A `tone` object has the following properties.
 
 These instrument types support `continued` tones.
 
-- `'default'`: default oscillator (`'sine'` )
-- `'square'`: square oscillator
-- `'sawtooth'`: default oscillator (`'sawtooth'` form)
-- `'triangle'`: default oscillator (`'triangle'` form)
+- `'default'`: default oscillator with a `'sine'` wave form
+- `'square'`: default oscillator with a `'square'` wave form
+- `'sawtooth'`: default oscillator with a `'sawtooth'` wave form
+- `'triangle'`: default oscillator with a `'triangle'` wave form
+
+##### Noise types
+
+These instrument types support `continued` tones.
+
+- `'whiteNoise'`: random noise (random buffer from -1 to 1)
+- `'brownNoise'`: Brownian/red/random-walk noise ([definition](https://en.wikipedia.org/wiki/Brownian_noise))
+- `'pinkNoise'`: fractal noise ([defintion](https://en.wikipedia.org/wiki/Pink_noise))
 
 ##### Muliti-Pitch Instrumental types
 
 These instrument types do *NOT* suppport `continued` tones.
 
-- `'piano'`: square oscillator
-- `'pianoElec'`: square oscillator
-- `'violin'`: square oscillator
-- `'metal'`: square oscillator
-- `'guitar'`: square oscillator
+- `'piano'`: classical piano
+- `'pianoElec'`: electric piano keyboard
+- `'violin'`: classical violin
+- `'metal'`: metal guitar
+- `'guitar'`: classical guitar
 
 ##### Single-Pitch Instrumental types
 
 These instrument types do *NOT* suppport `continued` tones.
 Note that a `pitch` encoding technically works, but the quality will not be ideal.
 
-- `'hithat'`: square oscillator
-- `'highKick'`: square oscillator
-- `'lowKic'`: square oscillator
-- `'clap'`: square oscillator
+- `'hithat'`: hit-hat sound
+- `'highKick'`: high-kick sound
+- `'lowKick'`: low-kick sound
+- `'clap'`: clap sound
 
 <code-groups>
 <code-group>
@@ -91,3 +100,7 @@ Erie offers those instruments by sampling audio files for notes.
 Due to the limitations in Web Audio API,
 It is not possible to continue sampled (i.e., non-oscillator) sounds.
 Thus, either a periodic form or oscillator-type instruments can be set as a continued tone.
+
+#### Attaching audio filters
+
+To attach audio filters, one can provide the name of filters. See the `filter` document.

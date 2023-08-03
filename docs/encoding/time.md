@@ -3,7 +3,7 @@ layout: default
 title: Time Channel
 parent: Encoding
 level: 1
-order: 701
+order: 601
 ---
 
 In data sonification, time is a very important channel to avoid chaos.
@@ -264,11 +264,11 @@ stream.enc.time.tick("loudness", 0.4) // default
 
 // alternatively
 let tick = new Erie.Tick("default_tick") // name, optional argument
-tick.interval = 0.5; // unit: seconds
-tick.playAtplayAtTime0 = true; // default
-tick.oscType = "sine"; // default
-tick.pitch = 150; // default
-tick.loudness = 0.4; // default
+tick.interval(0.5); // unit: seconds
+tick.playAtplayAtTime0(true); // default
+tick.oscType("sine"); // default
+tick.pitch(150); // default
+tick.loudness(0.4); // default
 stream.enc.time.tick(tick);
 
 {% endhighlight %}

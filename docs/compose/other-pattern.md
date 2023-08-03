@@ -3,7 +3,7 @@ layout: default
 title: Other patterns 
 parent: Composition
 level: 1
-order: 803
+order: 703
 ---
 
 There are other patterns to play multi-stream sonifications.

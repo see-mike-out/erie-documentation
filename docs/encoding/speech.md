@@ -3,7 +3,7 @@ layout: default
 title: Speech (before and after) Channels
 parent: Encoding
 level: 1
-order: 708
+order: 608
 ---
 
 A speech channel enocdes a natural language sound before (`speechBefore`) or after (`speechAfter`) the main tone.

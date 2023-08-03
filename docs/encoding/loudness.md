@@ -3,19 +3,20 @@ layout: default
 title: Loudness Channel
 parent: Encoding
 level: 1
-order: 705
+order: 605
 ---
 
 Note: Erie Web Player does not map the `loudness` to the "volume" of a sound (i.e., actual decibel value)
 because doing so may override or conflict with the user's volume setting.
 For instance, a user with low hearing may have to set their device volumen higher than others,
 and a user with sensitive hearing may have set it lower than others.
-Instead, Erie Web Player maps the `loudness` to the `gain` (or velocity) of a sound (i.e., how strong a sound is played).
-This way can work with users' different volume settings (i.e., relative volume control).
+Instead, Erie Web Player maps the `loudness` to the `gain` (or velocity) of a sound (i.e., how strong a sound is played),
+so that it works with users' different volume settings (i.e., relative volume control).
+The unit it perceived volume (decibel), but it is different from the actual decibel volume unit.
+It's always the very listener who has the control to the actual volume.
+However, if a loudness value is beyond 1 or 2, the sound might be too loud all at sudden, so the default loudness range is `[0, 1]`.
 
 Using the `loudness` is pretty straightforward.
-The range of `loudness` is always betwene `0` and `1`, and values exceeding this range will be capped.
-
 
 ### `loudness` usage pattern
 
