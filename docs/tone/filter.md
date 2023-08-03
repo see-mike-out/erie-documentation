@@ -11,9 +11,73 @@ The `filter` property of a `tone` specifies the filters attached to a tone (don'
 If you proivde two filters, then they are connected in chain to the audio context.
 For example, if your filters are [`filter1`, `filter2`], then the connection is made as: your tone instrument -> `filter1` -> `filter2` -> `audioContext`.
 
-## Supported preset filters (no additional encoding is supported)
+## Supported preset filters
+Standard API is not supported, instead use `Erie.Channel` constructor.
 
-- `'gainer'`: Simple gain filter
+### Sample filter
+
+- `'gainer'`: Simple gain filter (extra channel: `gain2` (`loudness`-type))
+
+### Biquad filters
+
+- `'lowpass'`: Simple lowpass-type biquad filter
+- `'highpass'`: Simple highpass-type biquad filter
+- `'bandpass'`: Simple bandpass-type biquad filter
+- `'lowshelf'`: Simple lowshelf-type biquad filter
+- `'highshelf'`: Simple highshelf-type biquad filter
+- `'peaking'`: Simple peaking-type biquad filter
+- `'notch'`: Simple notch-type biquad filter
+- `'allpass'`: Simple allpass-type biquad filter
+
+Biquad filters have the following extra channels
+
+- `biquadDetune`: `detune`-type
+- `biquadPitch`: `pitch`-type
+- `biquadQ`: [Q factor](https://en.wikipedia.org/wiki/Q_factor) (should range from 0.0001 to 1000, but needs to be specified).
+- `biquadGain`: `loudness`-type (only for `'lowshelf'` and `'highshelf'`)
+
+### API usage
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "tone": {
+    "type": "default",
+    "continued": false,
+    "filter": ["lowpass", "gainer"]
+  },
+  "encoding": {
+    "time": { ... },
+    "biquadQ": {
+      "field": "values",
+      "type": "quantitative"
+      "scale": {
+        "range": [150, 700]
+      }
+    }
+  }
+  ...
+}
+{% endhighlight %}
+</code-group>
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let stream = new Erie.Stream();
+...
+let tone = new Erie.Tone("default", false);
+tone.addFilter(["lowpass", "gainer"]);
+stream.tone.set(tone);
+...
+stream.enc.biquadQ = new Erie.Channel("values", "quantitative");
+stream.enc.biquadQ.scale("range", [150, 700]);
+...
+{% endhighlight %}
+</code-group>
+</code-groups>
 
 ## How to create a custom filter
 
