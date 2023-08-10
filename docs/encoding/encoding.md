@@ -53,6 +53,7 @@ For more details about the `modulation`, please refer to [frequency modulation](
 | `condition` | `object` | Conditional value assignment. |
 | `value` | `any` | (Optional) A static sound for a channel. |
 | `scale` | `object` | (Optional, but highly suggested) The detail of scaling. See below for details. |
+| `ramp` | `true|false|'abrupt'|'linear'|'exponential'` | (Optional, for `continuous` tones) Whether/how to ramp audio properties. `true` is `'linear'` and `false` is `'abrupt'`. |
 | `speech` | `boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
 | `tick` | `object|string` | (Optional, default: `null`; only for `time` channel) An audio axis. If it is `string`, then it should be a registered tick's name. |
 
