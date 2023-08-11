@@ -22,11 +22,11 @@ But, you can use it for accessible visualization.
 
 ## Try online with examples
 
-Try [Erie online editor]() with examples—the best way to learn how to write an Erie specification.
+Try [Erie online editor](https://see-mike-out.github.io/erie) with examples—the best way to learn how to write an Erie specification.
 
 ## Want to help with improving Erie?
 
-(I'm working on it. Currently, please make an issue in the [GitHub repo]().)
+(I'm working on it. Currently, please make an issue in the [GitHub repo](https://github.com/see-mike-out/erie-web).)
 
 There are major future extension plans:
 
