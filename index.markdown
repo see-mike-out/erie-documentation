@@ -50,7 +50,7 @@ However, the timing of resulting sonification may not be of high precision in so
 For example, if you use a `discrete` tone for more than 100 data points withint too short time, then the Web Audio API can be overloaded, so it fails to play such sound (it might cause your browsers to be shut down).
 In that case, use a `continuous` tone.
 
-### Recoding
+### Recording
 
-The recoding of a resulting sonification is not well streamlined because it is not possible to recorde sound generated from Web Speech API.
-In case you have access to different audio generation APIs for non-web enviroments, use the `compileToAudioGraph` method to get the compiled speech and sound values.
+The recording of a resulting sonification is not well streamlined because it is not possible to recorde sound generated from Web Speech API.
+Instead, I developed a Chrome extension for recording. See the recorder page.
