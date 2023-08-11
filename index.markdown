@@ -5,7 +5,7 @@ level: 0
 order: 0
 ---
 
-## Erie
+## Erie (Web)
 
 Erie is a 'fully open-sourced' declarative grammar for data sonification!
 **It is solely for data sonification, not as an accessibility attachment to a visualization.**
