@@ -36,6 +36,25 @@ Biquad filters have the following extra channels
 - `biquadQ`: [Q factor](https://en.wikipedia.org/wiki/Q_factor) (should range from 0.0001 to 1000, but needs to be specified).
 - `biquadGain`: `loudness`-type (only for `'lowshelf'` and `'highshelf'`)
 
+### Dynamic Compressor
+
+- `defaultCompressor`: A default dynamic compressor with (attack = 20, knee = 10, ratio = 18, release = 0.25, threshold = -50)
+
+Additional encoding channels when using a `defaultCompressor` filter. 
+While some channels have unit of seconds, they are not affected by `config.timeUnit`.
+
+- `dcAttack`: the time taken to have the compression, with the value range of `[0, 1]` (unit: seconds)
+- `dcKnee`: the dB range (i.e., from the threshold to knee) for smoothing, with the value range of `[0, 40]`
+- `dcRatio`: the amount of change in gain, with the value range of `[1, 20]`
+- `dcRelease`: the time taken to resolve the compression, with the value range of `[0, 1]`
+- `dcThreshold`: the dB value above which the compression has the effect, with the value range of `[-100, 0]`
+
+See [this documentation](https://developer.mozilla.org/en-US/docs/Web/API/DynamicsCompressorNode) for them.
+
+### Convolver
+
+- `distortion`: A static distortion filter.
+
 ### API usage
 
 <code-groups>

@@ -71,7 +71,7 @@ stream.tone.set(tone);
 
 ## Sampling single-pitch sounds
 
-For single pitch sounds like drum, provide the url only.
+For single pitch sounds like drum, use the `mono` property.
 
 <code-groups>
 <code-group>
@@ -82,7 +82,9 @@ For single pitch sounds like drum, provide the url only.
   "sampling": [
     {
       "name": "sample_audio",
-      "sample":  // url string
+      "sample": {
+        "mono": ...  // url string
+      }
     },
   ],
   ...
@@ -94,7 +96,7 @@ For single pitch sounds like drum, provide the url only.
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-let tone = new Erie.SampledTone("sample_audio", ... ); // url string
+let tone = new Erie.SampledTone("sample_audio", {mono: ...}); // url string
 stream.tone.set(tone);
 ...
 {% endhighlight %}
