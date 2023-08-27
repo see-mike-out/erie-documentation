@@ -94,6 +94,11 @@ html {
   text-decoration: underline;
 }
 
+.nav-item.current {
+  color: #2461a3 !important;
+  text-decoration: underline !important;
+}
+
 .config {
   font-size: 0.9rem;
 }

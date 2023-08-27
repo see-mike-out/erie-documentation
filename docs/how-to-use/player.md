@@ -43,6 +43,10 @@ This immediately pauses the sonification being played.
 This resumes playing the sonification from where it was stopped.
 If it was paused at `i`-th queue element, it starts playing from the `i`-th element.
 
+### `AudioQueue.playAt`
+
+This gives the index of the sub-sequence that is currently being played.
+
 ## Player Events
 
 As a player executes each queue element, it fires the following events

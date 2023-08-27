@@ -34,3 +34,7 @@ This method plays the specified sonification, and then returns a `Promise` which
 ### `async SequenceStream.stopQueue()`
 
 This method stops the specified sonification, and then returns a `Promise` which is resolved to `undefined`.
+
+### `SequenceStream.queue.playAt`
+
+This gives the index of the sub-sequence that is currently being played.

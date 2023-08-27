@@ -23,10 +23,16 @@
         </h1>
         <nav>
           {% assign pages = site.pages | where_exp: 'page', 'page.title' | sort: "order" %}
-          {% for page in pages %}
-          <a href={{ page.url | relative_url }} class="nav-item" data-level={{ page.level }}>
-            {{page.title}}
+          {% for pg in pages %}
+          {% if pg.title == page.title %}
+          <a href={{ pg.url | relative_url }} class="nav-item current" data-level={{ pg.level }} >
+            ▶︎ {{pg.title}}
           </a>
+          {% else %}
+          <a href={{ pg.url | relative_url }} class="nav-item" data-level={{ pg.level }} >
+            {{pg.title}}
+          </a>
+          {% endif %}
           {% endfor %}
         </nav>
         <div class="config mt-3">
