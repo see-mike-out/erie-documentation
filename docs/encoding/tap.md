@@ -11,8 +11,6 @@ Essentially, tap and `duration` works in a similar way (there is only a volume c
 That is, a tap channel encodes a data value in a different scale than that of the `time` channel.
 
 There are two tap channels: `tapSpeed` and `tapCount`.
-Either one is allowed at a time
-because they are later compiled to `tap` property in the resulting `AudioGraph` object.
 
 #### Note for precision
 A tapping sound is controlled by a `GainNode` (i.e., controlling the volume)
@@ -62,8 +60,8 @@ To cap the length of tapping sound, one can use `maxTappingLength` (unit: second
 let stream = new Erie.Stream();
 ...
 stream.enc.tapSpeed.field("density", "quantitative");
-stream.enc.tapSpeed.scale("domain", [0, 1]); // optinal
-stream.enc.tapSpeed.scale("range", [0, 10]); // optinal
+stream.enc.tapSpeed.scale("domain", [0, 1]); // optional
+stream.enc.tapSpeed.scale("range", [0, 10]); // optional
 stream.enc.tapSpeed.scale("band", 2); // unit: seconds
 ...
 {% endhighlight %}
@@ -89,7 +87,7 @@ Alternatively, the `pauseLength` property in `scale` makes it possible to direct
   ...
   "encoding" : {
     "tapCount": {
-      "field": "",
+      "field": "length",
       "type": "quantitative",
       "scale": {
         "doamin": [0, 5], // optional
@@ -107,9 +105,9 @@ Alternatively, the `pauseLength` property in `scale` makes it possible to direct
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.tapCount.field("density", "quantitative");
-stream.enc.tapCount.scale("domain", [0, 5]); // optinal
-stream.enc.tapCount.scale("range", [0, 10]); // optinal
+stream.enc.tapCount.field("length", "quantitative");
+stream.enc.tapCount.scale("domain", [0, 5]); // optional
+stream.enc.tapCount.scale("range", [0, 10]); // optional
 stream.enc.tapCount.scale("band", 0.2); // unit: seconds
 ...
 {% endhighlight %}
@@ -117,3 +115,55 @@ stream.enc.tapCount.scale("band", 0.2); // unit: seconds
 </code-groups>
 
 <!-- todo: example -->
+
+
+### `tapCount` + `tapSpeed`
+
+You can use `tapCount` and `tapSpeed` channels together. In this case, the `band` of `tapSpeed` (i.e., the duration), the `pause` of `tapCount`, and the `singleTappingPosition` of `tapSpeed` are all ignored.
+It is basically a `tapCount` channel with varying speeds.
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "encoding" : {
+    "tapCount": {
+      "field": "length",
+      "type": "quantitative",
+      "scale": {
+        "doamin": [0, 7], // optional
+        "range": [0, 7], // optional
+        "band": 0.2 // unit: seconds
+      }
+    },
+     "tapSpeed": {
+      "field": "sparsity",
+      "type": "quantitative",
+      "scale": {
+        "doamin": [0, 1], // optional
+        "range": [0, 7], // optional
+      }
+    }
+  }
+  ...
+}
+{% endhighlight %}
+</code-group>
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let stream = new Erie.Stream();
+...
+stream.enc.tapCount.field("length", "quantitative");
+stream.enc.tapCount.scale("domain", [0, 7]); // optional
+stream.enc.tapCount.scale("range", [0, 7]); // optional
+stream.enc.tapCount.scale("band", 0.2); // unit: seconds
+stream.enc.tapSpeed.field("sparsity", "quantitative");
+stream.enc.tapSpeed.scale("domain", [0, 1]); // optional
+stream.enc.tapSpeed.scale("range", [0, 7]); // optional
+...
+{% endhighlight %}
+</code-group>
+</code-groups>

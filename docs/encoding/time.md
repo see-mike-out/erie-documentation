@@ -218,7 +218,8 @@ It is defined using the following properties
 | Property | type | Description |
 | -------- | ---- | ----------- |
 | `name` | `string` | (Optional) The name of the tick. |
-| `interval` | `number` (unit: seconds) | (Default: `0.5`) the interval between tick sounds. |
+| `interval` | `number` (unit: seconds/beat) | (Default: `0.5`-seconds/`2`-beats) the interval between tick sounds. |
+| `band` | `number` (unit: seconds/beat) | (Default: `0.1`-seconds/`0.5`-beats) the length of each tick sound. |
 | `playAtTime0` | `boolean` | (Default: `true`) whether to play a tick sound at the beginnig of a stream. |
 | `oscType` | `'sine'|'square'|'sawtooth'|'triangle'` | (Default: `'sine'`) the type of an oscillator. See [here](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/type) for details. |
 | `pitch` | `number` | (Default: `150`) the pitch frequency of the tick sound. |

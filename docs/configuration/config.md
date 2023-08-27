@@ -15,6 +15,15 @@ A `config` object specifies global controls over a `stream`, using the follwing 
 | `skipScaleSpeech` | `boolean` | (Default: `false`) Wheter to skip playing the scale descriptions. |
 | `skipDescription` | `boolean` | (Default: `false`) Wheter to skip playing the description. |
 | `skipTitle` | `boolean` | (Default: `false`) Wheter to skip playing the title. |
+| `skipStartSpeech` | `boolean` | (Default: `false`) Wheter to skip the very first intro speech, "To stop playing the sonificatoin, press the X key." |
+| `skipStartPlaySpeech` | `boolean` | (Default: `false`) Wheter to skip playing the start of the audio speech, "Play sonification." |
+| `skipFinishSpeech` | `boolean` | (Default: `false`) Wheter to skip playing the end of sonification speech, "Finished." |
+| `skipSquenceIntro` | `boolean` | (Default: `false`) Wheter to skip playing the introduction of a sequence, "This sonification sequence consists of {the number of streams} parts." |
+| `skipSequenceTitle` | `boolean` | (Default: `false`) Wheter to skip playing the title of each sequence element. |
+| `skipSequenceDescription` | `boolean` | (Default: `false`) Wheter to skip playing the title of each sequence element. |
+| `skipOverlayIntro` | `boolean` | (Default: `false`) Wheter to skip playing the introduction of an overlay, "{determiner: this/the first/the second...} stream has {the number of overlays} overlaid sounds." |
+| `skipOverlayTitle` | `boolean` | (Default: `false`) Wheter to skip playing the title of each overlay element. |
+| `skipOverlayDescription` | `boolean` | (Default: `false`) Wheter to skip playing the title of each overlay element. |
 | `overlayScaleConsistency` | `boolean|object` | (Default: `true`) Whether to use common scales for `overlay` compositions (if channels is the same `type` and encodes the same datset). It is also possible to set by each encoding channel. |
 | `forceOverlayScaleConsistency` | `boolean|object` | (Default: `false`) Force using common scales for `overlay` compositions even if they encode different datasets. It is also possible to set by each encoding channel. |
 | `sequenceScaleConsistency` | `boolean|object` | (Default: `true`) Whether to use common scales for `sequence` compositions (if channels is the same `type` and encodes the same datset). It is also possible to set by each encoding channel. |

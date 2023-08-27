@@ -56,6 +56,8 @@ For more details about the `modulation`, please refer to [frequency modulation](
 | `ramp` | `true|false|'abrupt'|'linear'|'exponential'` | (Optional, for `continuous` tones) Whether/how to ramp audio properties. `true` is `'linear'` and `false` is `'abrupt'`. |
 | `speech` | `boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
 | `tick` | `object|string` | (Optional, default: `null`; only for `time` channel) An audio axis. If it is `string`, then it should be a registered tick's name. |
+| `format` | `string` | (Optional) The format of numerical values for a scale description or read out. See this D3 documentations ([number format](https://github.com/d3/d3-format), [time format](https://github.com/d3/d3-time-format)) for the expression. |
+| `formatType` | `'number'|'datetime'` | (Optional, default: `'datetime'`) The type of formatting. |
 
 ### Aggregate
 
@@ -91,7 +93,8 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | `maxDistinct` | `boolean` | (Optional, default: `true`) When `range` is not specified and `maxDistinct` is true, then the `range` becomes the entire range of that channel (e.g., from the lowest pitch to the highest pitch, from the pan of `-1`—leftmost to pan of `1`–rightmost). |
 | `times` | `number` | (Optional) A direct scale factor. When provided, for a value `v`, the auditory value is `v * times`. If the `max(value) * times` or `min(value) * times` goes beyond the possible auditory value for each channel, then the specified `times` is adjusted. |
 | `zero` | `boolean` | (Optional, default: `false`) Whether to include the zero value in the scale for a quantitative encoding. The default value is `zero` unlike visualization to maximalize the discriminability of auditory values because some audio values have limited possible range. |
-| `description` | `'nonskip'|'skip'`,`null`, or`string` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. If it is `'skip'` or `null`, then description is not played. If provided as a string that is not `'skip'` or `'nonskip'`, then the provided string is played instead. |
+| `description` | `'nonskip'|'skip'`,`null`, or`descriptionMarkup` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. If it is `'skip'` or `null`, then description is not played. If provided as a string that is not `'skip'` or `'nonskip'`, then the provided string is played instead. See below for the description markup. |
+| `title` | `string` | (Optional, default is the field's name) If provided, it is used for the description. |
 | `length` | `number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
 | `band` | `number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
 | `timing` | `'relative'|'absolute'|'simultaneous'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
@@ -135,7 +138,9 @@ Each encoding channel may have different `scale` properties, so refer to relevan
         {"test": {"not": [ value1, value2, ... ]}, "value": ... }, // "not"
         {"test": "d.field > 0", "value": ... } // conditional
       ],
-      "speech": true // or false
+      "speech": true // or false,
+      "format": '.2', // (rounding at the second decimal point), no default value
+      "formatType": "number" // default value
     }
   }
   ...
@@ -169,6 +174,11 @@ channel.condition.add([ value1, value2, ... ], ...);
 channel.condition.add({"not": [ value1, value2, ... ]}, ...);
 channel.condition.add("d.field > 0", ...);
 
+// format
+channel.format('.2', 'number');
+channel.format('.2');
+channel.formatType('number');
+
 stream.enc.{channelName}.set(channel); // provided for reusability;
 
 // method 2 (more direct)
@@ -182,6 +192,127 @@ stream.enc.{channelName}.scale("timing", "relative");
 {% endhighlight %}
 </code-group>
 </code-groups>
+
+#### Scale description markup
+
+For the `description` property of a scale, you can provide a marked-up expression
+to be read out before playing the sonification or be separately played.
+
+##### How to mark up a description text
+
+There are three four types of elements in a description text.
+
+1. Plain text → Just give that text
+2. A discrete audio legend → `<sound value="X" duration="D">`
+
+- `X`: a "data" value or reserved keywoard to be mapped using the scale.
+- `D`: the duration of this sound (default: 0.5 seconds or 1 beat). If `config.timeUnit` is `beat` then the unit is beat counts, and when it is `second`, then the unit is seconds.
+
+3. A continuous audio legend → `<sound v0="X1" v1="X2" duration="D">`
+
+- `vn`: `Xn` (`n` = `0`, `1`, `2`, ...): breakpoints, the "data" values or reserved keywoards to be mapped using the scale! Provide as many point as you need. They will be timed relatively.
+- `D`: the duration of this sound (default: 0.5 seconds or 1 beat multipled by the number of breakpoints). If `config.timeUnit` is `beat` then the unit is beat counts, and when it is `second`, then the unit is seconds.
+
+4. A datum list → `<list item="A" first="F" last="L" join="S" and="N">`
+
+- `A`: an array/list of items or a keyword to be listed. If not provided, all the domain values will be sounded. They should be comma separated.
+For example, `<list item="apple,pear, juice" ... >` (O) but `<list item="[apple,pear, 'juice']" ... >` (may work, but may cause error). Spaces before and after each item is trimmed.
+- `F`: the first `F` items to read out
+- `L`: the last `F` items to read out
+
+Note: `<list item="apple,pear,juice,melon,grape" first="2" last="2" join=", ">` will result in 'apple, pear, melon, grape'.
+See the examples for how to use.
+
+- `S`: a string between each consecutive pair of items. This considers a space (for iternationalization). The default is `,`
+- `N`: a string between the last two consecutive items. This considers a space (for iternationalization). There is no default value provided.
+
+Note: For the `time` channel, while the rest can be "compiled," it won't really play the audio
+
+##### Reserved keywords
+
+To use in a plan text, use them with `<` and `>` (e.g., `<domain.min>`)
+
+- `domain.min`: the minimum domain value
+- `domain.max`: the maximum domain value
+- `domain.length`: the number of domain values specified
+- `domain[n]`: the `n`-th domain value
+- `domain`: the entire domain
+- `channel`: the channel name
+- `field`: the channel's field
+- `aggregate`: the channel's aggregate method
+- `title`: the channel's display name (if not provided, it uses `field`).
+
+###### Examples
+
+Case 1: Consider a `pitch` channel that maps `[0, 50]` (data, field: `'weight'`) to `[300, 500]` (Hz).
+The description text is
+
+`The <channel> channel represents <title>. The minimum value <domain.min> is <sound value="domain.min"> and <domain.max> is <sound value="domain.max">.`
+This is compiled to *The pitch channel represents weight. The minimum value 0 is (sound with pitch 300) and 50 is (sound with pitch 500).*
+
+Case 2: Consider a `pan` channel that maps `[100, 300]` (data, field: `'height'`) to `[-1, 1]`.
+The description text is
+
+`The <channel> channel is for <title>. The minimum value of <domain.min> and the maximum value of <domain.max> are mapped to <sound v0="domain.min" v1="domain.max" duration="0.3">.`
+
+This is compiled to *The pan channel is for height. The minimum value 100 and the maximum value of 300 are mapped to (pan-sweep from -1 to 1 for 0.6 seconds).*
+
+Case 3: Consider a `time` channel that maps `[apple,pear,kiwi,melon,grape,mango,orange]` (data, field: `'type'`) to relative timing.
+The description text is
+
+`The <field> has <domain.unique> itmes. They are played from <list first="2" join=" and "> to <list last="2" join=" and ">.`
+
+This is compiled to *The type has 7 items. They are played from apple and pear to mango and orange.*
+
+##### How to play a description
+
+1. Play it before a sonification
+
+Quick answer: Nothing to be done.
+
+2. Play it separately
+
+In `config`, first set `skipScaleSpeech` as `true`.
+
+<code-groups>
+<code-group>
+<h4>JSON</h4>
+{% highlight json %}
+{
+  ...
+  "config": {
+    "skipScaleSpeech": true
+  }
+}
+{% endhighlight %}
+</code-group>
+
+<code-group>
+<h4>JavaScript</h4>
+{% highlight js %}
+let spec = new Erie.Stream();
+...
+spec.config('skipScaleSpeec', true);
+{% endhighlight %}
+</code-group>
+</code-groups>
+
+After you compile the sonification spec, run the `playDescription` method.
+
+{% highlight js %}
+let spec = new Erie.Stream();
+...
+let audio;
+Erie.compileAuidoGraph(spec)
+  .then((audio_graph) => {
+    let audio = audio_graph;
+    ...
+    audio.playScaleDescription();
+    audio.playScaleDescription('time'); // play only for the time channel
+    audio.stopScaleDescription(); // to stop whatever being played
+  });
+...
+{% endhighlight %}
 
 #### Scale consistency for multi-stream sonifications
 
