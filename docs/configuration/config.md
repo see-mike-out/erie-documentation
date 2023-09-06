@@ -47,7 +47,7 @@ For instance, when `timeUnit.unit` is `'beat'`, a `tapSpeed` channel's unit is t
 | Property | type | Description |
 | -------- | ---- | ----------- |
 | `unit` | `'second'|'beat'` | (Default: `'second'`) The unit for time. `'second'`: exact second amount. `'beat'`: beat counts. |
-| `tempo` | `number` | (Default: `100`) Beat per minute. Only works when the `unit` is `'note'`. |
+| `tempo` | `number` | (Default: `100`) Beat per minute. Only works when the `unit` is `'beat'`. |
 | `rounding` | `'always'|'start'|'never'` | (Default: `'always'`) Whether to round the time values (start/end times) to specified beat counts `'always'`: both start and end, `'start'`: only for the start time, `'never'`: no rounding. Only works when the `unit` is `'beat'`. |
 | `roundingBy` | `'number'` | (Default: `1`) The beath counts for rounding (precision). |
 
