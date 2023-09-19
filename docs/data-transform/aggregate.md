@@ -14,17 +14,17 @@ make sure that include all fields needed to be aggregated.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `aggregate` | `object[]` | One or more data aggregation operation. |
-| `groupby` | `string[]` | Nominal fields to group the aggregates by. |
+| `aggregate` | `Array[Object]` | One or more data aggregation operation. |
+| `groupby` | `Array[String]` | Nominal fields to group the aggregates by. |
 
 ### `aggregate` operation definition
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `op` | `string` | An aggregate operation. |
-| `field` | `string|string[]` | A field(s) to aggregate. Some operations require two fields. |
-| `p` | `number[0-1]` | A quantile threshould. |
-| `as` | `string` | (Optional) A new field name. |
+| `op` | `String` | An aggregate operation. |
+| `field` | `String|Array[String]` | A field(s) to aggregate. Some operations require two fields. |
+| `p` | `Number[0-1]` | A quantile threshould. |
+| `as` | `String` | (Optional) A new field name. |
 
 ### Supported aggregate operations
 

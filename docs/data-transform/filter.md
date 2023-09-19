@@ -12,7 +12,7 @@ A `filter` transformation filters "IN" rows that meet a provided condition.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `filter` | `exprString` | A filter expression. |
+| `filter` | `ExprString` | A filter expression. |
 
 ### Filter expression
 

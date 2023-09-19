@@ -34,10 +34,10 @@ Folding `column1` and `column2` by `category1` results in `key`, `value`, `categ
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `fold` | `string[]` | (Required) An array of field names to fold. |
-| `by` | `string` | (Required) A nominal field to group by. |
-| `exclude` | `boolean` | (Optional, default: `false`) Whether to drop other fields (not specified by `fold` and `by`). |
-| `as` | `string[length=2]` | (Optional, default: `['key', 'value']`) New field names for folded variables. |
+| `fold` | `Array[String]` | (Required) An array of field names to fold. |
+| `by` | `String` | (Required) A nominal field to group by. |
+| `exclude` | `Boolean` | (Optional, default: `false`) Whether to drop other fields (not specified by `fold` and `by`). |
+| `as` | `Array[String, length=2]` | (Optional, default: `['key', 'value']`) New field names for folded variables. |
 
 ### Usage pattern
 
@@ -184,16 +184,16 @@ fold.as(["measure", "statistics"]);
 stream.transform.add(fold);
 ...
 
-stream.enc.time.field("measure", "nominal");
-stream.enc.time.scale("timing", "relative");
-stream.enc.time.scale("band", 0.5);
-stream.enc.time.scale("order", [
+stream.encoding.time.field("measure", "nominal");
+stream.encoding.time.scale("timing", "relative");
+stream.encoding.time.scale("band", 0.5);
+stream.encoding.time.scale("order", [
   "Miles_per_Gallon_lower",
   "Miles_per_Gallon_mean",
   "Miles_per_Gallon_upper"
 ]);
 ...
-stream.enc.repeat.field("Origin");
+stream.encoding.repeat.field("Origin");
 ...
 {% endhighlight %}
 </code-group>

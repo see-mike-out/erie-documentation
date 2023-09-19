@@ -5,7 +5,7 @@ level: 0
 order: 700
 ---
 
-Erie offers two primary options to compose a multi-stream sonification: `sequence` and `overlay`.
+Erie offers two primary options for concatenation-based composition: `sequence` and `overlay`.
 
 ## Sequence: concatenate streams serially
 
@@ -79,9 +79,9 @@ let overlay = new Erie.Overlay([stream1, stream2]);
 Erie supports the following patterns for composing multiple streams.
 
 - ✅ A `sequence` of `overlay`s and/or `stream`s
-- ✅ A `overlay` of `stream`s (without a `repeat` channel by `overlay`)
+- ✅ An `overlay` of `stream`s (*without* a `repeat` channel by `overlay`)
 
 The following patterns are not supported (mostly because it may cause unexpected browser malfunctioning).
 
-- ❌ A `overlay` of `sequences`s. Use `sequences` of `overlay` instead.
-- ❌ A `overlay` of `stream`s (with a `repeat` channel by `overlay`).
+- ❌ An `overlay` of `sequences`s. Use `sequences` of `overlay` instead.
+- ❌ An `overlay` of `stream`s (**with** a `repeat` channel by `overlay`).

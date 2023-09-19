@@ -7,41 +7,25 @@ order: 0
 
 ## Erie (Web)
 
-Erie is a 'fully open-sourced' declarative grammar for data sonification!
-**It is solely for data sonification, not as an accessibility attachment to a visualization.**
-But, you can use it for accessible visualization.
+Erie for Web (or simply Erie.js) is a web implementation of Erie, a declarative grammar for data sonification.
+**Erie.js is intended for supporting sonification, not as auxiliary for visualization.**
 
-### What Erie supports
+### What Erie.js supports
 
 - Writing a sonification specification
 - Playing a sonification
 
-### What Erie does *NOT* do
+### What Erie.js does *NOT* do
 
-- Making a "good" sonification → It's your job to do!
-
-## Try online with examples
-
-Try [Erie online editor](https://see-mike-out.github.io/erie-editor) with examples—the best way to learn how to write an Erie specification.
-
-## Want to help with improving Erie?
-
-(I'm working on it. Currently, please make an issue in the [GitHub repo](https://github.com/see-mike-out/erie-web).)
-
-There are major future extension plans:
-
-- Connecting to R/Rstudio for statisticians.
-- Recording—This is a huge hurdle because it's nearly impossible to programmatically capture an audio (composed of multiple sequences of Web Audio and Web Speech API-generated sounds) at the current moment.
+- Making a "well-designed/good" sonification → It's your job to do!
 
 ## Some notes
 
 ### Open-source projects and standard APIs used in Erie
 
-Erie for Web uses W3C's standard APIs for audio: [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) and [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
+Erie for Web uses W3C's standard APIs for audio: [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) and [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). For URL-based imports, Erie uses the standard [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 Many parts of Erie relies on [Vega/Vega-Lite](https://vega.github.io/) and [D3](https://d3js.org/). (Thousands of thousands of Thank you for them).
-
-For URL-based imports, Erie uses [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 ### Precision of timing
 
@@ -52,5 +36,6 @@ In that case, use a `continuous` tone.
 
 ### Recording
 
-The recording of a resulting sonification is not well streamlined because it is not possible to recorde sound generated from Web Speech API.
-Instead, I developed a Chrome extension for recording. See the recorder page.
+The Web APIs do not support directly capturing audio generated from your browser or desktop (presumably for security, privacy, and copyright reasons).
+Instead, we use a Chrome extension by utilizing Chrome's `tabCapture` API to generate audio files out of Erie sonifications.
+Yet, it is still not possible to capture the sounds generated using the Web Speech API (`SpeechSynthesis`) because technically it is not generated from your browser but from your computer. Instead, our recorder creates an HTML file that has the text parts and recorded sounds so that they can be played using a screen reader.

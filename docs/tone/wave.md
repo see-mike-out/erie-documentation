@@ -17,9 +17,9 @@ A top-level object `wave` is a list of objects with the following properties.
 | Property | type | Description |
 | -------- | ---- | ----------- |
 | `name` | `String` | (Required) The name for indexing. |
-| `real` | `number[]` | (Required) Sine terms. |
-| `image` | `number[]` | (Required) Cosine terms. |
-| `disableNormalization` | `Boolean` | (Defalut: `false`) Whether to normalize the wave. |
+| `real` | `Array[Number]` | (Required) Sine terms. |
+| `image` | `Array[Number]` | (Required) Cosine terms. |
+| `disableNormalization` | `Boolean` | (Defalut: `false`) Whether to normalize the wave—fix the maximum amplitude at 1 (see the MDN doc). |
 
 ### API Usage
 
@@ -56,7 +56,6 @@ let wave = new Erie.Wave("wave1", periodicWave);
 // alt2) let wave = new Erie.Wave("wave1"); wave.real(periodicWave.real); wave.imag(periodicWave.imag);
 
 stream.wave.add(wave);
-let tone = new Erie.Tone("wave1");
 stream.tone.set(tone);
 ...
 {% endhighlight %}

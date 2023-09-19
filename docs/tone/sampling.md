@@ -97,6 +97,7 @@ For single pitch sounds like drum, use the `mono` property.
 let stream = new Erie.Stream();
 ...
 let tone = new Erie.SampledTone("sample_audio", {mono: ...}); // url string
+stream.sampling.add(tone);
 stream.tone.set(tone);
 ...
 {% endhighlight %}

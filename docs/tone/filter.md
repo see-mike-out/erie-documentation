@@ -12,6 +12,7 @@ If you proivde two filters, then they are connected in chain to the audio contex
 For example, if your filters are [`filter1`, `filter2`], then the connection is made as: your tone instrument -> `filter1` -> `filter2` -> `audioContext`.
 
 ## Supported preset filters
+
 Standard API is not supported, instead use `Erie.Channel` constructor.
 
 ### Sample filter
@@ -40,7 +41,7 @@ Biquad filters have the following extra channels
 
 - `defaultCompressor`: A default dynamic compressor with (attack = 20, knee = 10, ratio = 18, release = 0.25, threshold = -50)
 
-Additional encoding channels when using a `defaultCompressor` filter. 
+Additional encoding channels when using a `defaultCompressor` filter.
 While some channels have unit of seconds, they are not affected by `config.timeUnit`.
 
 - `dcAttack`: the time taken to have the compression, with the value range of `[0, 1]` (unit: seconds)
@@ -91,8 +92,8 @@ let tone = new Erie.Tone("default", false);
 tone.addFilter(["lowpass", "gainer"]);
 stream.tone.set(tone);
 ...
-stream.enc.biquadQ = new Erie.Channel("values", "quantitative");
-stream.enc.biquadQ.scale("range", [150, 700]);
+stream.encoding.biquadQ = new Erie.Channel("values", "quantitative");
+stream.encoding.biquadQ.scale("range", [150, 700]);
 ...
 {% endhighlight %}
 </code-group>
@@ -152,9 +153,9 @@ class MyFilter {
 Erie.registerFilter('myFilter', MyFilter);
 {% endhighlight %}
 
-3. (Optional) If you want to specify how a filter parameters change over time,
-then create and register an encoder function with four argutments: `filter` (the filter object),
-`sound` (an audio graph queue item), and `startTime` (when the effect starts).
+3. (Optional) If you want to specify how filter parameters change over time,
+then create and register an encoder function with three argutments: `filter` (the filter object),
+`sound` (an audio graph queue item), and `startTime` (when the sound starts).
 These values are determined by the player.
 
 {% highlight js %}
@@ -164,4 +165,18 @@ function MyFilterEncoder(filter, sound, startTime) {
 }
 
 Erie.registerFilter('myFilter', MyFilter, MyFilterEncoder);
+{% endhighlight %}
+
+4. (Optional) If you want to specify how to change filter parameters that are applied at the end of a sound,
+then create and register an finisher function with four argutments: `filter` (the filter object),
+`sound` (an audio graph queue item), `startTime` (when the sound starts), `endTime` (when the sound ends).
+These values are determined by the player.
+
+{% highlight js %}
+function MyFilterFinisher(filter, sound, startTime, endTime) {
+  filter.prop1.linearRampAtTime(sound[x], endTime - 0.5); // existing channel
+  filter.prop1.linearRampAtTime(sound.others[y], endTime - 0.5); // custom channel
+}
+
+Erie.registerFilter('myFilter', MyFilter, MyFilterEncoder, MyFilterFinisher);
 {% endhighlight %}

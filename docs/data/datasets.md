@@ -5,17 +5,17 @@ level: 0
 order: 301
 ---
 
-The `datasets` object allows for registering datasets and used in streams. 
-It is useful when there are multiple streams in an Erie specification. 
+The `datasets` object allows for registering datasets and used in streams.
+It is useful when there are multiple streams in an Erie specification.
 
 A `datasets` object is an array of `data` objects.
 Each `data` objects has the following properties.
 
 | Property | type | Description |
 | -------- | ---- | ----------- |
-| `name` | `string` | (Required) The name of a dataset. This is the index for the specified data. |
-| `values` | `object[]` | A tidy data. |
-| `url` | `urlString` | A URL to a dataset. It is retrieved using Fetch API. |
+| `name` | `String` | (Required) The name of a dataset. This is the index for the specified data. |
+| `values` | `Array[Object]` | A tidy data. |
+| `url` | `UrlString` | A URL to a dataset. It is retrieved using Fetch API. |
 
 ### Usage pattern
 
@@ -58,14 +58,14 @@ dataset2.set("values", [...]);
 let stream1 = new Erie.Stream();
 stream1.data.set("name", "data1");
 stream1.tone.set( ... );
-stream1.enc.{channelName1}.set( ... );
-stream1.enc.{channelName2}.set( ... );
+stream1.encoding.{channelName1}.set( ... );
+stream1.encoding.{channelName2}.set( ... );
 ...
 let stream2 = new Erie.Stream();
 stream1.data.set("name", "data2");
 stream2.tone.set( ... );
-stream2.enc.{channelName1}.set( ... );
-stream2.enc.{channelName2}.set( ... );
+stream2.encoding.{channelName1}.set( ... );
+stream2.encoding.{channelName2}.set( ... );
 ...
 let sequence = new Erie.Sequence(stream1, stream2);
 

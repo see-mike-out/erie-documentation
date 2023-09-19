@@ -1,0 +1,49 @@
+
+>>>> _layouts/default.html
+        <!-- <div id="pointers" class="mb-3">
+          {% assign git_url = "https://github.com/see-mike-out/erie-documentation/blob/main/" | append: page.path %}
+          <a href={{ git_url }} target="_blank" class="link-to-git">Edit in Git</a>
+        </div> -->
+
+
+>>> index.markdown
+## Try online with examples
+
+Try [Erie online editor](https://see-mike-out.github.io/erie-editor) with examples—the best way to learn how to write an Erie specification.
+
+## Want to help with improving Erie?
+
+(I'm working on it. Currently, please make an issue in the [GitHub repo](https://github.com/see-mike-out/erie-web).)
+
+There are major future extension plans:
+
+- Connecting to R/Rstudio for statisticians.
+- Recording—This is a huge hurdle because it's nearly impossible to programmatically capture an audio (composed of multiple sequences of Web Audio and Web Speech API-generated sounds) at the current moment.
+
+>>>> docs/how-to-use/recorder.md
+[Erie's chrome extension](https://github.com/see-mike-out/erie-chrome-ext).
+
+https://github.com/see-mike-out/erie-chrome-ext
+
+
+### Install
+
+Search "Erie Recorder for Chrome" on Chrome Web Store and install it.
+
+### Use
+
+Open the extension popup. Then play a sonification.
+
+>>>> docs/how-to-use/installation.md
+https://github.com/see-mike-out
+
+
+>>>> docs/encoding/encoding.md
+
+### Encoding channels planned for updates
+
+| Channel | Description |
+| ------- | ----------- |
+| `panX` | For 3D panning, the left-right position of a tone. While it is same as `pan` but it works in a 3D panning setting. Requires a high-end audio device and advanced computing device, otherwise using 3D panning will cause high latency or low quality. |
+| `panY` | For 3D panning, the front-back position of a tone. |
+| `panZ` | For 3D panning, the top-down position of a tone. |

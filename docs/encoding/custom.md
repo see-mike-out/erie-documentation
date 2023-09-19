@@ -6,9 +6,7 @@ level: 1
 order: 610
 ---
 
-One can provide custom channels that can be attached to user specified filters.
-
-It only applies to the audio filters that you add to your tone.
+A developer can provide custom channels that can be attached to their specified audio filters.
 
 Make sure that always specify the range of your scale, otherwise it might fail to render.
 
@@ -37,6 +35,7 @@ Make sure that always specify the range of your scale, otherwise it might fail t
 <code-group>
 <h4>JavaScript</h4>
 {% highlight js %}
+// this is a bit extended usage case for extra safety.
 class Gain2Channel extends Erie.Channel {
   constructor(f, t) {
     super(f, t);
@@ -50,9 +49,11 @@ class Gain2Channel extends Erie.Channel {
 
 let stream = new Erie.Stream();
 ...
-stream.enc.gain2 = new Gain2Channel();
-stream.enc.gain2.domain([0, 7000]);
-stream.enc.gain2.range([0, 1]);
+stream.encoding.gain2 = new Gain2Channel();
+// alternatively, (it does not check the range values)
+// stream.encoding.gain2 = new Erie.Channel("gain2");
+stream.encoding.gain2.domain([0, 7000]);
+stream.encoding.gain2.range([0, 1]);
 ...
 {% endhighlight %}
 </code-group>

@@ -6,8 +6,7 @@ level: 1
 order: 610
 ---
 
-The `repeat` channel is a way to make sequanced streams
-that are repeated over one or more nominal fields.
+The `repeat` channel is a data-driven composition method that sequences and/or overlays streams over one or more nominal fields.
 If used, then tones are grouped and played separately.
 It is possible to specify the order to be played using either `order` or `sort` property (not both).
 
@@ -24,6 +23,7 @@ It is possible to specify the order to be played using either `order` or `sort` 
       "field": "region",
       "type": "nominal",
       "speech": true, // before playing each stream, a speech sound for the correspondig value is played.
+      "by": "sequence", // the streams are sequenced
       "scale": {
         "order": ["Asia", "Europe", "North America"], // optional
         "sort": "ascending" // optional (not together with `order`)
@@ -40,11 +40,12 @@ It is possible to specify the order to be played using either `order` or `sort` 
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.repeat.field("region", "nominal");
-stream.enc.repeat.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
-stream.enc.repeat.scale("order", ["Asia", "Europe", "North America"]); // optional
-stream.enc.repeat.scale("sort", "ascending"); // optional (not together with `order`)
-stream.enc.repeat.scale("description", "skip");
+stream.encoding.repeat.field("region", "nominal");
+stream.encoding.repeat.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
+stream.encoding.repeat.by("sequence"); // the streams are sequenced
+stream.encoding.repeat.scale("order", ["Asia", "Europe", "North America"]); // optional
+stream.encoding.repeat.scale("sort", "ascending"); // optional (not together with `order`)
+stream.encoding.repeat.scale("description", "skip");
 ...
 {% endhighlight %}
 </code-group>
@@ -52,8 +53,9 @@ stream.enc.repeat.scale("description", "skip");
 
 <!-- example -->
 
-
 ### Multi-field `repeat` channel
+
+To enable nested repetition, provide `field`, `by`, and `scale.order` using arrays.
 
 <code-groups>
 <code-group>
@@ -66,12 +68,13 @@ stream.enc.repeat.scale("description", "skip");
       "field": ["region", "category"],
       "type": "nominal",
       "speech": true,
+      "by": ["sequence", "overlay"], // streams are sequenced for "region" and overlaid for "category"
       "scale": {
         "order": [
-          ["Asia", "Europe", "North America"], 
+          ["Asia", "Europe", "North America"],
           ["Customer", "Business", "Non-profit"]
         ], // Asia-Customer > Asia-Business > Asia-Non-profit > ... > North America-Non-profit
-        "description": "skip" 
+        "description": "skip"
       }
     }
   }
@@ -84,10 +87,11 @@ stream.enc.repeat.scale("description", "skip");
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.repeat.field(["region", "category"], "nominal");
-stream.enc.repeat.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
-stream.enc.repeat.scale("order", [["Asia", "Europe", "North America"], ["Customer", "Business", "Non-profit"]]); // Asia-Customer > Asia-Business > Asia-Non-profit > ... > North America-Non-profit
-stream.enc.repeat.scale("description", "skip");
+stream.encoding.repeat.field(["region", "category"], "nominal");
+stream.encoding.repeat.by(["sequence", "overlay"]); // streams are sequenced for "region" and overlaid for "category"
+stream.encoding.repeat.speech(true); // before playing each stream, a speech sound for the correspondig value is played.
+stream.encoding.repeat.scale("order", [["Asia", "Europe", "North America"], ["Customer", "Business", "Non-profit"]]); // Asia-Customer > Asia-Business > Asia-Non-profit > ... > North America-Non-profit
+stream.encoding.repeat.scale("description", "skip");
 ...
 {% endhighlight %}
 </code-group>

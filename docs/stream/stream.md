@@ -7,33 +7,83 @@ order: 200
 
 ## Terminology: Sequence, Overlay, Stream, Sound, and Tone
 
-In Erie, a `stream` is a specification for a unit of sonification, similar to a facet in visualizations.
-Multiple `stream`s can be combined as a `sequence` or an `overlay` (see the Sequence documentations).
+In Erie, a `stream` is a unit specification for a sonification, similar to a facet or view in visualizations.
+Multiple `stream`s can be combined as a `sequence` or an `overlay` (see the relevant documentations).
 Repeated `stream` (with a `repeat` channel in `encoding`) is still a `stream` or repeated `stream`.
 The term, `sound`, is an actual output audio.
 A `tone` is a unit sound that has no puase (except the pause between two tapping sounds) in it.
-For a continuous tone, it is the entire sound; whereas for a discrete tone, it is each sound composes a `stream`.
+For a continuous tone, itself is a sound; whereas for a discrete tone, it is multiple sounds compose a `stream`.
 
 A `stream` can have the following porperties.
 
 ## Stream properties
 
+### Case 1: a single sonification (top-level)
+
 | Property | type | Description |
 | -------- | ---- | ----------- |
-| `title` | `string` | (Required) The title of a sonification (if specified, it is played) |
-| `description` | `string` | (Required) The description of a sonification (if specified, it is played). |
-| `data` | `object` | (Required) Data to sonify. |
-| `datasets` | `array` | Registering datasets to be used (mainly for multi-stream sonifications). |
-| `sampling` | `array` | Registering sampling audios to be used. |
-| `synth` | `array` | Registering synths sounds to be used. |
-| `wave` | `array` | Registering periodic waves to be used. |
-| `tick` | `array` | Registering ticks to be used (mainly for multi-stream sonifications). |
-| `transform` | `array` | Data to sonify. |
-| `tone` | `object` | Tone definition. |
-| `encoding` | `object` | (Required) Encoding channels. |
-| `config` | `object` | Configuration object. |
+| `title` | `String` | The title of a sonification (if specified, it is played) |
+| `description` | `String` | The description of a sonification (if specified, it is played). |
+| `data` | `Object` | Data to sonify. |
+| `transform` | `Array` | Data to sonify. |
+| `tone` | `Object` | (Required) Tone definition. |
+| `encoding` | `Object` | (Required) Encoding channels. |
+| `tick` | `Array` | Registering ticks to be used (mainly for multi-stream sonifications). |
+| `sampling` | `Array` | Registering sampling audios to be used. |
+| `synth` | `Array` | Registering synths sounds to be used. |
+| `wave` | `Array` | Registering periodic waves to be used. |
+| `config` | `Object` | Configuration object. |
 
 Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level stream will be ignored.
+
+### Case 2: a Sequence sonification
+
+| Property | type | Description |
+| -------- | ---- | ----------- |
+| `title` | `String` | The title of a sonification (if specified, it is played) |
+| `description` | `String` | The description of a sonification (if specified, it is played). |
+| `data` | `Object` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
+| `datasets` | `Array` | Registering datasets to be used (if provided `data` should not be provided). |
+| `stream` | `Array[UnitStream|Overlay]` | Streams in the sequence. |
+| `sampling` | `Array` | Registering sampling audios to be used. |
+| `synth` | `Array` | Registering synths sounds to be used. |
+| `wave` | `Array` | Registering periodic waves to be used. |
+| `tick` | `Array` | Registering ticks to be used (mainly for multi-stream sonifications). |
+| `transform` | `Array` | Data to sonify. |
+| `config` | `Object` | Configuration object. |
+
+### Case 3: an Overlay sonification
+
+| Property | type | Description |
+| -------- | ---- | ----------- |
+| `title` | `String` | The title of a sonification (if specified, it is played) |
+| `description` | `String` | The description of a sonification (if specified, it is played). |
+| `data` | `Object` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
+| `datasets` | `Array` | Registering datasets to be used (if provided `data` should not be provided). |
+| `stream` | `Array[UnitStream]` | Streams in the overlay. |
+| `sampling` | `Array` | Registering sampling audios to be used. |
+| `synth` | `Array` | Registering synths sounds to be used. |
+| `wave` | `Array` | Registering periodic waves to be used. |
+| `tick` | `Array` | Registering ticks to be used (mainly for multi-stream sonifications). |
+| `transform` | `Array` | Data to sonify. |
+| `config` | `Object` | Configuration object. |
+
+Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level stream will be ignored.
+
+### Unit stream properties
+
+A `UnitStream` does not have registrations.
+
+| Property | type | Description |
+| -------- | ---- | ----------- |
+| `title` | `String` | The title of a sonification (if specified, it is played) |
+| `description` | `String` | The description of a sonification (if specified, it is played). |
+| `name` | `String` | (Purely optional) An identifier (it is not used for sonification itself). |
+| `data` | `Object` | Data to sonify. |
+| `transform` | `Array` | Data to sonify. |
+| `tone` | `Object` | (Required) Tone definition. |
+| `encoding` | `Object` | (Required) Encoding channels. |
+| `config` | `Object` | Configuration object. |
 
 ## API Usage
 
@@ -64,11 +114,11 @@ stream.transform.remove(index); // see the transform documentation
 stream.tone = new Erie.Tone();
 // alt) stream.tone({key}, {value});
 let channel = new Erie.{ChannelName}Channel();
-stream.enc.{channelName} = channel;
+stream.encoding.{channelName} = channel;
 // ex) let channel = new Erie.PitchChannel(); // provided for reusability.
-//     stream.enc.pitch.set(channel);
+//     stream.encoding.pitch.set(channel);
 // alt) let channel = new Erie.Channel({channelName}); // recommended
-// alt) stream.enc.{channelName}.method( ... );
+// alt) stream.encoding.{channelName}.method( ... );
 // take a look at each individual channel's documentation.
 stream.config({key}, {value});
 {% endhighlight %}

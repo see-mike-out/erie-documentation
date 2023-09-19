@@ -42,13 +42,13 @@ Child streams can share the same dataset and transforms or not (up to you!).
 {% highlight js %}
 let stream1 = new Erie.Stream();
 stream1.tone.set( ... );
-stream1.enc.{channelName1}.set( ... );
-stream1.enc.{channelName2}.set( ... );
+stream1.encoding.{channelName1}.set( ... );
+stream1.encoding.{channelName2}.set( ... );
 ...
 let stream2 = new Erie.Stream();
 stream2.tone.set( ... );
-stream2.enc.{channelName1}.set( ... );
-stream2.enc.{channelName2}.set( ... );
+stream2.encoding.{channelName1}.set( ... );
+stream2.encoding.{channelName2}.set( ... );
 ...
 let sequence = new Erie.Sequence(stream1, stream2);
 sequence.data.set("url", "...path...");
@@ -91,14 +91,14 @@ sequence.transform.add(transform2);
 let stream1 = new Erie.Stream();
 stream1.data.set("url", "...path1...");
 stream1.tone.set( ... );
-stream1.enc.{channelName1}.set( ... );
-stream1.enc.{channelName2}.set( ... );
+stream1.encoding.{channelName1}.set( ... );
+stream1.encoding.{channelName2}.set( ... );
 ...
 let stream2 = new Erie.Stream();
 stream2.data.set("url", "...path2...");
 stream2.tone.set( ... );
-stream2.enc.{channelName1}.set( ... );
-stream2.enc.{channelName2}.set( ... );
+stream2.encoding.{channelName1}.set( ... );
+stream2.encoding.{channelName2}.set( ... );
 ...
 let sequence = new Erie.Sequence(stream1, stream2);
 
@@ -147,14 +147,14 @@ dataset2.set("url", "...path2...");
 let stream1 = new Erie.Stream();
 stream1.data.set("name", "data1");
 stream1.tone.set( ... );
-stream1.enc.{channelName1}.set( ... );
-stream1.enc.{channelName2}.set( ... );
+stream1.encoding.{channelName1}.set( ... );
+stream1.encoding.{channelName2}.set( ... );
 ...
 let stream2 = new Erie.Stream();
 stream1.data.set("name", "data2");
 stream2.tone.set( ... );
-stream2.enc.{channelName1}.set( ... );
-stream2.enc.{channelName2}.set( ... );
+stream2.encoding.{channelName1}.set( ... );
+stream2.encoding.{channelName2}.set( ... );
 ...
 let sequence = new Erie.Sequence(stream1, stream2);
 

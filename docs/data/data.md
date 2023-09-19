@@ -9,9 +9,9 @@ Erie supports two methods for providing the data: `values` and `url`.
 
 | Property | type | Description |
 | -------- | ---- | ----------- |
-| `values` | `object[]` | A tidy data. |
-| `url` | `urlString` | A URL to a dataset. It is retrieved using Fetch API. |
-| `name` | `string` | The name of a dataset, which is defined in the `datasets` object. |
+| `values` | `Array[Object]` | A tidy data. |
+| `url` | `UrlString` | A URL to a dataset. It is retrieved using Fetch API. |
+| `name` | `String` | The name of a dataset, which is defined in the `datasets` object. |
 
 ### Specifying data using `values`
 

@@ -12,16 +12,16 @@ A `density` transformation converts a variable into an estimated kernel density 
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `density` | `string` | (Required) A variable name to estimate the density |
-| `groupby` | `string[]` | (Optinal) The names of variables to group items by. |
-| `cumulative` | `boolean` | (Optinal, default: `false`) Whether to compute cumulative density or probability density. |
-| `counts` | `boolean` | (Optinal, default: `false`) Whether to compute probabilty density (sum to 1) or count-wise density (actual counts, not sum to 1). |
-| `bandwidth` | `number` | (Optinal) The kernel's bandwidth. If not provided, it's automatically estimated |
-| `extent` | `number[length=2]` | (Optinal) A `[min, max]` range for the kernel density estimation. |
-| `minsteps` | `number` | (Optinal, default: `25`) The minimum number of sampled values. |
-| `maxsteps` | `number` | (Optinal, default: `200`) The maximum number of sampled values. |
-| `steps` | `number` | (Optinal) The exact number of sampled values |
-| `as` | `string[length=2]` | (Optional, default: `['value', 'density']`) The new field names for the estimation. |
+| `density` | `String` | (Required) A variable name to estimate the density |
+| `groupby` | `Array[String]` | (Optinal) The names of variables to group items by. |
+| `cumulative` | `Boolean` | (Optinal, default: `false`) Whether to compute cumulative density or probability density. |
+| `counts` | `Boolean` | (Optinal, default: `false`) Whether to compute probabilty density (sum to 1) or count-wise density (actual counts, not sum to 1). |
+| `bandwidth` | `Number` | (Optinal) The kernel's bandwidth. If not provided, it's automatically estimated |
+| `extent` | `Array[Number, length=2]` | (Optinal) A `[min, max]` range for the kernel density estimation. |
+| `minsteps` | `Number` | (Optinal, default: `25`) The minimum number of sampled values. |
+| `maxsteps` | `Number` | (Optinal, default: `200`) The maximum number of sampled values. |
+| `steps` | `Number` | (Optinal) The exact number of sampled values |
+| `as` | `Array[String, length=2]` | (Optional, default: `['value', 'density']`) The new field names for the estimation. |
 
 ### Basic usage
 
@@ -131,14 +131,14 @@ stream.transform.add(density);
 let tone = new Erie.Tone("default", true);
 stream.tone.set(tone);
 ...
-stream.enc.time.field("value", "quantitative");
-stream.enc.time.scale("length", 3);
+stream.encoding.time.field("value", "quantitative");
+stream.encoding.time.scale("length", 3);
 
-stream.enc.pitch.field("density", "quantitative");
-stream.enc.pitch.scale("polarity", "positive");
-stream.enc.pitch.scale("range", [0, 700]);
+stream.encoding.pitch.field("density", "quantitative");
+stream.encoding.pitch.scale("polarity", "positive");
+stream.encoding.pitch.scale("range", [0, 700]);
 
-stream.enc.repeat.field(groupby);
+stream.encoding.repeat.field(groupby);
 ...
 {% endhighlight %}
 </code-group>

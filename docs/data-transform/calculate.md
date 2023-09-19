@@ -12,9 +12,9 @@ A `calculate` transformation generates a new column by computing some operations
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `calculate` | `exprString` | A filter expression. |
-| `as` | `string` | (Required) A new field name. |
-| `groupby` | `string[]` | (Optional) Nominal fields to group elements by. |
+| `calculate` | `ExprString` | A filter expression. |
+| `as` | `String` | (Required) A new field name. |
+| `groupby` | `Array[String]` | (Optional) Nominal fields to group elements by. |
 
 ### Caculate expression
 
@@ -46,7 +46,7 @@ Filter expressions allow basic JavaScript expressions.
 let stream = new Erie.Stream();
 ...
 let calc = new Erie.Calculate("datum.cost + datum.expense", "net_cost"); // filter expression and new field name
-// alt) let calc = new Erie.Calculate(); 
+// alt) let calc = new Erie.Calculate();
 //      calc.calculate("datum.cost + datum.expense");
 //      calc.as("net_cost");
 stream.transform.add(calc);

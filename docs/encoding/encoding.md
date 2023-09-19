@@ -10,74 +10,82 @@ While Erie uses many Vega-Lite conventions, each encoding channel may have diffe
 This is because data sonification is defined on a sound space.
 For example, a `time` channel plays two roles: an encoding channel and a sonification canvas at the same time.
 
-This documentation describes overall structure of each encoding channel and their common properties.
+This documentation describes overall structure and common properties of encoding channels.
 
 ## Supported encoding channels
 
 | Channel | Description |
 | ------- | ----------- |
 | `time` | (Required) The time when a tone is played. |
-| `time2` | The time when a tone is finished, with a data field sharing the same scale with the corresponding `time` channel. |
-| `duration` | The length of a tone being played, with a data field *not* sharing the same scale with the corresponding `time` channel. |
-| `tapSpeed` | The number of tapping sounds uniformly distributed over the specified duration of time. |
+| `time2` | The time when a tone is finished, with a data field sharing the same scale with that of the `time` channel. |
+| `duration` | The length of a tone being played, with a data field *not* sharing the same scale with that of the `time` channel. |
+| `tapSpeed` | The number of tapping sounds evenly distributed over the specified duration of time. |
 | `tapCount` | The number of tapping sounds of the same specified length. |
 | `pitch` | The pitch frequency of a tone. For a synth instrument, this changes the carrier's frequency. |
 | `detune` | (Only for noise tones) The amount of detuning a tone. |
-| `loudness` | The volume or loudness of a tone. For a synth instrument, this changes the carrier's frequency. |
+| `loudness` | The volume or loudness of a tone. For a synth instrument, this changes the carrier's frequency. It is controled by gain. |
 | `pan` | The stereo panning (left and right spatial positioing) of a tone. |
 | `postReverb` | The length of the reverb sound played after a tone. |
 | `speechBefore` | The speech text played before playing a tone. |
 | `speechAfter` | The speech text played after playing a tone. |
 | `repeat` | Repeating streams of the same structure (i.e., encoding and tone design) over one or more `nominal`/`ordinal` variables. |
-| `modulation` | Modultaiotn index for a synth tone. |
-| `harmonicity` | Harmony between AM carrier and modulator. |
+| `modulation` | Modultaiotn index for a synth tone (the higher the index, the more warping the sound for FM; the larger the sound for AM). |
+| `harmonicity` | Harmony between AM carrier and modulator (non-linear channel). |
 
 For more details about the `modulation`, please refer to [frequency modulation](https://en.wikipedia.org/wiki/Frequency_modulation#Modulation_index) and [amplitude modulation (or harmonicity)](https://en.wikipedia.org/wiki/Amplitude_modulation#Modulation_index).
-
-### Encoding channels planned for updates
-
-| Channel | Description |
-| ------- | ----------- |
-| `panX` | For 3D panning, the left-right position of a tone. While it is same as `pan` but it works in a 3D panning setting. Requires a high-end audio device and advanced computing device, otherwise using 3D panning will cause high latency or low quality. |
-| `panY` | For 3D panning, the front-back position of a tone. |
-| `panZ` | For 3D panning, the top-down position of a tone. |
 
 ## Common encoding channel properties
 
 | Property | Type | Description |
 | --- | ----------- | ----------- |
-| `field` | `string` or `string[]` | (Mostly required) A field to encode in a channel. Only the `repeat` channel can use an array expression. |
-| `type` | `string` | (Required, but auto-detected) The data type of a field. Allowed values: `nominal`, `ordinal`, `quantitative`, and `temporal`. |
-| `aggregate` | `string` | (Optional) The data aggregation method for the channel. For count-based aggregate methods, `field` is ignored. See `aggregate` documentation for details. |
-| `bin` | `boolean` or `object` | (Optional) For an autoamted binning, set as `true`. For more detailed bin settings, see below. |
-| `condition` | `object` | Conditional value assignment. |
+| `field` | `String` or `Array[String]` | (Mostly required) A field to encode in a channel. Only the `repeat` channel can use an array expression. |
+| `type` | `String` | (Required, but auto-detected) The data type of a field. Allowed values: `nominal`, `ordinal`, `quantitative`, and `temporal`. |
+| `aggregate` | `String` | (Optional) The data aggregation method for the channel. For count-based aggregate methods, `field` is ignored. See `aggregate` documentation for details. |
+| `bin` | `Boolean` or `Object` | (Optional) For an autoamted binning, set as `true`. For more detailed bin settings, see below. |
+| `condition` | `Object` | Conditional value assignment. |
 | `value` | `any` | (Optional) A static sound for a channel. |
-| `scale` | `object` | (Optional, but highly suggested) The detail of scaling. See below for details. |
+| `scale` | `Object` | (Optional, but highly suggested) The detail of scaling. See below for details. |
 | `ramp` | `true|false|'abrupt'|'linear'|'exponential'` | (Optional, for `continuous` tones) Whether/how to ramp audio properties. `true` is `'linear'` and `false` is `'abrupt'`. |
-| `speech` | `boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
-| `tick` | `object|string` | (Optional, default: `null`; only for `time` channel) An audio axis. If it is `string`, then it should be a registered tick's name. |
-| `format` | `string` | (Optional) The format of numerical values for a scale description or read out. See this D3 documentations ([number format](https://github.com/d3/d3-format), [time format](https://github.com/d3/d3-time-format)) for the expression. |
+| `speech` | `Boolean` | (Optional, for `repeat` channel only, default: `true`) Whether to announce the name of value for the `repeat` channel. |
+| `tick` | `object|string` | (Optional, default: `null`; only for `time` channel) An audio axis. If it is `String`, then it should be a registered tick's name. |
+| `format` | `String` | (Optional) The format of numerical values for a scale description or read out. See this D3 documentations ([number format](https://github.com/d3/d3-format), [time format](https://github.com/d3/d3-time-format)) for the expression. |
 | `formatType` | `'number'|'datetime'` | (Optional, default: `'datetime'`) The type of formatting. |
 
-### Aggregate
+### Inline `aggregate`
 
-Possible `aggregate` values
+#### Possible `aggregate` values
 
-Note: `corr`, `covariance`, and `covariancep` is not available for the encoding `aggregate`.
+- `count`: the count of elements
+- `valid`: the number of valid items in a variable
+- `distinct`: the number of distinct items in a variable
+- `mean`/`average`: the mean of a variable
+- `mode`: the mode of a variable
+- `median`: the median of a variable
+- `quantile`: the `p` quantile value of a variable
+- `stdev`: the standard deviation of a variable
+- `stdevp`: the population standard deviation of a variable
+- `variance`: the variance of a variable
+- `variancep`: the population variance of a variable
+- `sum`: the sum of a variable
+- `product`: the product (multiplication) of a variable
+- `max`: the maximum value of a variable
+- `min`: the min value of a variable
+
+Note: double-field aggregates (`corr`, `covariance`, and `covariancep`) are not available for inline `aggregate`.
 
 See the `transform` documentation for further details.
 
 ### Bin
 
 The simplest way to use in-channel binning is setting the `bin` property as `true`.
-To provide more details, one can use a `bin` object with details.
+To provide more details, one can use a `bin` `Object` with details.
 
 | Property | Type | Description |
 | --- | ----------- | ----------- |
-| `nice` | `boolean` | (Optional) Whether to use 'nicely' separated bins (default: `true`). |
+| `nice` | `Boolean` | (Optional) Whether to use 'nicely' separated bins (default: `true`). |
 | `maxbins` | `integer` | (Optional) The maximum number of bins (default: `10`). |
-| `step` | `number` | (Optional) The exact size acrass all bins. |
-| `exact` | `number[]` | (Optional) The eaxct bin sizes for each bin. For example, if it is `[0, 10, 15, 20]`, then the resulting bins are `[0, 10)`, `[10, 15)`, and `[15, 20)`. |
+| `step` | `Number` | (Optional) The exact size acrass all bins. |
+| `exact` | `Array[Number]` | (Optional) The eaxct bin sizes for each bin. For example, if it is `[0, 10, 15, 20]`, then the resulting bins are `[0, 10)`, `[10, 15)`, and `[15, 20)`. |
 
 ### Scale
 
@@ -87,16 +95,16 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 
 | Property | Type | Description |
 | --- | ----------- | ----------- |
-| `domain` | `any[]` | (Optional) An array of domain intervals. `domain` must have the same length with `range`. The data type should be in accordance with the `field`'s type. |
-| `range` | `any[]` | (Optional) An array of range intervals. `range` must have the same length with `doamin`. The data type should be in accordance with the targeted channel's type (e.g., `number` for `pitch`, `string` for `timbre`). |
-| `polarity` | `'positive'|'negative'` | (Optional) The mapping direction. If it is `'positive'`, then a higher data value maps to a higher auditory value (e.g., more loud, higher pitch, right pan). If it is `'negative'`, then a higher data value maps to a lower auditory value (e.g., less loud, lower pitch, left pan). This does not work when `domain` and `range` are both provided. |
-| `maxDistinct` | `boolean` | (Optional, default: `true`) When `range` is not specified and `maxDistinct` is true, then the `range` becomes the entire range of that channel (e.g., from the lowest pitch to the highest pitch, from the pan of `-1`—leftmost to pan of `1`–rightmost). |
-| `times` | `number` | (Optional) A direct scale factor. When provided, for a value `v`, the auditory value is `v * times`. If the `max(value) * times` or `min(value) * times` goes beyond the possible auditory value for each channel, then the specified `times` is adjusted. |
-| `zero` | `boolean` | (Optional, default: `false`) Whether to include the zero value in the scale for a quantitative encoding. The default value is `zero` unlike visualization to maximalize the discriminability of auditory values because some audio values have limited possible range. |
-| `description` | `'nonskip'|'skip'`,`null`, or`descriptionMarkup` | (Optional, default: `'nonskip'`) Whether to play a description about the scale before playing the sonification stream. If it is `'skip'` or `null`, then description is not played. If provided as a string that is not `'skip'` or `'nonskip'`, then the provided string is played instead. See below for the description markup. |
-| `title` | `string` | (Optional, default is the field's name) If provided, it is used for the description. |
-| `length` | `number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
-| `band` | `number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
+| `domain` | `Array[Any]` | (Optional) An array of domain intervals. `domain` must have the same length with `range`. The data type should be in accordance with the `field`'s type. |
+| `range` | `Array[Any]` | (Optional) An array of range intervals. `range` must have the same length with `doamin`. The data type should be in accordance with the targeted channel's type (e.g., `Number` for `pitch`, `String` for `timbre`). |
+| `polarity` | `'positive'|'negative'` | (Optional) The mapping direction. If it is `'positive'`, then a higher data value maps to a higher auditory value (e.g., more loud, higher pitch, right pan). If it is `'negative'`, then a higher data value maps to a lower auditory value (e.g., less loud, lower pitch, left pan). |
+| `maxDistinct` | `Boolean` | (Optional, default: `true`) When `range` is not specified and `maxDistinct` is true, then the `range` becomes the maximum-possible range of that channel (e.g., from the lowest pitch to the highest pitch, from the pan of `-1`—leftmost to pan of `1`–rightmost). |
+| `times` | `Number` | (Optional) A direct scale factor. When provided, for a value `v`, the auditory value is `v * times`. If the `max(value) * times` or `min(value) * times` goes beyond the possible auditory value for each channel, then the specified `times` is adjusted. |
+| `zero` | `Boolean` | (Optional, default: `false`) Whether to include the zero value in the scale for a quantitative encoding. The default value is `false`, so as to maximalize the discriminability of auditory values because some audio values have limited possible range. |
+| `description` | `'nonskip'|'skip'`,`null`, or`descriptionMarkup` | (Optional, default: `'nonskip'`) Specifying the description of a scale. If it is `'skip'` or `null`, then description is not played. If provided as a string that is not `'skip'` or `'nonskip'`, then the provided string or markked-up expression is played instead. See below for the description markup. |
+| `title` | `String` | (Optional, default is the field's name) If provided, it replaces the field name in the default description. |
+| `length` | `Number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
+| `band` | `Number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
 | `timing` | `'relative'|'absolute'|'simultaneous'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
 
 #### API usage
@@ -179,15 +187,15 @@ channel.format('.2', 'number');
 channel.format('.2');
 channel.formatType('number');
 
-stream.enc.{channelName}.set(channel); // provided for reusability;
+stream.encoding.{channelName}.set(channel); // provided for reusability;
 
 // method 2 (more direct)
-stream.enc.{channelName}.field("Origin", "nominal");
-stream.enc.{channelName}.scale("timing", "relative");
+stream.encoding.{channelName}.field("Origin", "nominal");
+stream.encoding.{channelName}.scale("timing", "relative");
 
 // method 1 + 2
-stream.enc.{channelName} = new Erie.Channel("Origin", "nominal");
-stream.enc.{channelName}.scale("timing", "relative");
+stream.encoding.{channelName} = new Erie.Channel("Origin", "nominal");
+stream.encoding.{channelName}.scale("timing", "relative");
 
 {% endhighlight %}
 </code-group>
@@ -226,7 +234,7 @@ See the examples for how to use.
 - `S`: a string between each consecutive pair of items. This considers a space (for iternationalization). The default is `,`
 - `N`: a string between the last two consecutive items. This considers a space (for iternationalization). There is no default value provided.
 
-Note: For the `time` channel, while the rest can be "compiled," it won't really play the audio
+Note: For the `time` channel, while the rest can be "compiled," it won't really play the audio.
 
 ##### Reserved keywords
 
@@ -314,6 +322,8 @@ Erie.compileAuidoGraph(spec)
 ...
 {% endhighlight %}
 
+If `scale.description` is set to `'skip'` or `null`, then it is also not played with the `playScaleDescription` method.
+
 #### Scale consistency for multi-stream sonifications
 
 It is possible (and default) to use a consistent scales unless otherwise specified.
@@ -330,26 +340,28 @@ Then, assume these streams use a pitch channel.
 
 'Stream-A' defines a pitch channel, while the others do not.
 Then, 'Overlay-1', 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Stream-A'
-as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
+as long as they rely on the same dataset and field, and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
 If the overlaid streams use a different dataset or of a different encoding type,
 then the scale will be different.
 
 ##### Case 2: Nested
 
-'Stream-A' and 'Overlay-1' definee a pitch channel, while the others do not.
+'Stream-A' and 'Overlay-1' define a pitch channel, while the others do not.
 Then, 'Overlay-2', and 'Overlay-3' use the same pitch scale as defined in 'Overlay-1'
-as long as they rely on the same dataset and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
-If 'Overlay-2', and 'Overlay-3' use a different dataset or of a different encoding type,
+as long as they rely on the same dataset and field, and are of the same encoding `type` (e.g., `nominal`, `quantitative`).
+If 'Overlay-2', and 'Overlay-3' use a different dataset, field, or encoding type,
 then the scale will be different.
 
 ##### Case 3: I just need individually defined scales
 
 If it is necessary to use individually defined scales,
-then set `overlayScaleConsistency` (for `overlay`) or `sequenceScaleConsistency` (for `sequence`) to be `true`,
+then set `overlayScaleConsistency` (for `overlay`) or `sequenceScaleConsistency` (for `sequence`) to `false`,
 in the closest `config` object.
 To make inconsistent scales between 'Stream-A' and 'Stream-B',
-then set `sequenceScaleConsistency` as `true` in the top-level `sequence`.
+then set `sequenceScaleConsistency` as `false` in the top-level `sequence`.
 To make inconsistent scales among 'Overlay-1', 'Overlay-2', and 'Overlay-3',
-then set `overlayScaleConsistency` as `true` in the `overlay` object.
+then set `overlayScaleConsistency` as `false` in the `overlay` object.
 
 When two scale definitions conflicts, a property defined earliest is applied.
+
+This can also done by channels, for example `{ "sequenceScaleConsistency": { "pitch" : false } }`.

@@ -5,9 +5,9 @@ level: 0
 order: 400
 ---
 
-Erie supports several basic data transformation operations.
-The transformations are exectued in the specified order.
-Transformations that change the shape of the data set may drop non-computed fields/columns.
+Erie supports several basic data transform operations.
+Transforms are exectued in the specified order.
+Depending on how it is configured, transforms may drop irrelevant fields/columns.
 
 ## Supoorted transformation operations
 
@@ -47,7 +47,6 @@ stream.transform.add({ ... });
 {% endhighlight %}
 </code-group>
 </code-groups>
-
 
 For JavaScript API,
 you can also use `stream.transform.remove(index)` to remove a transform item by index.

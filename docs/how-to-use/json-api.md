@@ -1,6 +1,6 @@
 ---
 layout: default
-title: JSON Specification API
+title: JSON Spec API
 parent: How to use
 level: 1
 order: 103
@@ -15,3 +15,5 @@ let spec = {
 
 compileAuidoGraph(spec);
 {% endhighlight %}
+
+This documentation contains how to write both JavaScript and JSON-based specs.

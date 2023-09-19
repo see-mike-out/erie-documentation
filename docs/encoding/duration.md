@@ -39,9 +39,9 @@ The `duration` channel has a relatively simple usage pattern.
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.time.field("Body Mass (g)", "quantitative");
-stream.enc.time.scale("domain", [0, 7000]); // optinal
-stream.enc.time.scale("range", [0, 1]); // unit: seconds
+stream.encoding.time.field("Body Mass (g)", "quantitative");
+stream.encoding.time.scale("domain", [0, 7000]); // optinal
+stream.encoding.time.scale("range", [0, 1]); // unit: seconds
 ...
 {% endhighlight %}
 </code-group>

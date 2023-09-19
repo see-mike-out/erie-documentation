@@ -17,9 +17,9 @@ A `tone` object has the following properties.
 
 | Property | type | Description |
 | -------- | ---- | ----------- |
-| `type` | `string` or `object` | (Default: `'default'`, a sine wave oscillator) The instrument type of a tone. |
-| `continued` | `boolean` | (Default: `false`) Whether a tone is continued (no break between sound points) or discrete (breaks between sound points). This property can be ignored for sampled instruments (see below). |
-| `filter` | `string[]` | A list of audio filter names. |
+| `type` | `String` or `Object` | (Default: `'default'`, a sine wave oscillator) The instrument type of a tone. |
+| `continued` | `Boolean` | (Default: `false`) Whether a tone is continued (no break when audio property changes) or discrete (breaks). This property can be ignored for sampled instruments by defaulting to `'false'` (see below). |
+| `filter` | `Array[String]` | A list of audio filter names. |
 
 ### Supported instrument types
 
@@ -45,6 +45,7 @@ These instrument types support `continued` tones.
 ##### Muliti-Pitch Instrumental types
 
 These instrument types do *NOT* suppport `continued` tones.
+*Why?* These instruments are technically sampled from different audio files, and they can't be smoothly connected.
 
 - `'piano'`: classical piano
 - `'pianoElec'`: electric piano keyboard
@@ -90,7 +91,7 @@ stream.tone.set(tone);
 
 #### Sampling a sound, using a synth, or providing a Periodic Wave form
 
-Set the `type` as the name of the sampled sound or synth instrument as defined in the top-level `sampling`, `synth`, or `wave` object.
+Set the `type` as the name of a sampled sound, synth instrument, or periodic wave as defined in the top-level `sampling`, `synth`, or `wave` object.
 Make sure to not use the overlapping names.
 Erie searches the instrument by looking at the named instrument list, the `wave` object, the `synth` object, and the `sampling` object, in this order.
 
@@ -99,7 +100,7 @@ Erie searches the instrument by looking at the named instrument list, the `wave`
 Erie offers those instruments by sampling audio files for notes.
 Due to the limitations in Web Audio API,
 It is not possible to continue sampled (i.e., non-oscillator) sounds.
-Thus, either a periodic form or oscillator-type instruments can be set as a continued tone.
+Thus, either a periodic form or oscillator-type (including synth) instruments can be set as a continued tone.
 
 #### Attaching audio filters
 

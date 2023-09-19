@@ -6,15 +6,18 @@ level: 1
 order: 605
 ---
 
-Note: Erie Web Player does not map the `loudness` to the "volume" of a sound (i.e., actual decibel value)
+The `loudness` channel maps a data variable to how loud a sound is (or volume).
+Erie.js compiles `loudness` as gain, instead of physical volume that is measured in decibel
 because doing so may override or conflict with the user's volume setting.
 For instance, a user with low hearing may have to set their device volumen higher than others,
 and a user with sensitive hearing may have set it lower than others.
-Instead, Erie Web Player maps the `loudness` to the `gain` (or velocity) of a sound (i.e., how strong a sound is played),
+In addition, sampled audio has its own default volume, so controling them is nearly impossible.
+Instead, Erie Web Player maps the `loudness` to the `gain` (or velocity) of a sound (i.e., how strong a sound is played; or the amplitude of a sound),
 so that it works with users' different volume settings (i.e., relative volume control).
-The unit it perceived volume (decibel), but it is different from the actual decibel volume unit.
 It's always the very listener who has the control to the actual volume.
-However, if a loudness value is beyond 1 or 2, the sound might be too loud all at sudden, so the default loudness range is `[0, 1]`.
+
+The unit of `loudness`/gain is from `0` to infinity, where 0 means muted sound (the signal is flat) and 1 means the default volume.
+However, if a loudness value is beyond 1 or 2, the sound might be too loud all at sudden, so we set the default loudness range to `[0, 1]`.
 
 Using the `loudness` is pretty straightforward.
 
@@ -45,9 +48,9 @@ Using the `loudness` is pretty straightforward.
 {% highlight js %}
 let stream = new Erie.Stream();
 ...
-stream.enc.loudness.field("Body Mass (g)", "quantitative");
-stream.enc.loudness.scale("domain", [0, 7000]); // optinal
-stream.enc.loudness.scale("range", [0, 1]); // optional
+stream.encoding.loudness.field("Body Mass (g)", "quantitative");
+stream.encoding.loudness.scale("domain", [0, 7000]); // optinal
+stream.encoding.loudness.scale("range", [0, 1]); // optional
 ...
 {% endhighlight %}
 </code-group>
