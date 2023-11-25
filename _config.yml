@@ -23,7 +23,7 @@ email: hyeokkim777@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Documentation website for Erie, a data sonification grammar
 baseurl: "/erie-documentation" # the subpath of your site, e.g. /blog
-url: "https://see-mike-out.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://see-mike-out.github.io/erie-documentation" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  see-mike-out
 
 defaults:
