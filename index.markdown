@@ -21,6 +21,15 @@ Erie for Web (or simply Erie.js) is a web implementation of Erie, a declarative 
 
 ## Some notes
 
+### Erie is looking for your input!
+
+Erie is an open-source project, and your input (bug report, code suggestion, etc.) is valuable.
+Currently, Erie is maintained by a single person (me), so potential collaboration is much welcomed. 
+There are several ways you can contribute:
+
+1. By reporting bug in the package repo ([link](https://github.com/see-mike-out/erie-web/issues)).
+2. By emailing me to discuss with potential collaboration (hyeokkim777 'at' gmail 'dot' com).
+
 ### Open-source projects and standard APIs used in Erie
 
 Erie for Web uses W3C's standard APIs for audio: [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) and [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). For URL-based imports, Erie uses the standard [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
