@@ -10,11 +10,18 @@ order: 101
 
 To install for Node projects (e.g., Svelte), run the belwow line in your shell.
 
+- From NPM (Stable)
+
+{% highlight shell %}
+npm install erie-web
+{% endhighlight %}
+
+- From GitHub (Latest)
+
 {% highlight shell %}
 npm install https://github.com/see-mike-out/erie-web.git
 {% endhighlight %}
 
-(NPM publishing is on the way.)
 
 Then, you can import Erie like below.
 
