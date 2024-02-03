@@ -75,6 +75,22 @@ This event is fired when an `AudioQueue` stops playing an `Tone` item/item.
 Note that for a `Tone + Speech` element, this event can be fired multiple times.
 `event.detail` contains `sid` (a 6-letter random string ID for the played `Tone`).
 
+### Event `erieOnNotePlay`
+
+This event is fired whenever a tone or speech is played.
+`event.detail` has `type` and `note` property.
+This could be useful to match with sonification and visualization (refer to these Svelte files ([1](https://github.com/see-mike-out/erie-editor/blob/1d9ee242457a6be5bf6f24ba906cd22b1ac5f9dd/src/tester-components/visualization-view.svelte#L52-L60) and [2](https://github.com/see-mike-out/erie-editor/blob/main/src/chart-control/highlight-mark.js)) to see how it can work).
+
+- `type`: either `tone` or `speech`.
+- `note`
+  - For `tone` type, `note` contains auditory values and the `__datum` property for the datum that it encodes. (Note: for a continuous tone, it only includes the first datum).
+  - For `speech` type, `note` includes the speech text and other auditory information (e.g., speech rate, language, etc.).
+
+### Event `erieOnNoteStop`
+
+This event is fired whenever a tone or speech is finished.
+`event.detail` has `type` and `note` property (same as above).
+
 ### Event `erieOnPlaySpeech`
 
 This event is fired when an `AudioQueue` starts playing an `Speech` item/element.
