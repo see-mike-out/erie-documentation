@@ -10,7 +10,10 @@ You can record the sonfication and save it using Erie's chrome extension (link-a
 
 ## For general users
 
-This section is temporarily removed due to anonymization.
+Install the extension via [here](https://chromewebstore.google.com/detail/erie-recorder-for-chrome/efbafkmjeinnnkjlkipfmpcbglbjgedc).
+
+To record your sonification, just turn on the extension, and play the sonification using Chrome (works with the editor).
+Once your sonification is recorded, the output audio file will be automatically downloaded to your default download forlder.
 
 ### What you get?
 
@@ -19,7 +22,7 @@ They include an HTML document, an SSML document, and associated audio files in t
 
 ## For developers
 
-To use, first download the extension via `[hidden]`.
+To use, first download the extension via [here](https://github.com/see-mike-out/erie-chrome-ext).
 
 Second, install the extension via developer tool ([how to](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked)).
 
