@@ -48,6 +48,11 @@ If it was paused at `i`-th queue element, it starts playing from the `i`-th elem
 
 This gives the index of the sub-sequence that is currently being played.
 
+### `AudioQueue.queue[i].getPCM()` or `generatePCMCode(AudioQueue.queue[i])`(experimental) 
+
+This method returns an [`AudioBuffer`] object with Raw Pulse-code Modulation. 
+Currently, this is an experimental feature and only supports a sinusoidal oscillator with time, pitch, pan, and loudness channels.
+
 ## Player Events
 
 As a player executes each queue element, it fires the following events.
