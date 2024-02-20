@@ -48,10 +48,32 @@ If it was paused at `i`-th queue element, it starts playing from the `i`-th elem
 
 This gives the index of the sub-sequence that is currently being played.
 
-### `AudioQueue.queue[i].getPCM()` or `generatePCMCode(AudioQueue.queue[i])`(experimental) 
+### `AudioQueue.queue[i].getPCM()` or `generatePCMCode(AudioQueue.queue[i])`(experimental)
 
-This method returns an [`AudioBuffer`] object with Raw Pulse-code Modulation. 
+This method returns an [`AudioBuffer`](https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer) object with [Raw Pulse-code Modulation](Pulse-code modulation).
+You can run this method for a `tone-series` queue item.
 Currently, this is an experimental feature and only supports a sinusoidal oscillator with time, pitch, pan, and loudness channels.
+It works well for a discrete `tone-series` queue. Continuous queues are not rendered smooothly.
+Refer to the below usage
+
+{% highlight js %}
+compileAudioGraph(spec).then((audio) => {
+  audio.prerender().then((queue) => {
+    queue[i].getPCM()?.then((buffer) => {
+      if (buffer) {
+        let ctx = new AudioContext();
+        let source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.start();
+        source.onended = () => {
+          console.log("done");
+        };
+      }
+    });
+  });
+})
+{% endhighlight %}
 
 ## Player Events
 
