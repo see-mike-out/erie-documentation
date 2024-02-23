@@ -21,14 +21,15 @@ Erie for Web (or simply Erie.js) is a web implementation of Erie, a declarative 
 
 ## Some notes
 
-### Erie is looking for your input!
+### Erie is looking for your input
 
 Erie is an open-source project, and your input (bug report, code suggestion, etc.) is valuable.
-Currently, Erie is maintained by a single person (me), so potential collaboration is much welcomed. 
+Currently, Erie is maintained by a single person (me), so potential collaboration is much welcomed.
 There are several ways you can contribute:
 
 1. By reporting bug in the package repo ([link](https://github.com/see-mike-out/erie-web/issues)).
 2. By emailing me to discuss with potential collaboration (hyeokkim777 'at' gmail 'dot' com).
+3. Take a look at the bottom of this page for future extension plans.
 
 ### Open-source projects and standard APIs used in Erie
 
@@ -48,3 +49,10 @@ In that case, use a `continuous` tone.
 The Web APIs do not support directly capturing audio generated from your browser or desktop (presumably for security, privacy, and copyright reasons).
 Instead, we use a Chrome extension by utilizing Chrome's `tabCapture` API to generate audio files out of Erie sonifications (access [here](https://chromewebstore.google.com/detail/erie-recorder-for-chrome/efbafkmjeinnnkjlkipfmpcbglbjgedc)).
 Yet, it is still not possible to capture the sounds generated using the Web Speech API (`SpeechSynthesis`) because technically it is not generated from your browser but from your computer. Instead, our recorder creates an HTML file that has the text parts and recorded sounds so that they can be played using a screen reader.
+
+## Future expansion plans
+
+- Support for 3d pan encoding
+- Support for instrument smapling via pulse-code
+- Support for PCM generation for other instruments
+- Support for PCM to MP3/WAV file generation

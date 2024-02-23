@@ -51,7 +51,7 @@ This gives the index of the sub-sequence that is currently being played.
 ### `AudioQueue.queue[i].getPCM()` or `generatePCMCode(AudioQueue.queue[i])`(experimental)
 
 This method returns an [`AudioBuffer`](https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer) object with [Raw Pulse-code Modulation](Pulse-code modulation).
-You can run this method for a `tone-series` queue item.
+You can run this method for a `tone-series` or `tone-overlay-series` queue item.
 Currently, this is an experimental feature and only supports a sinusoidal oscillator with time, pitch, pan, and loudness channels.
 It works well for a discrete `tone-series` queue. For overly slow continous tones, there could be some click sound as pitch transition is approximated.
 Refer to the below usage
