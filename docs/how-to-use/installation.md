@@ -19,9 +19,8 @@ npm install erie-web
 - From GitHub (Latest)
 
 {% highlight shell %}
-npm install https://github.com/see-mike-out/erie-web.git
+npm install <https://github.com/see-mike-out/erie-web.git>
 {% endhighlight %}
-
 
 Then, you can import Erie like below.
 
@@ -39,7 +38,13 @@ Have the below imports in your HTML file or wherever it applies to.
 <script src="https://cdn.jsdelivr.net/npm/arquero@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@5/build-es5/vega.min.js"></script>
+<script>
+  const vegaStatistics = vega;
+</script>
+<!-- For development -->
 <script src="{path}/erie-web.js"></script>
+<!-- For production -->
 <!-- <script src="{path}/erie-web.min.js"></script>  -->
 {% endhighlight %}
 
