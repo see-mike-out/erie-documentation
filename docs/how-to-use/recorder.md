@@ -6,7 +6,7 @@ level: 1
 order: 106
 ---
 
-You can record the sonfication and save it using Erie's chrome extension (link-anonymized).
+You can record the sonfication and save it using Erie's chrome extension.
 
 ## For general users
 
