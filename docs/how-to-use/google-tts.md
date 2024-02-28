@@ -46,7 +46,7 @@ The `config` object has the following properties.
 
 ### An example using SvelteKit
 
-1. Write a `POST` method function in your `routes/api/TTS/+server.js` file.
+#### Write a `POST` method function in your `routes/api/TTS/+server.js` file.
 
 {% highlight js %}
 import { json } from "@sveltejs/kit";
@@ -74,7 +74,7 @@ export async function POST({ request }) {
 }
 {% endhighlight %}
 
-2. Have a function in your client side file, like `routes/.../+page.svelte`
+#### Have a function in your client side file, like `routes/.../+page.svelte`
 
 {% highlight html %}
 <script>
