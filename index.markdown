@@ -53,6 +53,4 @@ Yet, it is still not possible to capture the sounds generated using the Web Spee
 ## Future expansion plans
 
 - Support for 3d pan encoding
-- Support for instrument smapling via pulse-code
-- Support for PCM generation for other instruments
-- Support for PCM to MP3/WAV file generation
+- Generate the full file

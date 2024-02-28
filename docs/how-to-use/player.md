@@ -24,12 +24,15 @@ At high-level, there are four types of sub-queues: `Speech`, `Tone`, `Tone-Speec
 
 This distnction depends on how those APIs work.
 
-### `async AudioQueue.play(start, end) -> Promise<undefined>`
+### `async AudioQueue.play(start, end, options) -> Promise<undefined|[buffer]>`
 
 This methods plays the queued sonification. `SequenceStream.playQueue()` runs this method.
 If `start` is specified, the sonfication is played from the `start`-th queue element.
 If `start` and `end` are both specified, the sonfication is played from the `start`-th queue element to `(end - 1)`-th queue element.
-The resulting `Promise` is resolved to `undefined`.
+
+The `options` object can take the following property:
+
+- `pcm` (`boolean`, default = `false`, optional): If set `true`, the resulting `Promise` is resolved to an *Array* of`AudioPrimitiveBuffer` instances (see below) and no sound will be played. If set `false` (default), the resulting `Promise` is resolved to `undefined`.
 
 ### `AudioQueue.stop() -> undefined`
 
@@ -48,32 +51,47 @@ If it was paused at `i`-th queue element, it starts playing from the `i`-th elem
 
 This gives the index of the sub-sequence that is currently being played.
 
-### `AudioQueue.queue[i].getPCM()` or `generatePCMCode(AudioQueue.queue[i])`(experimental)
+## `AudioPrimitiveBuffer` class
 
-This method returns an [`AudioBuffer`](https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer) object with [Raw Pulse-code Modulation](Pulse-code modulation).
-You can run this method for a `tone-series` or `tone-overlay-series` queue item.
-Currently, this is an experimental feature and only supports a sinusoidal oscillator with time, pitch, pan, and loudness channels.
-It works well for a discrete `tone-series` queue. For overly slow continous tones, there could be some click sound as pitch transition is approximated.
-Refer to the below usage
+This class contains information about the `AudioBuffer` for a queue item.
+An `AudioPrimitiveBuffer` instance has the following attributes:
+- `length`: The length of the sound in seconds
+- `sampleRate` (default `44100`): The sample rate of the buffer.
+- `compiled`: Whether the final buffer has been compiled.
+- `compiledBuffer`: An `AudioBuffer` instance that contains the buffer data.
+- `primitive`: An array that contains initially collected data. Each element has `at` (where this sound locates in seconds) and `data` an `AudioBuffer` from position 0.
 
-{% highlight js %}
-compileAudioGraph(spec).then((audio) => {
-  audio.prerender().then((queue) => {
-    queue[i].getPCM()?.then((buffer) => {
-      if (buffer) {
-        let ctx = new AudioContext();
-        let source = ctx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(ctx.destination);
-        source.start();
-        source.onended = () => {
-          console.log("done");
-        };
-      }
+## `async makeWaveFromBuffer(AudioBuffer, Extension) -> Promise<Blob>`
+
+This function takes an audio buffer and resolves a `Blob` object for an audio.
+
+### Example 
+
+```html
+<script>
+	function getBlobFromAudioBuffer(buffers, i) {
+    let blobLink = []
+		for (const b of buffers) {
+			if (b?.constructor.name === Erie?.AudioPrimitiveBuffer?.name) {
+				Erie.makeWaveFromBuffer(b.compiledBuffer, "mp3").then((blob) => {
+					blobLink[i] = window.URL.createObjectURL(blob);
+					i++;
+				});
+			}
+		}
+    return blobLink;
+	}
+  audio?.queue
+    ?.play(0, 1, { pcm: true })
+    .then((buffer) => {
+      getBlobFromAudioBuffer(buffer, i);
     });
-  });
-})
-{% endhighlight %}
+</script>
+...
+<a href={blobLink[i]}>Download</a>
+...
+```
+
 
 ## Player Events
 
