@@ -42,11 +42,12 @@ The `config` object has the following properties.
 
 - `language` (optinoal): Same as above. If specified in `sound`, `config.language` is ignored.
 - `speechRate` (optinoal): Same as above. If specified in `sound`, `config.language` is ignored.
-- `ssmlGender` (`string`, optional): The gender of the output voice. This should be either `NEUTRAL`, `FEMALE`, or `MALE`.
+- `ssmlGender` (`string`, optional): The gender of the output voice. This should be either `NEUTRAL` (default), `FEMALE`, or `MALE`.
+- `audioEncoding` (`string`, optional): The output audio file encoding. Refer to the [Google Cloud documentation](https://cloud.google.com/text-to-speech/docs/reference/rest/v1/AudioConfig#audioencoding). The default is `MULAW` (`wav` format). Technically, setting it as `MP3` should not affect the use of `AudioQueue.getFullAudio` method.
 
 ### An example using SvelteKit
 
-#### Write a `POST` method function in your `routes/api/TTS/+server.js` file.
+#### Write a `POST` method function in your `routes/api/TTS/+server.js` file
 
 {% highlight js %}
 import { json } from "@sveltejs/kit";
@@ -55,20 +56,23 @@ import { writeFile } from 'node:fs/promises'
 
 export async function POST({ request }) {
   const data = await request.json();
-  const sound = data.sound, // this is a queue item after a queue is prerendered.
-    config = data.config, // if you pass all the `config` information in your spec, then they should be reflected here.
+  const sound = data.sound,
+    config = data.config,
     options = data.options;
   let response = await GoogleCloudTTSGenerator(sound, config);
-  if (options?.getBlob) { // instead of saving file on local, get a blob
-    let blob = new Blob(response, { type: "audio/mp3" })
+
+  if (options?.getBlob) {
+    let blob = new Blob(response, { type: "audio/wav" })
     var url = window.URL.createObjectURL(blob);
     return url;
   } else {
-    let filename = options?.filename || sound.speech.replace(/\s/gi, '-') + '.mp3';
-    if (options?.path) {
-      filename = options.path + filename;
+    if (options?.writeFile) {
+      let filename = options?.filename || sound.speech.replace(/\s/gi, '-') + '.wav';
+      if (options?.path) {
+        filename = options.path + filename;
+      }
+      await writeFile(filename, response, 'binary');
     }
-    await writeFile(filename, response, 'binary');
     return json(response);
   }
 }
@@ -78,20 +82,29 @@ export async function POST({ request }) {
 
 {% highlight html %}
 <script>
- async function getTTS(data) {
+  import { bufferToArrayBuffer } from "erie-web";
+  async function getTTS(data) {
   let sound = {};
   Object.assign(sound, data.text);
-  // in case there is no language information.
   if (!sound.language) sound.language = document?.documentElement?.lang;
-  await fetch("/api/TTS", {
+  let res = await fetch("/api/TTS", {
    method: "POST",
    body: JSON.stringify({ sound, config: data.config }),
    headers: {
     "content-type": "application/json",
    },
   });
+  let parsed = await res.json();
+  return bufferToArrayBuffer(parsed.data);
  }
+
+  let BlobLink;
+  async function getFullAudio() {
+    BlobLink = await queue.getFullAudio(getTTS);
+  }
 </script>
+
+<a href={totalBlobLink}>Download</a>
 {% endhighlight %}
 
 This code will save output audio in your server directory.

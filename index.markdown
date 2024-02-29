@@ -50,7 +50,12 @@ The Web APIs do not support directly capturing audio generated from your browser
 Instead, we use a Chrome extension by utilizing Chrome's `tabCapture` API to generate audio files out of Erie sonifications (access [here](https://chromewebstore.google.com/detail/erie-recorder-for-chrome/efbafkmjeinnnkjlkipfmpcbglbjgedc)).
 Yet, it is still not possible to capture the sounds generated using the Web Speech API (`SpeechSynthesis`) because technically it is not generated from your browser but from your computer. Instead, our recorder creates an HTML file that has the text parts and recorded sounds so that they can be played using a screen reader.
 
+### Offline audio generation
+
+Now, Erie supports offline audio generation. Refer to [this documentation](#AudioQueuegetFullAudiottsFetchFunction---PromiseBlob`).
+Note that you need a separate Text-to-Speech API (usually a commercial service). To better support, Erie offers [an interface function for Google Cloud Text-To-Speech API](docs/how-to-use/google-tts.html).
+In case you don't have an access to a TTS API, you can still use the recorder extension.
+
 ## Future expansion plans
 
 - Support for 3d pan encoding
-- Generate the full file

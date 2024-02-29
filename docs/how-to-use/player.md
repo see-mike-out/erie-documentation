@@ -51,36 +51,71 @@ If it was paused at `i`-th queue element, it starts playing from the `i`-th elem
 
 This gives the index of the sub-sequence that is currently being played.
 
+### `AudioQueue.getFullAudio(ttsFetchFunction) -> Promise<Blob>`
+
+This method generates an `mp3` file for the full audio.
+If there is any `text` type or `tone-speech-series` type queue item, `ttsFetchFunction` must be provided.
+Otherwise, there will be a `TypeError`.
+A `ttsFetchFunction` must take a queue item as an input, and should return an `ArrayBuffer`.
+For an exmaple `ttsFetchFunction`, refer to ['Using Google Cloud TTS'](google-tts.html).
+
+Note that this method only works on a client side (i.e., can't be run on a Node server), however your `ttsFetchFunction` may need to be run only on a server.
+In that case, use `fetch` method.
+While `audioQueueCompile` function should work on server side, most of the methods of an `AudioQueue` instance does not work on a server because niether `AudioContext` nor `OfflineAudioContext` is not supported on Node (only on supported browers).
+Therefore, the following procedures are suggested.
+
+1. (On Client) Compile your specification to an `AudioQueue` instance.
+2. (On Server) Define an API endpoint for getting TTS audio. In this case, you can use `GoogleCloudTTSGenerator` as an interface between Erie and Google Cloud TTS.
+3. (On Client) Define a `ttsFetchFunction` function to the TTS API endpoint.
+4. (On Client) Run this `getFullAudio` method with the `ttsFetchFunction` function.
+
+#### An exmaple after the ['Using Google Cloud TTS'](google-tts.html) example
+
+{% highlight html %}
+<script>
+  let BlobLink;
+  async function getFullAudio() {
+    BlobLink = await queue.getFullAudio(getTTS);
+  }
+</script>
+...
+<a href={totalBlobLink}>Download</a>
+...
+{% endhighlight %}
+
 ## `AudioPrimitiveBuffer` class
 
 This class contains information about the `AudioBuffer` for a queue item.
 An `AudioPrimitiveBuffer` instance has the following attributes:
+
 - `length`: The length of the sound in seconds
 - `sampleRate` (default `44100`): The sample rate of the buffer.
 - `compiled`: Whether the final buffer has been compiled.
 - `compiledBuffer`: An `AudioBuffer` instance that contains the buffer data.
 - `primitive`: An array that contains initially collected data. Each element has `at` (where this sound locates in seconds) and `data` an `AudioBuffer` from position 0.
 
-## `async makeWaveFromBuffer(AudioBuffer, Extension) -> Promise<Blob>`
+## `async makeWaveFromBuffer(buffer: AudioBuffer, ext: Extension) -> Promise<Blob>`
 
 This function takes an audio buffer and resolves a `Blob` object for an audio.
+The `ext` can be `mp3`, `wav`, etc. (default: `wav`)
+If it is `$raw`, then it returns an `ArrayBuffer` for the wav audio file.
 
-### Example 
+### Example
 
-```html
+{% highlight html %}
 <script>
-	function getBlobFromAudioBuffer(buffers, i) {
+  function getBlobFromAudioBuffer(buffers, i) {
     let blobLink = []
-		for (const b of buffers) {
-			if (b?.constructor.name === Erie?.AudioPrimitiveBuffer?.name) {
-				Erie.makeWaveFromBuffer(b.compiledBuffer, "mp3").then((blob) => {
-					blobLink[i] = window.URL.createObjectURL(blob);
-					i++;
-				});
-			}
-		}
+    for (const b of buffers) {
+      if (b?.constructor.name === Erie?.AudioPrimitiveBuffer?.name) {
+        Erie.makeWaveFromBuffer(b.compiledBuffer, "mp3").then((blob) => {
+          blobLink[i] = window.URL.createObjectURL(blob);
+          i++;
+        });
+      }
+    }
     return blobLink;
-	}
+  }
   audio?.queue
     ?.play(0, 1, { pcm: true })
     .then((buffer) => {
@@ -90,8 +125,7 @@ This function takes an audio buffer and resolves a `Blob` object for an audio.
 ...
 <a href={blobLink[i]}>Download</a>
 ...
-```
-
+{% endhighlight %}
 
 ## Player Events
 
