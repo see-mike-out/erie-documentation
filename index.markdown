@@ -52,7 +52,7 @@ Yet, it is still not possible to capture the sounds generated using the Web Spee
 
 ### Offline audio generation
 
-Now, Erie supports offline audio generation. Refer to [this documentation](#AudioQueuegetFullAudiottsFetchFunction---PromiseBlob`).
+Now, Erie supports offline audio generation. Refer to [this documentation](docs/how-to-use/player.html#audioqueuegetfullaudiottsfetchfunction---promiseblob).
 Note that you need a separate Text-to-Speech API (usually a commercial service). To better support, Erie offers [an interface function for Google Cloud Text-To-Speech API](docs/how-to-use/google-tts.html).
 In case you don't have an access to a TTS API, you can still use the recorder extension.
 
