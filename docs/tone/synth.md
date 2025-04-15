@@ -4,6 +4,7 @@ title: Synth
 parent: Tone
 level: 1
 order: 503
+version: current
 ---
 
 To use an FM/AM synth tone, it MUST be registered in the `synth` object (`Array` type) before using it.

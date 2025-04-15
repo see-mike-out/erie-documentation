@@ -4,6 +4,7 @@ title: Other patterns
 parent: Composition
 level: 1
 order: 703
+version: current
 ---
 
 There are other patterns to play multi-stream sonifications.

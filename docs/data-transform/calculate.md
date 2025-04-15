@@ -4,6 +4,7 @@ title: Calculate
 parent: Transform
 level: 1
 order: 404
+version: current
 ---
 
 A `calculate` transformation generates a new column by computing some operations.

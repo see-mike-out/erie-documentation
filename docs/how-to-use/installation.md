@@ -4,6 +4,7 @@ title: Installation
 parent: How to use
 level: 1
 order: 101
+version: current
 ---
 
 ## Node

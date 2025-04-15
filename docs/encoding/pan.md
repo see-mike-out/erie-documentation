@@ -4,6 +4,7 @@ title: Pan Channel
 parent: Encoding
 level: 1
 order: 606
+version: current
 ---
 
 In Erie, the `pan` channel means streo panning (left and right spatial positioning).
@@ -27,7 +28,7 @@ When no earphones or headphones are provided, panning is better identifed when a
       "type": "quantitative",
       "scale": {
         "doamin": [1900, 1950, 2000], // optional
-        "range": [-1, 0, 1] // opational
+        "range": [-1, 0, 1] // optional
       }
     }
   }

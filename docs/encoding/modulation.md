@@ -4,6 +4,7 @@ title: Modulation and Harmonicity Channel
 parent: Encoding
 level: 1
 order: 609
+version: current
 ---
 
 For a synth tone, the modulator's pitch can be adjusted using `modulation` index (FM/AM) or `harmonicity` (AM) channels.

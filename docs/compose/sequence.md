@@ -4,6 +4,7 @@ title: Sequence
 parent: Composition
 level: 1
 order: 701
+version: current
 ---
 
 A `sequence` composition plays its child streams one by one.

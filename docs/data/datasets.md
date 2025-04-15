@@ -3,6 +3,7 @@ layout: default
 title: Datasets
 level: 0
 order: 301
+version: current
 ---
 
 The `datasets` object allows for registering datasets and used in streams.

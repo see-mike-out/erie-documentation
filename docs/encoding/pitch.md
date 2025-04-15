@@ -4,6 +4,7 @@ title: Pitch and Detune Channel
 parent: Encoding
 level: 1
 order: 604
+version: current
 ---
 
 ## Pitch

@@ -4,6 +4,7 @@ title: Time Channel
 parent: Encoding
 level: 1
 order: 601
+version: current
 ---
 
 In data sonification, time is a very important channel to avoid chaos.

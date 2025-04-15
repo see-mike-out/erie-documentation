@@ -4,6 +4,7 @@ title: Repeat Channel
 parent: Encoding
 level: 1
 order: 610
+version: current
 ---
 
 The `repeat` channel is a data-driven composition method that sequences and/or overlays streams over one or more nominal fields.

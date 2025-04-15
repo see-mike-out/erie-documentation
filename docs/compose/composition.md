@@ -3,6 +3,7 @@ layout: default
 title: Composition
 level: 0
 order: 700
+version: current
 ---
 
 Erie offers two primary options for concatenation-based composition: `sequence` and `overlay`.

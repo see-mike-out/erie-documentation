@@ -3,6 +3,7 @@ layout: default
 title: Stream
 level: 0
 order: 200
+version: current
 ---
 
 ## Terminology: Sequence, Overlay, Stream, Sound, and Tone

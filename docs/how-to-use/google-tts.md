@@ -4,6 +4,7 @@ title: Using Google Cloud TTS
 parent: How to use
 level: 1
 order: 107
+version: current
 ---
 
 Instead of Web Seech API, you can use [Google Cloud Text-to-Speech (TTS) API](https://cloud.google.com/text-to-speech).

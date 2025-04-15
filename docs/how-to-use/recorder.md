@@ -4,6 +4,7 @@ title: Recorder (Chrome Extension)
 parent: How to use
 level: 1
 order: 106
+version: current
 ---
 
 You can record the sonfication and save it using Erie's chrome extension.

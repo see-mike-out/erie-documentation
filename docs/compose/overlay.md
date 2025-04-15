@@ -4,6 +4,7 @@ title: Overlay
 parent: Composition
 level: 1
 order: 702
+version: current
 ---
 
 A `overlay` composition plays its child streams together, or simultaneously, or parallelly.

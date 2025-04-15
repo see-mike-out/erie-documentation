@@ -4,6 +4,7 @@ title: Compiler API
 parent: How to use
 level: 1
 order: 104
+version: current
 ---
 
 Erie.js compiler (in JS) returns a playable audio stream object.

@@ -3,6 +3,7 @@ layout: default
 title: Encoding
 level: 0
 order: 600
+version: current
 ---
 
 The `encoding` property of a `steam` defines how to map data variables to auditory variables.

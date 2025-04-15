@@ -4,6 +4,7 @@ title: JSON Spec API
 parent: How to use
 level: 1
 order: 103
+version: current
 ---
 
 Alternatively, you can directly manipulate the spec and pass it to the compiler.

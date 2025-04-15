@@ -4,6 +4,7 @@ title: Density
 parent: Transform
 level: 1
 order: 406
+version: current
 ---
 
 A `density` transformation converts a variable into an estimated kernel density using Vega's density transform (see [this documentation](https://vega.github.io/vega-lite/docs/density.html)), resulting in a density distribution

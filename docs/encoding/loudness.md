@@ -4,6 +4,7 @@ title: Loudness Channel
 parent: Encoding
 level: 1
 order: 605
+version: current
 ---
 
 The `loudness` channel maps a data variable to how loud a sound is (or volume).
@@ -35,7 +36,7 @@ Using the `loudness` is pretty straightforward.
       "type": "quantitative",
       "scale": {
         "doamin": [0, 7000], // optional
-        "range": [0, 1] // opational
+        "range": [0, 1] // optional
       }
     }
   }

@@ -4,6 +4,7 @@ title: Sampling
 parent: Tone
 level: 1
 order: 502
+version: current
 ---
 
 It is possible to sample sounds by providing sampling sounds.

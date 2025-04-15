@@ -4,6 +4,7 @@ title: Periodic Wave
 parent: Tone
 level: 1
 order: 501
+version: current
 ---
 
 It is possible to provide a periodic wave form (see [this MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/PeriodicWave))

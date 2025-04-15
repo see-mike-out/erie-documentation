@@ -4,6 +4,7 @@ title: Fold
 parent: Transform
 level: 1
 order: 405
+version: current
 ---
 
 A `fold` transformation reshapes the data by unpivoting it.

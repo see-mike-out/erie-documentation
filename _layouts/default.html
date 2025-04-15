@@ -17,13 +17,16 @@
     <div class="row">
       <section id="nav-section" class="col-12 col-md-4 col-lg-3 col-xl-2 p-3">
         <h1>
-          <a href="{{baseUrl}}">
+          <a href="{{site.baseurl}}">
             <img src={{ "assets/image/erie-logo-32.png" | relative_url }} />
             Erie Documentation
           </a>
         </h1>
         <nav>
-          {% assign pages = site.pages | where_exp: 'page', 'page.title' | sort: "order" %}
+          <a href="{{site.baseurl}}/docs/future" class="nav-item" data-level="0">
+            Future
+          </a>
+          {% assign pages = site.pages | where_exp: 'page', 'page.version == "current"'  | where_exp: 'page', 'page.title'| sort: "order" %}
           {% for pg in pages %}
           {% if pg.title == page.title %}
           <a href="{{ pg.url | relative_url }}" class="nav-item current" data-level="{{ pg.level }}">

@@ -3,6 +3,7 @@ layout: default
 title: Data
 level: 0
 order: 300
+version: current
 ---
 
 Erie supports two methods for providing the data: `values` and `url`.

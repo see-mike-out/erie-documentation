@@ -4,6 +4,7 @@ title: JavaScript Spec API
 parent: How to use
 level: 1
 order: 102
+version: current
 ---
 
 #### 1. To use Erie.js spec API, first create an Erie Spec object

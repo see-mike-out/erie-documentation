@@ -3,6 +3,7 @@ layout: default
 title: How to Use
 level: 0
 order: 100
+version: current
 ---
 
 Erie.js has a spec API, queue compiler, and player for web, written in JavaScript.

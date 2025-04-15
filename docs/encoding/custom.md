@@ -4,6 +4,7 @@ title: Custom channels
 parent: Encoding
 level: 1
 order: 610
+version: current
 ---
 
 A developer can provide custom channels that can be attached to their specified audio filters.

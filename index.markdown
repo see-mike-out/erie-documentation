@@ -3,6 +3,7 @@ layout: default
 title: Home
 level: 0
 order: 0
+version: current
 ---
 
 ## Erie (Web)
@@ -59,3 +60,7 @@ In case you don't have an access to a TTS API, you can still use the recorder ex
 ## Future expansion plans
 
 - Support for 3d pan encoding
+- Support for custom ordering
+- Support for streaming data
+
+(These are now available with a beta version, see [Future](docs/future) section)

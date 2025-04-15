@@ -4,6 +4,7 @@ title: Filter
 parent: Transform
 level: 1
 order: 403
+version: current
 ---
 
 A `filter` transformation filters "IN" rows that meet a provided condition.

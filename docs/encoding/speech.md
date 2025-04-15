@@ -4,6 +4,7 @@ title: Speech (before and after) Channels
 parent: Encoding
 level: 1
 order: 608
+version: current
 ---
 
 A speech channel enocdes a natural language sound before (`speechBefore`) or after (`speechAfter`) the main tone.

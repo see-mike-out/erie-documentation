@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Erie Documentation (Future) | {{ page.title }}</title>
+  <link rel="stylesheet" href={{ "css/style.css" | relative_url}}>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="icon" type="image/x-icon" href={{"assets/image/erie-logo-32.png" | relative_url }}>
+  <meta name="viewport" content="width=device-width" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <section id="nav-section" class="col-12 col-md-4 col-lg-3 col-xl-2 p-3 future">
+        <h1>
+          <a href="{{site.baseurl}}/docs/future">
+            <img src={{ "assets/image/erie-logo-32.png" | relative_url }} />
+            Erie Documentation (Future)
+          </a>
+        </h1>
+        <nav>
+          <a href="{{site.baseurl}}/" class="nav-item" data-level="0">
+            Current
+          </a>
+          {% assign pages = site.pages | where_exp: 'page', 'page.version == "future"' | where_exp: 'page', 'page.title'| sort: "order" %}
+          {% for pg in pages %}
+          {% if pg.title == page.title %}
+          <a href="{{ pg.url | relative_url }}" class="nav-item current" data-level="{{ pg.level }}">
+            ▶︎ {{pg.title}}
+          </a>
+          {% else %}
+          <a href="{{ pg.url | relative_url }}" class="nav-item" data-level="{{ pg.level }}">
+            {{pg.title}}
+          </a>
+          {% endif %}
+          {% endfor %}
+        </nav>
+        <div class="config mt-3">
+          <input id="use-interactive-tabs" name="use-interactive-tabs" type="checkbox"
+            aria-labelledby="use-interactive-tabs-label" class="me-1" />
+          <label id="use-interactive-tabs-label" for="use-interactive-tabs">Use interactive tabs</label>
+        </div>
+      </section>
+      <section id="content-section" class="col-12 col-md-8 col-lg-9 col-xl-10 p-3">
+        <h1>{%if page.parent %}<small>{{ page.parent}}</small> {% endif %}{{ page.title }}</h1>
+        <main class="p-0 m-0">
+          {{ content }}
+        </main>
+        <div class="copy">
+          &copy; Hyeok Kim
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    // code snippet configurations
+    function makeCodeCopyButtons() {
+      let codeSnippets = document.querySelectorAll("figure.highlight");
+      Array.from(codeSnippets).forEach((code) => {
+        let codeContent = code.querySelector("pre")?.innerText || "";
+        let copyBtn = document.createElement("button");
+        copyBtn.className = "code-copy-button ready";
+        copyBtn.innerHTML = '<i class="bi bi-clipboard"></i><i class="bi bi-clipboard-check-fill"></i><i class="bi bi-clipboard-x"></i>'
+        copyBtn.setAttribute('aria-roledescription', 'button');
+        copyBtn.setAttribute('aria-label', 'Copy to clipboard');
+        copyBtn.onclick = (e) => {
+          navigator.clipboard.writeText(codeContent).then(() => {
+            copyBtn.className = "code-copy-button succeed";
+          }, () => {
+            copyBtn.className = "code-copy-button failed";
+          })
+        };
+        code.append(copyBtn);
+      });
+    }
+
+    function removeCodeCopyButtons() {
+      document.querySelectorAll(".code-copy-button").forEach((a) => a.remove());
+    }
+
+    function makeCodeTabs() {
+      let codeGroups = document.querySelectorAll("code-groups");
+      Array.from(codeGroups).forEach((groups) => {
+        let tabBar = document.createElement("nav");
+        tabBar.className = "code-tab"
+        let contentArea = document.createElement("div");
+        groups.querySelectorAll("code-group").forEach((group, i) => {
+          let tab = group.querySelector("h4").cloneNode(true);
+          let content = group.querySelector("figure.highlight").cloneNode(true);
+          tab.setAttribute("aria-roledescription", "button");
+          tab.setAttribute("aria-label", "view " + tab.innerHTML + " code snippet");
+          if (i != 0) content.style.display = 'none';
+          if (i == 0) tab.classList.add("selected");
+          tab.onclick = (e) => {
+            contentArea.childNodes.forEach((n) => n.style.display = "none");
+            content.style.display = "inherit";
+            tabBar.childNodes.forEach((n) => n.classList.remove("selected"));
+            tab.classList.add("selected");
+          }
+          tabBar.appendChild(tab);
+          contentArea.appendChild(content);
+        });
+        groups.innerHTML = "";
+        groups.appendChild(tabBar);
+        groups.appendChild(contentArea);
+      });
+    }
+    function releaseCodeTabs() {
+      let codeGroups = document.querySelectorAll("code-groups");
+      Array.from(codeGroups).forEach((groups) => {
+        let titles = Array.from(groups.querySelectorAll("h4"));
+        let contents = Array.from(groups.querySelectorAll("figure.highlight"));
+        let temp_groups = [];
+        titles.forEach((t, i) => {
+          let title = t.cloneNode(true);
+          title.setAttribute("aria-roledescription", null);
+          title.setAttribute("aria-label", null);
+          title.onclick = null;
+          title.classList.remove("selected");
+          let content = contents[i];
+          content.style.display = "inherit";
+          let codeGroup = document.createElement("code-group");
+          codeGroup.appendChild(title);
+          codeGroup.appendChild(content);
+          temp_groups.push(codeGroup);
+        })
+        groups.innerHTML = "";
+        temp_groups.forEach((group) => {
+          groups.appendChild(group);
+        });
+      });
+    }
+    document.getElementById("use-interactive-tabs")?.addEventListener("change", (e) => {
+      removeCodeCopyButtons();
+      if (e.target.checked) {
+        localStorage.setItem("erie-doc-interactive-tabs", 'true');
+        makeCodeTabs();
+      } else {
+        localStorage.setItem("erie-doc-interactive-tabs", 'false');
+        releaseCodeTabs();
+      }
+      makeCodeCopyButtons()
+    });
+
+    if (localStorage.getItem("erie-doc-interactive-tabs") === 'true') {
+      document.getElementById("use-interactive-tabs").setAttribute('checked', true);
+      makeCodeTabs();
+    }
+
+    makeCodeCopyButtons();
+  </script>
+</body>
+
+</html>

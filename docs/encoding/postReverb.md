@@ -4,6 +4,7 @@ title: Post Reverb Channel
 parent: Encoding
 level: 1
 order: 607
+version: current
 ---
 
 The `postReverb` is a less loud sound followed by the main tone, and a data variable is mapped to the length of each post-reverb sound.

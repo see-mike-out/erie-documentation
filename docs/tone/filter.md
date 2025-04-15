@@ -4,6 +4,7 @@ title: Audio Filter
 parent: Tone
 level: 1
 order: 504
+version: current
 ---
 
 The `filter` property of a `tone` specifies the filters attached to a tone (don't be confused with data transform filters).

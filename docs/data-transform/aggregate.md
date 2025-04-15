@@ -4,6 +4,7 @@ title: Aggregate
 parent: Transform
 level: 1
 order: 401
+version: current
 ---
 
 An `aggregate` transformation offers aggregating one or more fields.

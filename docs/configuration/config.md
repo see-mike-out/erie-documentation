@@ -3,6 +3,7 @@ layout: default
 title: Config
 level: 0
 order: 900
+version: current
 ---
 
 A `config` object specifies global controls over a `stream`, `sequence`, and `overlay`, using the follwing properties.
