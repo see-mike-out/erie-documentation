@@ -41,6 +41,11 @@ This method stops the specified sonification.
 
 This gives the index of the sub-sequence that is currently being played.
 
+### `SequenceStream.ordering`
+
+This attribute contains the normalized ordering of the stream (if not provided, a default one is automatically generated).
+See the [`ordering`](../order/ordering.html) property for more detail.
+
 ## `StreamingStream` class
 
 This class is an interface to Erie.js web player for streaming data.

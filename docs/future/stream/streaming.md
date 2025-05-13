@@ -14,7 +14,7 @@ To make a sonification for streaming data, **set `stream: true` in your `data` p
 Some limitations:
 
 - No overlay is supported (yet).
-- Sequnece stream is purposefully not supported.
+- Sequnece stream is purposefully not supported. Use a `repeat` channel instead.
 
 ## Streaming sonification properties
 

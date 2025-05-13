@@ -17,15 +17,16 @@ A `stream` can have the following porperties.
 | -------- | ---- | ----------- |
 | `title` | `String` | The title of a sonification (if specified, it is played) |
 | `description` | `String` | The description of a sonification (if specified, it is played). |
-| `data` | `Object` | Data to sonify. |
-| `transform` | `Array` | Data to sonify. |
-| `tone` | `Object` | (Required) Tone definition. |
-| `encoding` | `Object` | (Required) Encoding channels. |
-| `tick` | `Array` | Registering ticks to be used (mainly for multi-stream sonifications). |
-| `sampling` | `Array` | Registering sampling audios to be used. |
-| `synth` | `Array` | Registering synths sounds to be used. |
-| `wave` | `Array` | Registering periodic waves to be used. |
+| `data` | `DataSpec` | Data to sonify. |
+| `transform` | `Array<TransformSpec>` | Data transformations to apply. |
+| `tone` | `ToneSpec` | (Required) Tone definition. |
+| `encoding` | `{[channel]: ChannelSpec}` | (Required) Encoding channels. |
+| `tick` | `Array<TickSpec>` | Registering ticks to be used (mainly for multi-stream sonifications). |
+| `sampling` | `Array<SamplingSpec>` | Registering sampling audios to be used. |
+| `synth` | `Array<SynthSpec>` | Registering synths sounds to be used. |
+| `wave` | `Array<WaveSpec>` | Registering periodic waves to be used. |
 | `config` | `Object` | Configuration object. |
+| `ordering` | `Array<OrderSpec>` | Configuration object. |
 
 Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level stream will be ignored.
 
@@ -35,15 +36,15 @@ Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level s
 | -------- | ---- | ----------- |
 | `title` | `String` | The title of a sonification (if specified, it is played) |
 | `description` | `String` | The description of a sonification (if specified, it is played). |
-| `data` | `Object` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
-| `datasets` | `Array` | Registering datasets to be used (if provided `data` should not be provided). |
+| `data` | `DataSpec` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
+| `datasets` | `Array<DataSpec>` | Registering datasets to be used (if provided `data` should not be provided). |
+| `transform` | `Array<TransformSpec>` | Data transformations to apply. |
 | `stream` | `Array[UnitStream|Overlay]` | Streams in the sequence. |
-| `sampling` | `Array` | Registering sampling audios to be used. |
-| `synth` | `Array` | Registering synths sounds to be used. |
-| `wave` | `Array` | Registering periodic waves to be used. |
-| `tick` | `Array` | Registering ticks to be used (mainly for multi-stream sonifications). |
-| `transform` | `Array` | Data to sonify. |
+| `sampling` | `Array<SamplingSpec>` | Registering sampling audios to be used. |
+| `synth` | `Array<SynthSpec>` | Registering synths sounds to be used. |
+| `wave` | `Array<WaveSpec>` | Registering periodic waves to be used. |
 | `config` | `Object` | Configuration object. |
+| `ordering` | `Array<OrderSpec>` | Configuration object. |
 
 ### Case 3: an Overlay sonification
 
@@ -53,13 +54,13 @@ Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level s
 | `description` | `String` | The description of a sonification (if specified, it is played). |
 | `data` | `Object` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
 | `datasets` | `Array` | Registering datasets to be used (if provided `data` should not be provided). |
+| `transform` | `Array<TransformSpec>` | Data transformations to apply. |
 | `stream` | `Array[UnitStream]` | Streams in the overlay. |
-| `sampling` | `Array` | Registering sampling audios to be used. |
-| `synth` | `Array` | Registering synths sounds to be used. |
-| `wave` | `Array` | Registering periodic waves to be used. |
-| `tick` | `Array` | Registering ticks to be used (mainly for multi-stream sonifications). |
-| `transform` | `Array` | Data to sonify. |
+| `sampling` | `Array<SamplingSpec>` | Registering sampling audios to be used. |
+| `synth` | `Array<SynthSpec>` | Registering synths sounds to be used. |
+| `wave` | `Array<WaveSpec>` | Registering periodic waves to be used. |
 | `config` | `Object` | Configuration object. |
+| `ordering` | `Array<OrderSpec>` | Configuration object. |
 
 Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level stream will be ignored.
 
