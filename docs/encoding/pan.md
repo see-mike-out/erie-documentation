@@ -27,7 +27,7 @@ When no earphones or headphones are provided, panning is better identifed when a
       "field": "year",
       "type": "quantitative",
       "scale": {
-        "doamin": [1900, 1950, 2000], // optional
+        "domain": [1900, 1950, 2000], // optional
         "range": [-1, 0, 1] // optional
       }
     }
@@ -42,7 +42,7 @@ When no earphones or headphones are provided, panning is better identifed when a
 let stream = new Erie.Stream();
 ...
 stream.encoding.pan.field("year", "quantitative");
-stream.encoding.pan.scale("domain", [1900, 1950, 2000]); // optinal
+stream.encoding.pan.scale("domain", [1900, 1950, 2000]); // optional
 stream.encoding.pan.scale("range", [-1, 0, 1]); // optional
 ...
 {% endhighlight %}

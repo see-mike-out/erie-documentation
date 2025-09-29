@@ -97,7 +97,7 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | Property | Type | Description |
 | --- | ----------- | ----------- |
 | `domain` | `Array[Any]` | (Optional) An array of domain intervals. `domain` must have the same length with `range`. The data type should be in accordance with the `field`'s type. |
-| `range` | `Array[Any]` | (Optional) An array of range intervals. `range` must have the same length with `doamin`. The data type should be in accordance with the targeted channel's type (e.g., `Number` for `pitch`, `String` for `timbre`). |
+| `range` | `Array[Any]` | (Optional) An array of range intervals. `range` must have the same length with `domain`. The data type should be in accordance with the targeted channel's type (e.g., `Number` for `pitch`, `String` for `timbre`). |
 | `polarity` | `'positive'|'negative'` | (Optional) The mapping direction. If it is `'positive'`, then a higher data value maps to a higher auditory value (e.g., more loud, higher pitch, right pan). If it is `'negative'`, then a higher data value maps to a lower auditory value (e.g., less loud, lower pitch, left pan). |
 | `maxDistinct` | `Boolean` | (Optional, default: `true`) When `range` is not specified and `maxDistinct` is true, then the `range` becomes the maximum-possible range of that channel (e.g., from the lowest pitch to the highest pitch, from the pan of `-1`—leftmost to pan of `1`–rightmost). |
 | `times` | `Number` | (Optional) A direct scale factor. When provided, for a value `v`, the auditory value is `v * times`. If the `max(value) * times` or `min(value) * times` goes beyond the possible auditory value for each channel, then the specified `times` is adjusted. |

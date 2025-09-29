@@ -39,12 +39,14 @@ Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level s
 | `data` | `DataSpec` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
 | `datasets` | `Array<DataSpec>` | Registering datasets to be used (if provided `data` should not be provided). |
 | `transform` | `Array<TransformSpec>` | Data transformations to apply. |
-| `stream` | `Array[UnitStream|Overlay]` | Streams in the sequence. |
+| `sequence` | `Array[UnitStream|Overlay]` | Streams in the sequence. |
 | `sampling` | `Array<SamplingSpec>` | Registering sampling audios to be used. |
 | `synth` | `Array<SynthSpec>` | Registering synths sounds to be used. |
 | `wave` | `Array<WaveSpec>` | Registering periodic waves to be used. |
 | `config` | `Object` | Configuration object. |
 | `ordering` | `Array<OrderSpec>` | Configuration object. |
+
+The `sequence` property will be switched to `stream` (but you can still use `sequence`.)
 
 ### Case 3: an Overlay sonification
 
@@ -55,7 +57,7 @@ Note: `datasets`, `sampling`, `synth`, and `tick` defined not in the top-level s
 | `data` | `Object` | Data to sonify (if provided, it functions as the dataset for all the unit streams, and `datasets` should not be provided). |
 | `datasets` | `Array` | Registering datasets to be used (if provided `data` should not be provided). |
 | `transform` | `Array<TransformSpec>` | Data transformations to apply. |
-| `stream` | `Array[UnitStream]` | Streams in the overlay. |
+| `overlay` | `Array[UnitStream]` | Streams in the overlay. |
 | `sampling` | `Array<SamplingSpec>` | Registering sampling audios to be used. |
 | `synth` | `Array<SynthSpec>` | Registering synths sounds to be used. |
 | `wave` | `Array<WaveSpec>` | Registering periodic waves to be used. |

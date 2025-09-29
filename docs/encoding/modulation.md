@@ -47,7 +47,7 @@ The `modulation` channel for an FM synth tone encodes the modulation index defin
       "field": "Body Mass (g)",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": [0, 10]
       }
     }
@@ -68,7 +68,7 @@ stream.synth.add(synth);
 ...
 stream.tone.set(synth);
 stream.encoding.modulation.field("Body Mass (g)", "quantitative");
-stream.encoding.modulation.scale("domain", [0, 7000]); // optinal
+stream.encoding.modulation.scale("domain", [0, 7000]); // optional
 stream.encoding.modulation.scale("range", [0, 10]);
 ...
 {% endhighlight %}
@@ -105,7 +105,7 @@ The `modulation` channel for an AM tone encodes the modulation index defined as 
       "field": "Body Mass (g)",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": [10, 500]
       }
     }
@@ -126,7 +126,7 @@ stream.synth.add(synth);
 ...
 stream.tone.set(synth);
 stream.encoding.modulation.field("Body Mass (g)", "quantitative");
-stream.encoding.modulation.scale("domain", [0, 7000]); // optinal
+stream.encoding.modulation.scale("domain", [0, 7000]); // optional
 stream.encoding.modulation.scale("range", [10, 500]);
 ...
 {% endhighlight %}
@@ -165,7 +165,7 @@ This only available for an AM synth.
       "field": "Body Mass (g)",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": [0, 1]
       }
     }
@@ -186,7 +186,7 @@ stream.synth.add(synth);
 ...
 stream.tone.set(synth);
 stream.encoding.harmonicity.field("Body Mass (g)", "quantitative");
-stream.encoding.harmonicity.scale("domain", [0, 7000]); // optinal
+stream.encoding.harmonicity.scale("domain", [0, 7000]); // optional
 stream.encoding.harmonicity.scale("range", [0, 1]);
 ...
 {% endhighlight %}

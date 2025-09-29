@@ -29,7 +29,7 @@ For example, if a mapped pitch value is 130.6Hz, then the pitch sound is rounded
       "type": "quantitative",
       "roundToNote": true, // default: `false`
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": ['C3', 'C5'] // optional
         "range": [130.812, 523.251] // optional, equivalent (unit: `Hz`)
       }
@@ -45,7 +45,7 @@ For example, if a mapped pitch value is 130.6Hz, then the pitch sound is rounded
 let stream = new Erie.Stream();
 ...
 stream.encoding.pitch.field("Body Mass (g)", "quantitative");
-stream.encoding.pitch.roundToNote(true); // optinal
+stream.encoding.pitch.roundToNote(true); // optional
 stream.encoding.pitch.scale("domain", [0, 7000]); // optional
 stream.encoding.pitch.scale("range", ['C3', 'C5']); // optional
 stream.encoding.pitch.scale("range", [130.812, 523.251] ); // optional, equivalent (unit: `Hz`)
@@ -90,7 +90,7 @@ Detune can range from `-1200` to `1200`, where each `100` is a distance between 
       "field": "Body Mass (g)",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": [0, 1200] // optional; this way each 1000 maps to one-note scaling
       }
     }

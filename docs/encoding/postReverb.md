@@ -24,7 +24,7 @@ then after the main tone, a `1`-second less loud sound is played for a data valu
       "field": "weight",
       "type": "quantitative",
       "scale": {
-        "doamin": [10, 20], // optional
+        "domain": [10, 20], // optional
         "range": [0, 2] // optional (if omitted, [0, 4])
       }
     }
@@ -39,7 +39,7 @@ then after the main tone, a `1`-second less loud sound is played for a data valu
 let stream = new Erie.Stream();
 ...
 stream.encoding.postReverb.field("weight", "quantitative");
-stream.encoding.postReverb.scale("domain", [10, 20]); // optinal
+stream.encoding.postReverb.scale("domain", [10, 20]); // optional
 stream.encoding.postReverb.scale("range", [0, 2]); // optional  (if omitted, [0, 4])
 ...
 {% endhighlight %}

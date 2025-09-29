@@ -20,6 +20,9 @@ Depending on how it is configured, transforms may drop irrelevant fields/columns
 | `calculate` | Compute a new field | No |
 | `fold` | Convert columns to values | Yes-Column/Row |
 | `density` | Compute a kernel density | Yes-Column/Row |
+| `quantile` | Convert to quantiles  | Yes-Column/Row |
+| `boxplot` | Convert to boxplot values | Yes-Column/Row |
+| `diffing` | Diffing consecutive values | Yes-Column/Row |
 
 ### API usage
 

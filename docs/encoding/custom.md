@@ -24,7 +24,7 @@ Make sure that always specify the range of your scale, otherwise it might fail t
       "field": "Body Mass (g)",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": [0, 1] // required
       }
     }

@@ -31,7 +31,7 @@ This channel works when there is a 2-channel stereo audio output device (e.g., e
       "field": "year",
       "type": "quantitative",
       "scale": {
-        "doamin": [1900, 1950, 2000], // optional
+        "domain": [1900, 1950, 2000], // optional
         "range": [-1, 0, 1] // optional
       }
     }
@@ -46,7 +46,7 @@ This channel works when there is a 2-channel stereo audio output device (e.g., e
 let stream = new Erie.Stream();
 ...
 stream.encoding.pan.field("year", "quantitative");
-stream.encoding.pan.scale("domain", [1900, 1950, 2000]); // optinal
+stream.encoding.pan.scale("domain", [1900, 1950, 2000]); // optional
 stream.encoding.pan.scale("range", [-1, 0, 1]); // optional
 ...
 {% endhighlight %}
@@ -71,7 +71,7 @@ Their ranges are all from `-1` to `1`.
       "field": "year",
       "type": "quantitative",
       "scale": {
-        "doamin": [1900, 1950, 2000], // optional
+        "domain": [1900, 1950, 2000], // optional
         "range": [-1, 0, 1] // optional
       }
     },
@@ -79,7 +79,7 @@ Their ranges are all from `-1` to `1`.
       "field": "revenue",
       "type": "quantitative",
       "scale": {
-        "doamin": [-500, 0, 500], // optional
+        "domain": [-500, 0, 500], // optional
         "range": [-1, 0, 1] // optional
       }
     },
@@ -87,7 +87,7 @@ Their ranges are all from `-1` to `1`.
       "field": "location",
       "type": "ordinal",
       "scale": {
-        "doamin": ['A', 'B', 'C'], // optional
+        "domain": ['A', 'B', 'C'], // optional
         "range": [-1, 0, 1] // optional
       }
     }
@@ -102,13 +102,13 @@ Their ranges are all from `-1` to `1`.
 let stream = new Erie.Stream();
 ...
 stream.encoding.panX.field("year", "quantitative")
-  .scale("domain", [1900, 1950, 2000]) // optinal
+  .scale("domain", [1900, 1950, 2000]) // optional
   .scale("range", [-1, 0, 1]); // optional
 stream.encoding.panY.field("revenue", "quantitative")
-  .scale("domain", [-500, 0, 500]) // optinal
+  .scale("domain", [-500, 0, 500]) // optional
   .scale("range", [-1, 0, 1]); // optional
 stream.encoding.panZ.field("location", "ordinal")
-  .scale("domain", ['A', 'B', 'C']) // optinal
+  .scale("domain", ['A', 'B', 'C']) // optional
   .scale("range", [-1, 0, 1]); // optional
 ...
 {% endhighlight %}
@@ -133,7 +133,7 @@ Raidus ranges from `0` to `1`, and `panPolar` and `panAzimuth` can take any numb
       "field": "year",
       "type": "quantitative",
       "scale": {
-        "doamin": [1900, 2000], // optional
+        "domain": [1900, 2000], // optional
         "range": [0, 600] // optional (every 5 year = 30 deg)
       }
     },
@@ -141,7 +141,7 @@ Raidus ranges from `0` to `1`, and `panPolar` and `panAzimuth` can take any numb
       "field": "revenue",
       "type": "quantitative",
       "scale": {
-        "doamin": [-500, 0, 500], // optional
+        "domain": [-500, 0, 500], // optional
         "range": [-360, 0, 360] // optional
       }
     },
@@ -149,7 +149,7 @@ Raidus ranges from `0` to `1`, and `panPolar` and `panAzimuth` can take any numb
       "field": "location",
       "type": "ordinal",
       "scale": {
-        "doamin": ['A', 'B', 'C'], // optional
+        "domain": ['A', 'B', 'C'], // optional
         "range": [0, 0.5, 1] // optional
       }
     }
@@ -164,13 +164,13 @@ Raidus ranges from `0` to `1`, and `panPolar` and `panAzimuth` can take any numb
 let stream = new Erie.Stream();
 ...
 stream.encoding.panAzimuth.field("year", "quantitative")
-  .scale("domain", [1900, 2000]) // optinal
+  .scale("domain", [1900, 2000]) // optional
   .scale("range", [0, 600]); // optional (every 5 year = 30 deg)
 stream.encoding.panPolar.field("revenue", "quantitative")
-  .scale("domain", [-500, 0, 500]) // optinal
+  .scale("domain", [-500, 0, 500]) // optional
   .scale("range", [-360, 0, 360]); // optional
 stream.encoding.panRadius.field("location", "ordinal")
-  .scale("domain", ['A', 'B', 'C']) // optinal
+  .scale("domain", ['A', 'B', 'C']) // optional
   .scale("range", [0, 0.5, 1]); // optional
 ...
 {% endhighlight %}

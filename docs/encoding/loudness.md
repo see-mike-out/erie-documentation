@@ -35,7 +35,7 @@ Using the `loudness` is pretty straightforward.
       "field": "Body Mass (g)",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7000], // optional
+        "domain": [0, 7000], // optional
         "range": [0, 1] // optional
       }
     }
@@ -50,7 +50,7 @@ Using the `loudness` is pretty straightforward.
 let stream = new Erie.Stream();
 ...
 stream.encoding.loudness.field("Body Mass (g)", "quantitative");
-stream.encoding.loudness.scale("domain", [0, 7000]); // optinal
+stream.encoding.loudness.scale("domain", [0, 7000]); // optional
 stream.encoding.loudness.scale("range", [0, 1]); // optional
 ...
 {% endhighlight %}

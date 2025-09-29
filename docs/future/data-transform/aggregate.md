@@ -15,7 +15,7 @@ make sure that include all fields needed to be aggregated.
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
-| `aggregate` | `Datum[]` | One or more data aggregation operation. |
+| `aggregate` | `Array[AggregateOp]` | One or more data aggregation operation. |
 | `groupby` | `Array[String]` | Nominal fields to group the aggregates by. |
 
 ### `aggregate` operation definition

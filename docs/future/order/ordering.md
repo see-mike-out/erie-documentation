@@ -58,7 +58,7 @@ A specifier has the follwoing properties.
 
 #### `StreamItdentifier`
 
-While all properties are technically optinal, either one of those must be provided.
+While all properties are technically optional, either one of those must be provided.
 
 | Property | type | Description |
 | -------- | ---- | ----------- |

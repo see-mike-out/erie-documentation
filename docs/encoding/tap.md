@@ -37,7 +37,7 @@ To cap the length of tapping sound, one can use `maxTappingLength` (unit: second
       "field": "density",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 1], // optional
+        "domain": [0, 1], // optional
         "range": [0, 10],
         "band": 2, // unit: seconds
         "singleTappingPosition": "start" // or "middle" / "end"
@@ -84,7 +84,7 @@ Alternatively, the `pauseLength` property in `scale` makes it possible to direct
       "field": "length",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 5], // optional
+        "domain": [0, 5], // optional
         "range": [0, 10],
         "band": 0.2 // unit: seconds
       }
@@ -126,7 +126,7 @@ It is basically a `tapCount` channel with varying speeds.
       "field": "length",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 7], // optional
+        "domain": [0, 7], // optional
         "range": [0, 7], // optional
         "band": 0.2 // unit: seconds
       }
@@ -135,7 +135,7 @@ It is basically a `tapCount` channel with varying speeds.
       "field": "sparsity",
       "type": "quantitative",
       "scale": {
-        "doamin": [0, 1], // optional
+        "domain": [0, 1], // optional
         "range": [0, 7], // optional
       }
     }
