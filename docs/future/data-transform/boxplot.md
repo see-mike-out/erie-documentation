@@ -30,15 +30,6 @@ In addition to the field names specified for `boxplot` and in `groupby`, a `boxp
 | `order` | `number` | The order of values (in ascending order): lower outliers, lower bound, 25% quantile, median, 75% quantile, and upper outliers. |
 | `group_name` | `string` | Idnetifier for groups. |
 
-  {
-    category: 'A',
-    key: 'whisker_lower',
-    value: 0,
-    role: 'point',
-    order: 0,
-    group_name: 'A'
-  },
-
 ### Usage pattern
 
 <code-groups>
