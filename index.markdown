@@ -6,7 +6,7 @@ order: 0
 version: current
 ---
 
-## Erie (Web) --- Future
+## Erie (Web)
 
 Erie for Web (or simply Erie.js) is a web implementation of Erie, a declarative grammar for data sonification.
 **Erie.js is intended for supporting sonification, not as auxiliary for visualization.**
