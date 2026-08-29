@@ -18,7 +18,7 @@ npm install erie-web@0.3.9
 Then, you can import Erie like below.
 
 {% highlight js %}
-impor * as Erie from 'erie-web';
+import * as Erie from 'erie-web';
 {% endhighlight %}
 
 ## Browser
