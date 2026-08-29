@@ -8,11 +8,20 @@ version: current
 
 Erie supports two methods for providing the data: `values` and `url`.
 
+For static streams:
+
 | Property | type | Description |
 | -------- | ---- | ----------- |
-| `values` | `Array[Object]` | A tidy data. |
+| `values` | `Datum[]` | A tidy data. |
 | `url` | `UrlString` | A URL to a dataset. It is retrieved using Fetch API. |
 | `name` | `String` | The name of a dataset, which is defined in the `datasets` object. |
+
+For streaming streams:
+
+| Property | type | Description |
+| -------- | ---- | ----------- |
+| `stream` | `true` | (Required for streaming streams) If set, the output will be a `StreamingStream` object, and the above properties will be ignored. |
+| `test` | `DataSpec` | (Optional) Either `{ values: [ ... ] }` or `{ url: "..." }` |
 
 ### Specifying data using `values`
 

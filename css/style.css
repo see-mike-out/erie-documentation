@@ -31,8 +31,8 @@ html {
   max-height: 100%;
   overflow: scroll;
 }
-#nav-section.future {
-  background-color: #1987541b;
+#nav-section.legacy {
+  background-color: #dddddd;
 }
 
 #nav-section {

@@ -23,8 +23,8 @@
           </a>
         </h1>
         <nav>
-          <a href="{{site.baseurl}}/docs/future" class="nav-item" data-level="0">
-            Future
+          <a href="{{site.baseurl}}/docs/legacy" class="nav-item" data-level="0">
+            Legacy
           </a>
           {% assign pages = site.pages | where_exp: 'page', 'page.version == "current"'  | where_exp: 'page', 'page.title'| sort: "order" %}
           {% for pg in pages %}

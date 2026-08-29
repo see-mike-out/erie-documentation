@@ -3,11 +3,9 @@ layout: default
 title: Using Google Cloud TTS
 parent: How to use
 level: 1
-order: 107
+order: 108
 version: current
 ---
-
-**This feature will be dperecated soon due to failure to produce stable built files.**
 
 Instead of Web Seech API, you can use [Google Cloud Text-to-Speech (TTS) API](https://cloud.google.com/text-to-speech).
 

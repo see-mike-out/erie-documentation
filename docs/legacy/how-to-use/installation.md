@@ -1,0 +1,47 @@
+---
+layout: legacy
+title: Installation
+parent: How to use
+level: 1
+order: 101
+version: legacy
+---
+
+## Node
+
+To install for Node projects (e.g., Svelte), run the belwow line in your shell.
+
+{% highlight shell %}
+npm install erie-web@0.3.9
+{% endhighlight %}
+
+Then, you can import Erie like below.
+
+{% highlight js %}
+impor * as Erie from 'erie-web';
+{% endhighlight %}
+
+## Browser
+
+Download `erie-web.js` or `erie-web.min.js`.
+
+Have the below imports in your HTML file or wherever it applies to.
+
+{% highlight html %}
+<script src="https://cdn.jsdelivr.net/npm/arquero@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@5/build-es5/vega.min.js"></script>
+<!-- For development -->
+<script src="{path}/erie-web.js"></script>
+<!-- For production -->
+<!-- <script src="{path}/erie-web.min.js"></script>  -->
+{% endhighlight %}
+
+Write your script.
+
+{% highlight html %}
+<script>
+  // Erie is the global object.
+</script>
+{% endhighlight %}

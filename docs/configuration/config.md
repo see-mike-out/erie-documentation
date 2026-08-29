@@ -2,7 +2,7 @@
 layout: default
 title: Config
 level: 0
-order: 900
+order: 1000
 version: current
 ---
 

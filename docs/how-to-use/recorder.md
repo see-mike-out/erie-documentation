@@ -3,7 +3,7 @@ layout: default
 title: Recorder (Chrome Extension)
 parent: How to use
 level: 1
-order: 106
+order: 107
 version: current
 ---
 

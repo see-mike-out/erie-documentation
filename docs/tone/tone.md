@@ -16,11 +16,12 @@ A `tone` object has the following properties.
 
 ## Tone properties
 
-| Property | type | Description |
+| Property | Type | Description |
 | -------- | ---- | ----------- |
 | `type` | `String` or `Object` | (Default: `'default'`, a sine wave oscillator) The instrument type of a tone. |
 | `continued` | `Boolean` | (Default: `false`) Whether a tone is continued (no break when audio property changes) or discrete (breaks). This property can be ignored for sampled instruments by defaulting to `'false'` (see below). |
 | `filter` | `Array[String]` | A list of audio filter names. |
+| `hasBaseTone` | `Boolean` | (Default: `false`) Whether to have a baseline sound that keeps being played for streaming data stream. For static streams, it is ignored. |
 
 ### Supported instrument types
 

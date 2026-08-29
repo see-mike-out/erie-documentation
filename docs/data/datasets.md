@@ -15,7 +15,7 @@ Each `data` objects has the following properties.
 | Property | type | Description |
 | -------- | ---- | ----------- |
 | `name` | `String` | (Required) The name of a dataset. This is the index for the specified data. |
-| `values` | `Array[Object]` | A tidy data. |
+| `values` | `Datum[]` | A tidy data. |
 | `url` | `UrlString` | A URL to a dataset. It is retrieved using Fetch API. |
 
 ### Usage pattern

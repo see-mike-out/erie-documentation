@@ -11,9 +11,9 @@ Erie.js compiler (in JS) returns a playable audio stream object.
 
 ## Global
 
-### `async compileAudioGraph(spec) -> Promise<SequenceStream>`
+### `async compileAudioGraph(spec) -> Promise<SequenceStream | StreamingStream>`
 
-This async function returns a `Promise` which is resolved to a `SequenceStream` instance.
+This async function returns a `Promise` which is resolved to a `SequenceStream` instance for static data or a `StreamingStream` instance for streaming data.
 
 ## `SequenceStream` class
 
@@ -40,3 +40,14 @@ This method stops the specified sonification.
 ### `SequenceStream.queue.playAt`
 
 This gives the index of the sub-sequence that is currently being played.
+
+### `SequenceStream.ordering`
+
+This attribute contains the normalized ordering of the stream (if not provided, a default one is automatically generated).
+See the [`ordering`](../order/ordering.html) property for more detail.
+
+## `StreamingStream` class
+
+This class is an interface to Erie.js web player for streaming data.
+This is also a private class, and not directly accessible.
+See more in the `streaming data` page.

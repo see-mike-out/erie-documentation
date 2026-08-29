@@ -6,10 +6,16 @@ order: 0
 version: current
 ---
 
-## Erie (Web)
+## Erie (Web) --- Future
 
 Erie for Web (or simply Erie.js) is a web implementation of Erie, a declarative grammar for data sonification.
 **Erie.js is intended for supporting sonification, not as auxiliary for visualization.**
+
+## What's new
+
+- Support for 3d pan encoding (`panX`, `panY`, and `panZ` for Cartesian encoding and `panRadius`, `panPolar`, and `panAzimuth` for angular encoding).
+- Support for custom `ordering` spec.
+- Support for streaming data (see `data` docs).
 
 ### What Erie.js supports
 
@@ -54,14 +60,11 @@ Yet, it is still not possible to capture the sounds generated using the Web Spee
 ### Offline audio generation
 
 Now, Erie supports offline audio generation. Refer to [this documentation](docs/how-to-use/player.html#audioqueuegetfullaudiottsfetchfunction---promiseblob).
-~~Note that you need a separate Text-to-Speech API (usually a commercial service). To better support, Erie offers [an interface function for Google Cloud Text-To-Speech API](docs/how-to-use/google-tts.html).~~ 
-Preset for Google TTS API will be deprecated due to failing to produce stable compilation, yet you can still provide external APIs.
+Note that you need a separate Text-to-Speech API (usually a commercial service). To better support, Erie offers [an interface function for Google Cloud Text-To-Speech API](docs/how-to-use/google-tts.html).
 In case you don't have an access to a TTS API, you can still use the recorder extension.
 
-## Future expansion plans
+## Future plans
 
-- Support for 3d pan encoding
-- Support for custom ordering
-- Support for streaming data
-
-(These are now available with a beta version, see [Future](docs/future) section)
+- Overlay for streaming data
+- Customizing chimes
+- Customizing 3D panner settings
