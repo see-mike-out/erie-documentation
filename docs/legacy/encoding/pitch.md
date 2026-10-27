@@ -30,7 +30,7 @@ For example, if a mapped pitch value is 130.6Hz, then the pitch sound is rounded
       "roundToNote": true, // default: `false`
       "scale": {
         "domain": [0, 7000], // optional
-        "range": ['C3', 'C5'] // optional
+        "range": ["C3", "C5"] // optional
         "range": [130.812, 523.251] // optional, equivalent (unit: `Hz`)
       }
     }

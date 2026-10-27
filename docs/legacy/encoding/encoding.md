@@ -107,6 +107,9 @@ Each encoding channel may have different `scale` properties, so refer to relevan
 | `length` | `Number` (unit: second) | (Optional, only for the `time` channel) The entire length of a sonfication stream with an absolute timing (a shortcut to `range`). |
 | `band` | `Number` (unit: second) | (Optional) For the `time` channel, the length of each tone. For the `tapSpeed` channel, the length of time duration. For the `tapCount` channel, the length of each tapping sound. |
 | `timing` | `'relative'|'absolute'|'simultaneous'` | (Optional) The timing (when it starts) of each tone (default: `'absolute'`). |
+| `type` | `'linear'|'log'|'symlog'|'pow'|'sqrt'` | (Optional) The scale transformation function (default: `'linear'`). |
+| `exponent` | `Number` | (Optional) The exponent value for the `'pow'` `type` (only works when `type = 'pow'`). |
+| `constant` | `Number` | (Optional) The constant value for the `'symlog'` `type` (only works when `type = 'symlog'`). |
 
 #### API usage
 
