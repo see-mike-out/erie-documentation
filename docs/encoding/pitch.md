@@ -58,7 +58,7 @@ stream.encoding.pitch.scale("range", [130.812, 523.251] ); // optional, equivale
 
 ### Using a note scale
 
-Instead of frequency, one can use the name of note ([conversion table](https://pages.mtu.edu/~suits/notefreqs.html)).
+Instead of frequency, one can use the name of note ([conversion table](https://plastic.audio/note-frequencies/)).
 
 A note name is formatted as `NOS` standing for `note`, `octave`, and `semitone`.
 
